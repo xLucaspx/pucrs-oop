@@ -1,0 +1,9 @@
+Exemplo de generalização e polimorfismo
+
+- O sistema já funciona com veículos.
+
+- Alterar o sistema com a adição de uma subclasse para veículo elétrico.
+
+- O veículo elétrico:
+	- possui um atributo adicional da carga da bateria
+	- o imposto IPVA é zero
