@@ -30,15 +30,20 @@ public class CadastroPartido {
 	}
 
 	/**
-	 * Busca um partido pelo nome indicado.
+	 * Busca um partido pelo nome indicado. Como nao ha restricao no cadastro para nomes
+	 * de partidos iguais, ira retornar o primeiro resultado encontrado, mesmo que existam outros.
 	 *
 	 * @param nome O nome do partido buscado.
 	 * @return O primeiro partido encontrado com nome igual ao passado como argumento,
 	 * ou <code>null</code> caso não encontre nenhum partido com esse nome.
 	 */
 	public Partido consultaPartido(String nome) {
-		// TODO: implement method
-		throw new UnsupportedOperationException("Not supported yet.");
+		for (Partido p : partidos) {
+			if (p.getNome().equals(nome)) {
+				return p;
+			}
+		}
+		return null;
 	}
 
 	/**

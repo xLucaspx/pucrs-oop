@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,7 +9,14 @@ import java.util.Objects;
 public class Partido {
 	private int numero;
 	private String nome;
-	private List<Candidato> candidatos;
+	/**
+	 * Armazena os candidatos a prefeito do partido.
+	 */
+	private List<Candidato> prefeitos;
+	/**
+	 * Armazena os candidatos a vereador do partido.
+	 */
+	private List<Candidato> vereadores;
 
 	/**
 	 * Inicializa um objeto do tipo <code>Partido</code>.
@@ -19,7 +27,8 @@ public class Partido {
 	public Partido(int numero, String nome) {
 		this.numero = numero;
 		this.nome = nome;
-		this.candidatos = new ArrayList<>();
+		this.prefeitos = new ArrayList<>();
+		this.vereadores = new ArrayList<>();
 	}
 
 	/**
@@ -36,13 +45,27 @@ public class Partido {
 		return nome;
 	}
 
+	public List<Candidato> getPrefeitos() {
+		return Collections.unmodifiableList(prefeitos);
+	}
+
+	public List<Candidato> getVereadores() {
+		return Collections.unmodifiableList(vereadores);
+	}
+
 	/**
-	 * Adiciona um novo candidato ao partido.
+	 * Adiciona um novo candidato ao partido. Classifica-o
+	 * em <code>prefeito</code> ou <code>vereador</code> com
+	 * base no seu atributo <code>numero</code>.
 	 *
 	 * @param c O candidato que sera adicionado.
 	 */
 	public void adicionaCandidato(Candidato c) {
-		this.candidatos.add(c);
+		if (c.getNumero() < 100) {
+			this.prefeitos.add(c);
+			return;
+		}
+		this.vereadores.add(c);
 	}
 
 	/**

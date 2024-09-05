@@ -52,6 +52,13 @@ public class Candidato {
 	}
 
 	/**
+	 * @return O numero de votos do candidato.
+	 */
+	public int getVotos() {
+		return votos;
+	}
+
+	/**
 	 * Acrescenta o numero de votos passado como argumento ao total de votos do candidato.
 	 * Se o valor informado for negativo ou nulo, o metodo nao sera exeutado.
 	 *

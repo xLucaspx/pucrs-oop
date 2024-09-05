@@ -29,4 +29,21 @@ public class Candidatura {
 	public boolean cadastraCandidato(Candidato c) {
 		return candidatos.add(c);
 	}
+
+	/**
+	 * Busca um candidato pelo numero e municipio indicados.
+	 *
+	 * @param numero    O numero do candidato buscado.
+	 * @param municipio O municipio da candidatura.
+	 * @return O candidato com os atributos correspondentes, ou <code>null</code> caso não encontre
+	 * nenhum candidato.
+	 */
+	public Candidato consultaCandidato(int numero, String municipio) {
+		for (Candidato c : candidatos) {
+			if (c.getNumero() == numero && c.getMunicipio().equals(municipio)) {
+				return c;
+			}
+		}
+		return null;
+	}
 }

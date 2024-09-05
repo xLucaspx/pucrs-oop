@@ -126,6 +126,10 @@ public class ACMEVoting {
 	public void executar() {
 		cadastraPartidos();
 		cadastraCandidatos();
+		cadastraVotosCandidatos();
+		consultaPartido();
+		consultaCandidato();
+		consultaPrefeitosPartido();
 	}
 
 	/**
@@ -134,7 +138,7 @@ public class ACMEVoting {
 	 * sucesso, a saida exibira os dados no formato <code>1:numero,nome</code>. Interrompe a execucao ao ler o valor
 	 * <code>-1</code>.</p>
 	 * <p><strong>Importante</strong>: Para o funcionamento correto do metodo, o arquivo de entrada deve obedecer o
-	 * formato proposto, ou seja, uma linha contendo o numero do partido (ou <code>-1</code> para encerrar) e outra
+	 * formato proposto, i.e.: uma linha contendo o numero do partido (ou <code>-1</code> para encerrar) e outra
 	 * linha contendo o nome.</p>
 	 */
 	private void cadastraPartidos() {
@@ -168,7 +172,7 @@ public class ACMEVoting {
 	 * sucesso, a saida exibira os dados no formato <code>2:numero,nome,municipio</code>. Interrompe a execucao ao ler
 	 * o valor <code>-1</code>.</p>
 	 * <p><strong>Importante</strong>: Para o funcionamento correto do metodo, o arquivo de entrada deve obedecer o
-	 * formato proposto, ou seja, uma linha contendo o numero do partido (ou <code>-1</code> para encerrar), outra linha
+	 * formato proposto, i.e.: uma linha contendo o numero do partido (ou <code>-1</code> para encerrar), outra linha
 	 * contendo o nome e a ultima contendo o municipio.</p>
 	 */
 	private void cadastraCandidatos() {
@@ -206,7 +210,112 @@ public class ACMEVoting {
 	}
 
 	/**
-	 * Redireciona a entrada de dados para o arquivo especificado na constante <code>INPUT_FILE_NAME</code>.
+	 * <p>Metodo que realiza o cadastro de votos dos candidatos. Le os dados (numero do candidato, municipio e
+	 * quantidade) de votos, busca o candidato correspondente e, caso todas as informações sejam validas, contabiliza
+	 * os votos e exibe a saida no formato <code>3:numero,municipio,votos</code>. Interrompe a execucao ao ler o valor
+	 * <code>-1</code>.</p>
+	 * <p><strong>Importante</strong>: Para o funcionamento correto do metodo, o arquivo de entrada deve obedecer o
+	 * formato proposto, i.e.: uma linha contendo o numero do candidato (ou <code>-1</code> para encerrar), outra
+	 * linha contendo o municipio e a ultima contendo o total de votos (maior do que 0).</p>
+	 */
+	private void cadastraVotosCandidatos() {
+		boolean run = true;
+
+		while (run) {
+			String strNumero = in.nextLine();
+
+			// verifica condicao de encerramento
+			if (strNumero.equals("-1")) {
+				run = false;
+				continue;
+			}
+
+			// le dados restantes para cadastro
+			String municipio = in.nextLine();
+			int votos = Integer.parseInt(in.nextLine());
+
+			// verifica se o candidato existe
+			Candidato c = candidaturaHandler.consultaCandidato(Integer.parseInt(strNumero), municipio);
+
+			if (c == null) {
+				continue;
+			}
+
+			c.adicionaVotos(votos);
+			System.out.printf("3:%d,%s,%d%n", c.getNumero(), c.getMunicipio(), c.getVotos());
+		}
+	}
+
+	/**
+	 * <p>Metodo que mostra os dados de um determinado partido pelo numero informado; se nao for encontrado
+	 * nenhum partido sera exibida a mensagem <code>4:Nenhum partido encontrado.</code>, caso contrario a saida
+	 * mostrara os dados do partido no formato <code>4:numero,nome</code>. É executado apenas uma vez.</p>
+	 * <p><strong>Importante</strong>: Para o funcionamento correto do metodo, o arquivo de entrada deve obedecer o
+	 * formato proposto, i.e.: uma linha contendo o numero do partido imediatamente apos o fim do cadastro de votos.
+	 * </p>
+	 */
+	private void consultaPartido() {
+		int numero = Integer.parseInt(in.nextLine());
+		Partido p = partidoHandler.consultaPartido(numero);
+
+		String saida = p == null ? "4:Nenhum partido encontrado." : "4:%d,%s".formatted(p.getNumero(), p.getNome());
+
+		System.out.println(saida);
+	}
+
+	/**
+	 * <p>Metodo que mostra os dados de um determinado candidato. Le o numero do candidato e o municipio da candidatura;
+	 * se nao for encontrado nenhum candidato sera exibida a mensagem <code>5:Nenhum candidato encontrado.</code>, caso
+	 * contrario a saida mostrara os dados do candidato no formato <code>5:numero,nome,municipio,votos</code>. É
+	 * executado apenas uma vez.</p>
+	 * <p><strong>Importante</strong>: Para o funcionamento correto do metodo, o arquivo de entrada deve obedecer o
+	 * formato proposto, i.e.: uma linha contendo o numero do partido e outra contendo o municipio, imediatamente apos
+	 * o fim da consulta de partido.</p>
+	 */
+	private void consultaCandidato() {
+		int numero = Integer.parseInt(in.nextLine());
+		String municipio = in.nextLine();
+		Candidato c = candidaturaHandler.consultaCandidato(numero, municipio);
+
+		String saida = c == null ? "5:Nenhum candidato encontrado." : "5:%d,%s,%s,%d".formatted(c.getNumero(),
+			c.getNome(),
+			c.getMunicipio(),
+			c.getVotos()
+		);
+
+		System.out.println(saida);
+	}
+
+	/**
+	 * <p>Metodo que mostra os dados de todos os candidatos a prefeito de um determinado partido. Le o nome do partido e,
+	 * se nao for encontrado nenhum partido correspondente sera exibida a mensagem
+	 * <code>6:Nenhum partido encontrado.</code>, caso contrario a saida mostrara os dados cada candidato a prefeito do
+	 * partido no formato <code>6:nomePartido,numeroPrefeito,nomePrefeito,municipio,votos</code>. Se não hover candidatos
+	 * a prefeito, não havera saida. É executado apenas uma vez.</p>
+	 * <p><strong>Importante</strong>: Para o funcionamento correto do metodo, o arquivo de entrada deve obedecer o
+	 * formato proposto, i.e.: uma linha contendo o nome do partido imediatamente apos o fim da consulta de candidato.
+	 * </p>
+	 */
+	private void consultaPrefeitosPartido() {
+		String nome = in.nextLine();
+		Partido p = partidoHandler.consultaPartido(nome);
+
+		if (p == null) {
+			System.out.println("6:Nenhum partido encontrado.");
+			return;
+		}
+
+		p.getPrefeitos().forEach(pref -> System.out.printf("6:%s,%d,%s,%s,%d%n",
+			p.getNome(),
+			pref.getNumero(),
+			pref.getNome(),
+			pref.getMunicipio(),
+			pref.getVotos()
+		));
+	}
+
+	/**
+	 * Redireciona a entrada de dados para o arquivo especificado na constante <code>NOME_ARQUIVO_ENTRADA</code>.
 	 * Ajusta o <code>Locale</code> para utilizar ponto decimal.
 	 */
 	private void redirecionaEntrada() {
@@ -222,7 +331,7 @@ public class ACMEVoting {
 	}
 
 	/**
-	 * Redireciona a saida de dados para o arquivo especificado na constante <code>OUTPUT_FILE_NAME</code>.
+	 * Redireciona a saida de dados para o arquivo especificado na constante <code>NOME_ARQUIVO_SAIDA</code>.
 	 * Ajusta o <code>Locale</code> para utilizar ponto decimal.
 	 */
 	private void redirecionaSaida() {
