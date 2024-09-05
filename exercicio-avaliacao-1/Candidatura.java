@@ -1,10 +1,22 @@
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Classe catalogo que gerencia o cadastro de candidatos.
  */
 public class Candidatura {
-	private ArrayList<Candidato> candidatos;
+	/**
+	 * Objeto responsavel por armazenar os candidatos cadastrados. Utiliza-se um <code>Set</code>
+	 * pois nao deseja-se cadastrar objetos repetidos.
+	 */
+	private final Set<Candidato> candidatos;
+
+	/**
+	 * Inicializa um objeto do tipo <code>Candidatura</code>.
+	 */
+	public Candidatura() {
+		this.candidatos = new HashSet<>();
+	}
 
 	/**
 	 * Cadastra um novo candidato no sistema. Não pode haver candidatos com o
@@ -15,7 +27,6 @@ public class Candidatura {
 	 * caso contrario.
 	 */
 	public boolean cadastraCandidato(Candidato c) {
-		// TODO: implement method
-		throw new UnsupportedOperationException("Not supported yet.");
+		return candidatos.add(c);
 	}
 }

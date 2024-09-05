@@ -24,30 +24,33 @@ public class ACMEVoting {
 	/**
 	 * Define o caminho do arquivo de entrada de dados.
 	 */
-	private static final String INPUT_FILE_NAME = "./resources/exemplos-io/input.txt";
+	private static final String NOME_ARQUIVO_ENTRADA = "./resources/exemplos-io/input.txt";
 	/**
 	 * Define o caminho do arquivo de saida de dados.
 	 */
-	private static final String OUTPUT_FILE_NAME = "./output.txt";
+	private static final String NOME_ARQUIVO_SAIDA = "./output.txt";
+
+	/**
+	 * Objeto que gerencia o cadastro de partidos.
+	 */
+	private final CadastroPartido partidoHandler;
+	/**
+	 * Objeto que gerencia o cadastro de candidatos.
+	 */
+	private final Candidatura candidaturaHandler;
 
 	private Scanner in = new Scanner(System.in);
 	private PrintStream out = System.out;
 
 	/**
-	 * Objeto que gerencia o cadastro de partidos.
-	 */
-	private CadastroPartido partidoHandler;
-	/**
-	 * Objeto que gerencia o cadastro de candidatos.
-	 */
-	private Candidatura candidaturaHandler;
-
-	/**
 	 * Construtor da aplicacao
 	 */
 	public ACMEVoting() {
-		redirectInput();
-		// redirectOutput();
+		redirecionaEntrada();
+		// redirecionaSaida();
+
+		this.partidoHandler = new CadastroPartido();
+		this.candidaturaHandler = new Candidatura();
 	}
 
 	/**
@@ -121,17 +124,94 @@ public class ACMEVoting {
 	 * passo 5 e nome de um partido para o passo 6.</p>
 	 */
 	public void executar() {
-		// TODO implement method
-		throw new UnsupportedOperationException("Not supported yet.");
+		cadastraPartidos();
+		cadastraCandidatos();
+	}
+
+	/**
+	 * <p>Metodo que realiza o cadastro de partidos. Le os dados (numero e nome), cria a instancia de
+	 * partido e chama o metodo responsavel da classe <code>CadastroPartido</code>; se o cadastro foi realizado com
+	 * sucesso, a saida exibira os dados no formato <code>1:numero,nome</code>. Interrompe a execucao ao ler o valor
+	 * <code>-1</code>.</p>
+	 * <p><strong>Importante</strong>: Para o funcionamento correto do metodo, o arquivo de entrada deve obedecer o
+	 * formato proposto, ou seja, uma linha contendo o numero do partido (ou <code>-1</code> para encerrar) e outra
+	 * linha contendo o nome.</p>
+	 */
+	private void cadastraPartidos() {
+		boolean run = true;
+
+		while (run) {
+			String strNumero = in.nextLine();
+
+			// verifica condicao de encerramento
+			if (strNumero.equals("-1")) {
+				run = false;
+				continue;
+			}
+
+			// le dados restantes para cadastro
+			String nome = in.nextLine();
+
+			// cria instancia e realiza cadastro
+			Partido p = new Partido(Integer.parseInt(strNumero), nome);
+			boolean success = partidoHandler.cadastraPartido(p);
+
+			if (success) {
+				System.out.printf("1:%d,%s%n", p.getNumero(), p.getNome());
+			}
+		}
+	}
+
+	/**
+	 * <p>Metodo que realiza o cadastro de candidatos. Le os dados (numero, nome e municipio), cria a instancia de
+	 * candidato e chama o metodo responsavel da classe <code>Candidatura</code>; se o cadastro foi realizado com
+	 * sucesso, a saida exibira os dados no formato <code>2:numero,nome,municipio</code>. Interrompe a execucao ao ler
+	 * o valor <code>-1</code>.</p>
+	 * <p><strong>Importante</strong>: Para o funcionamento correto do metodo, o arquivo de entrada deve obedecer o
+	 * formato proposto, ou seja, uma linha contendo o numero do partido (ou <code>-1</code> para encerrar), outra linha
+	 * contendo o nome e a ultima contendo o municipio.</p>
+	 */
+	private void cadastraCandidatos() {
+		boolean run = true;
+
+		while (run) {
+			String strNumero = in.nextLine();
+
+			// verifica condicao de encerramento
+			if (strNumero.equals("-1")) {
+				run = false;
+				continue;
+			}
+
+			// le dados restantes para cadastro
+			String nome = in.nextLine();
+			String municipio = in.nextLine();
+
+			// verifica se o partido existe
+			int numeroPartido = Integer.parseInt(strNumero.substring(0, 2));
+			Partido p = partidoHandler.consultaPartido(numeroPartido);
+			if (p == null) {
+				continue;
+			}
+
+			// cria instancia e realiza cadastro
+			Candidato c = new Candidato(Integer.parseInt(strNumero), nome, municipio, p);
+			boolean success = candidaturaHandler.cadastraCandidato(c);
+
+			if (success) {
+				p.adicionaCandidato(c); // add candidato ao partido apenas em caso de sucesso
+				System.out.printf("2:%d,%s,%s%n", c.getNumero(), c.getNome(), c.getMunicipio());
+			}
+		}
 	}
 
 	/**
 	 * Redireciona a entrada de dados para o arquivo especificado na constante <code>INPUT_FILE_NAME</code>.
 	 * Ajusta o <code>Locale</code> para utilizar ponto decimal.
 	 */
-	private void redirectInput() {
+	private void redirecionaEntrada() {
 		try {
-			BufferedReader inputStream = new BufferedReader(new FileReader(INPUT_FILE_NAME));
+			BufferedReader inputStream = new BufferedReader(new FileReader(NOME_ARQUIVO_ENTRADA));
 			in = new Scanner(inputStream);
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
@@ -145,9 +225,9 @@ public class ACMEVoting {
 	 * Redireciona a saida de dados para o arquivo especificado na constante <code>OUTPUT_FILE_NAME</code>.
 	 * Ajusta o <code>Locale</code> para utilizar ponto decimal.
 	 */
-	private void redirectOutput() {
+	private void redirecionaSaida() {
 		try {
-			PrintStream outputStream = new PrintStream(OUTPUT_FILE_NAME, StandardCharsets.UTF_8);
+			PrintStream outputStream = new PrintStream(NOME_ARQUIVO_SAIDA, StandardCharsets.UTF_8);
 			System.setOut(outputStream);
 		} catch (IOException | SecurityException e) {
 			System.err.println(e.getMessage());

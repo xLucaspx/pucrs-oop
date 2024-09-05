@@ -1,10 +1,22 @@
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Classe catalogo que gerencia o cadastro de partidos.
  */
 public class CadastroPartido {
-	private ArrayList<Partido> partidos;
+	/**
+	 * Objeto responsavel por armazenar os partidos cadastrados. Utiliza-se um <code>Set</code>
+	 * pois nao deseja-se cadastrar objetos repetidos.
+	 */
+	private final Set<Partido> partidos;
+
+	/**
+	 * Inicializa um objeto do tipo <code>CadastroPartido</code>.
+	 */
+	public CadastroPartido() {
+		this.partidos = new HashSet<>();
+	}
 
 	/**
 	 * Cadastra um novo partido no sistema. Não pode haver partidos com o mesmo numero.
@@ -14,8 +26,7 @@ public class CadastroPartido {
 	 * caso contrario.
 	 */
 	public boolean cadastraPartido(Partido p) {
-		// TODO: implement method
-		throw new UnsupportedOperationException("Not supported yet.");
+		return partidos.add(p);
 	}
 
 	/**
@@ -38,7 +49,11 @@ public class CadastroPartido {
 	 * nenhum partido com este numero.
 	 */
 	public Partido consultaPartido(int numero) {
-		// TODO: implement method
-		throw new UnsupportedOperationException("Not supported yet.");
+		for (Partido p : partidos) {
+			if (p.getNumero() == numero) {
+				return p;
+			}
+		}
+		return null;
 	}
 }
