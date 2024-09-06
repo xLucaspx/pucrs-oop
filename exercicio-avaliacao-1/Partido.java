@@ -45,12 +45,25 @@ public class Partido {
 		return nome;
 	}
 
+	/**
+	 * @return Lista nao modificavel contendo os candidatos a prefeito do partido.
+	 */
 	public List<Candidato> getPrefeitos() {
 		return Collections.unmodifiableList(prefeitos);
 	}
 
+	/**
+	 * @return Lista nao modificavel contendo os candidatos a vereador do partido.
+	 */
 	public List<Candidato> getVereadores() {
 		return Collections.unmodifiableList(vereadores);
+	}
+
+	/**
+	 * @return A quantidade de candidatos do partido.
+	 */
+	public int getTotalCandidatos() {
+		return prefeitos.size() + vereadores.size();
 	}
 
 	/**

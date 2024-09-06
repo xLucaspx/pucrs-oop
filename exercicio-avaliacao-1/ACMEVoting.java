@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -24,7 +25,7 @@ public class ACMEVoting {
 	/**
 	 * Define o caminho do arquivo de entrada de dados.
 	 */
-	private static final String NOME_ARQUIVO_ENTRADA = "./resources/exemplos-io/input.txt";
+	private static final String NOME_ARQUIVO_ENTRADA = "./resources/exemplos-io-mais-dados/input.txt";
 	/**
 	 * Define o caminho do arquivo de saida de dados.
 	 */
@@ -94,7 +95,8 @@ public class ACMEVoting {
 	 *     <strong>Mostrar os dados do partido com mais candidatos</strong>: Localiza o partido com a maior
 	 *     quantidade de candidatos. Se nao houver partidos com candidatos, mostra a mensagem de erro <code>
 	 *     7:Nenhum partido com candidatos.</code>. Caso contrario, mostra os dados do partido e quantidade de
-	 *     candidatos correspondente no formato <code>7:numero,nome,quantidade</code>;
+	 *     candidatos correspondente no formato <code>7:numero,nome,quantidade</code>. (<em>Em caso de empate,
+	 *     sao mostrados os dados de todos os partidos com o numero de candidatos correspondente</em>);
 	 *   </li>
 	 *   <li>
 	 *     <strong>Mostrar os dados do prefeito e do vereador mais votados</strong>: Se nao houver candidatos
@@ -130,6 +132,10 @@ public class ACMEVoting {
 		consultaPartido();
 		consultaCandidato();
 		consultaPrefeitosPartido();
+		consultaPartidoComMaisCandidatos();
+		mostraCandidatosMaisVotados();
+		mostraPartidoComMaisVotosDeVereadores();
+		mostraMunicipioComMaisVotos();
 	}
 
 	/**
@@ -145,7 +151,7 @@ public class ACMEVoting {
 		boolean run = true;
 
 		while (run) {
-			String strNumero = in.nextLine();
+			String strNumero = in.nextLine().trim();
 
 			// verifica condicao de encerramento
 			if (strNumero.equals("-1")) {
@@ -154,7 +160,7 @@ public class ACMEVoting {
 			}
 
 			// le dados restantes para cadastro
-			String nome = in.nextLine();
+			String nome = in.nextLine().trim();
 
 			// cria instancia e realiza cadastro
 			Partido p = new Partido(Integer.parseInt(strNumero), nome);
@@ -179,7 +185,7 @@ public class ACMEVoting {
 		boolean run = true;
 
 		while (run) {
-			String strNumero = in.nextLine();
+			String strNumero = in.nextLine().trim();
 
 			// verifica condicao de encerramento
 			if (strNumero.equals("-1")) {
@@ -188,8 +194,8 @@ public class ACMEVoting {
 			}
 
 			// le dados restantes para cadastro
-			String nome = in.nextLine();
-			String municipio = in.nextLine();
+			String nome = in.nextLine().trim();
+			String municipio = in.nextLine().trim();
 
 			// verifica se o partido existe
 			int numeroPartido = Integer.parseInt(strNumero.substring(0, 2));
@@ -222,7 +228,7 @@ public class ACMEVoting {
 		boolean run = true;
 
 		while (run) {
-			String strNumero = in.nextLine();
+			String strNumero = in.nextLine().trim();
 
 			// verifica condicao de encerramento
 			if (strNumero.equals("-1")) {
@@ -231,8 +237,8 @@ public class ACMEVoting {
 			}
 
 			// le dados restantes para cadastro
-			String municipio = in.nextLine();
-			int votos = Integer.parseInt(in.nextLine());
+			String municipio = in.nextLine().trim();
+			int votos = Integer.parseInt(in.nextLine().trim());
 
 			// verifica se o candidato existe
 			Candidato c = candidaturaHandler.consultaCandidato(Integer.parseInt(strNumero), municipio);
@@ -255,7 +261,7 @@ public class ACMEVoting {
 	 * </p>
 	 */
 	private void consultaPartido() {
-		int numero = Integer.parseInt(in.nextLine());
+		int numero = Integer.parseInt(in.nextLine().trim());
 		Partido p = partidoHandler.consultaPartido(numero);
 
 		String saida = p == null ? "4:Nenhum partido encontrado." : "4:%d,%s".formatted(p.getNumero(), p.getNome());
@@ -273,8 +279,8 @@ public class ACMEVoting {
 	 * o fim da consulta de partido.</p>
 	 */
 	private void consultaCandidato() {
-		int numero = Integer.parseInt(in.nextLine());
-		String municipio = in.nextLine();
+		int numero = Integer.parseInt(in.nextLine().trim());
+		String municipio = in.nextLine().trim();
 		Candidato c = candidaturaHandler.consultaCandidato(numero, municipio);
 
 		String saida = c == null ? "5:Nenhum candidato encontrado." : "5:%d,%s,%s,%d".formatted(c.getNumero(),
@@ -289,15 +295,15 @@ public class ACMEVoting {
 	/**
 	 * <p>Metodo que mostra os dados de todos os candidatos a prefeito de um determinado partido. Le o nome do partido e,
 	 * se nao for encontrado nenhum partido correspondente sera exibida a mensagem
-	 * <code>6:Nenhum partido encontrado.</code>, caso contrario a saida mostrara os dados cada candidato a prefeito do
-	 * partido no formato <code>6:nomePartido,numeroPrefeito,nomePrefeito,municipio,votos</code>. Se não hover candidatos
-	 * a prefeito, não havera saida. É executado apenas uma vez.</p>
+	 * <code>6:Nenhum partido encontrado.</code>, caso contrario a saida mostrara os dados de cada candidato a
+	 * prefeito do partido no formato <code>6:nomePartido,numeroPrefeito,nomePrefeito,municipio,votos</code>. Se não
+	 * houver candidatos a prefeito, não havera saida. É executado apenas uma vez.</p>
 	 * <p><strong>Importante</strong>: Para o funcionamento correto do metodo, o arquivo de entrada deve obedecer o
 	 * formato proposto, i.e.: uma linha contendo o nome do partido imediatamente apos o fim da consulta de candidato.
 	 * </p>
 	 */
 	private void consultaPrefeitosPartido() {
-		String nome = in.nextLine();
+		String nome = in.nextLine().trim();
 		Partido p = partidoHandler.consultaPartido(nome);
 
 		if (p == null) {
@@ -312,6 +318,98 @@ public class ACMEVoting {
 			pref.getMunicipio(),
 			pref.getVotos()
 		));
+	}
+
+	/**
+	 * Metodo que mostra os dados do(s) partido(s) com mais candidatos. Se nao houver candidatos cadastrados sera exibida
+	 * a mensagem <code>7:Nenhum partido com candidatos.</code>, caso contrario a saida mostrara os dados do partido com
+	 * o maior numero de candidatos no formato <code>7:numero,nome,quantidade</code>. (<em>Em caso de empate, sao
+	 * mostrados os dados de todos os partidos com o numero de candidatos correspondente</em>).
+	 * É executado apenas uma vez.
+	 */
+	private void consultaPartidoComMaisCandidatos() {
+		List<Partido> maisCandidatos = partidoHandler.getPartidosComMaisCandidatos();
+
+		if (maisCandidatos.isEmpty()) {
+			System.out.println("7:Nenhum partido com candidatos.");
+			return;
+		}
+
+		maisCandidatos.forEach(p -> System.out.printf("7:%d,%s,%d%n", p.getNumero(), p.getNome(), p.getTotalCandidatos()));
+	}
+
+	/**
+	 * Metodo que mostra os dados do(s) candidato(s) com mais votados para prefeito e para vereador. Se, para algum dos
+	 * cargos, nao existir candidatos cadastrados ou nao existir candidatos com votos, sera exibida a mensagem
+	 * <code>8:Nenhum candidato encontrado.</code> (se essa condicao for verdadeira para ambos, a mensagem sera exibida
+	 * duas vezes). Caso contrario a saida mostrara os dados do(s) prefeito(s) e vereador(es) mais votados no formato
+	 * <code>8:numero,nome,municipio,votos</code>. (<em>em caso de empate, sao mostrados os dados de todos os candidatos
+	 * com o numero de votos correspondente</em>). É executado apenas uma vez.
+	 */
+	private void mostraCandidatosMaisVotados() {
+		List<Candidato> prefeitosMaisVotados = candidaturaHandler.getPrefeitosMaisVotados();
+		List<Candidato> vereadoresMaisVotados = candidaturaHandler.getVereadoresMaisVotados();
+
+		if (prefeitosMaisVotados.isEmpty()) {
+			System.out.println("8:Nenhum candidato prefeito encontrado.");
+		}
+
+		prefeitosMaisVotados.forEach(p -> System.out.printf("8:%d,%s,%s,%d%n",
+			p.getNumero(),
+			p.getNome(),
+			p.getMunicipio(),
+			p.getVotos()
+		));
+
+		if (vereadoresMaisVotados.isEmpty()) {
+			System.out.println("8:Nenhum candidato vereador encontrado.");
+		}
+
+		vereadoresMaisVotados.forEach(v -> System.out.printf("8:%d,%s,%s,%d%n",
+			v.getNumero(),
+			v.getNome(),
+			v.getMunicipio(),
+			v.getVotos()
+		));
+	}
+
+	/**
+	 * Metodo que mostra os dados do(s) partido(s) com mais votos para vereador. Se nao existir candidatos cadastrados ou
+	 * nao existir candidatos vereadores com votos, sera exibida a mensagem
+	 * <code>9:Nenhum candidato vereador encontrado.</code>. Caso contrario a saida mostrara os dados do(s) partido(s) no
+	 * formato <code>9:numero,nome,quantidade</code>. (<em>em caso de empate, sao mostrados os dados de todos os partidos
+	 * com o numero de votos correspondente</em>). É executado apenas uma vez.
+	 */
+	private void mostraPartidoComMaisVotosDeVereadores() {
+		CadastroPartido.PartidoVotos resultado = partidoHandler.getPartidosComMaisVotosDeVereadores();
+		List<Partido> partidos = resultado.partidos();
+		int totalVotos = resultado.totalVotos();
+
+		if (partidos.isEmpty()) {
+			System.out.println("9:Nenhum candidato vereador encontrado.");
+			return;
+		}
+
+		partidos.forEach(p -> System.out.printf("9:%d,%s,%d%n", p.getNumero(), p.getNome(), totalVotos));
+	}
+
+	/**
+	 * <strong>Mostrar o municipio com maior quantidade de votos</strong>: Se nao houver candidatos cadastrados
+	 * no sistema, mostra a mensagem de erro <code>10:Nenhum candidato encontrado.</code>. Caso contrario, mostra
+	 * os dados do municipio que possuir a maior quantidade de votos somados para prefeito e para vereadores no
+	 * formato <code>10:municipio,quantidade</code>.
+	 */
+	private void mostraMunicipioComMaisVotos() {
+		Candidatura.MunicipioVotos resultado = candidaturaHandler.getMunicipiosComMaisVotos();
+		List<String> municipios = resultado.municipios();
+		int totalVotos = resultado.totalVotos();
+
+		if (municipios.isEmpty()) {
+			System.out.println("10:Nenhum candidato encontrado.");
+			return;
+		}
+
+		municipios.forEach(m -> System.out.printf("10:%s,%d%n", m, totalVotos));
 	}
 
 	/**
