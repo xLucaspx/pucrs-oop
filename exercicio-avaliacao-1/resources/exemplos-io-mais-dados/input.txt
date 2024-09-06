@@ -17,7 +17,7 @@ Porto Alegre
 11
 Pedro da Silveira
 Canoas
-22 
+22
 Maria de Campos
 Canoas
 33
@@ -74,4 +74,3 @@ Canoas
 22111
 Canoas
 Partido Gaucho
-

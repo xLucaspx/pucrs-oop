@@ -1,0 +1,10 @@
+--- ./resources/exemplos-io-dados-invalidos/output.txt
++++ ./output/output-2.txt
+@@ -6,3 +6,7 @@
+ 5:Nenhum candidato encontrado.
+ 6:Nenhum partido encontrado.
+ 7:11,Partido Brasileiro,2
++8:Nenhum candidato prefeito encontrado.
++8:Nenhum candidato vereador encontrado.
++9:Nenhum candidato vereador encontrado.
++10:Nenhum candidato encontrado.

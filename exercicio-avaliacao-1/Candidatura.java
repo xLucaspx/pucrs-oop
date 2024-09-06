@@ -61,7 +61,7 @@ public class Candidatura {
 	 * vazia caso nao existam candidatos.
 	 */
 	public List<Candidato> getPrefeitosMaisVotados() {
-		List<Candidato> prefeitos = getCandidatosMaisVotados(10, 100);
+		List<Candidato> prefeitos = getCandidatosMaisVotados(Prefeito.class);
 		return Collections.unmodifiableList(prefeitos);
 	}
 
@@ -74,7 +74,7 @@ public class Candidatura {
 	 * vazia caso nao existam candidatos.
 	 */
 	public List<Candidato> getVereadoresMaisVotados() {
-		List<Candidato> vereadores = getCandidatosMaisVotados(10000, 100000);
+		List<Candidato> vereadores = getCandidatosMaisVotados(Vereador.class);
 		return Collections.unmodifiableList(vereadores);
 	}
 
@@ -119,23 +119,24 @@ public class Candidatura {
 	}
 
 	/**
-	 * Busca, no <code>Set</code> de candidatos, pelos que possuem a maior quantidade de votos. Os criterios
-	 * de busca serao os numeros passados como argumento, delimitando quais os candidatos buscados. A lista tera
-	 * mais de um elemento se e somente se qualquer <code>Candidato</code> da lista tiver a mesma quantidade de
-	 * votos. No caso de nao haver candidatos ou nao haver candidatos com votos, a lista estara vazia.
+	 * Busca, no <code>Set</code> de candidatos, pelos que possuem a maior quantidade de votos. Filtra os candidatos
+	 * de acordo com a classe passada como argumento, i.e.: ira contabilizar apenas os candidatos que sao uma instancia
+	 * da classe informada. A lista tera mais de um elemento se e somente se qualquer <code>Candidato</code> da lista
+	 * tiver a mesma quantidade de votos. No caso de nao haver candidatos do tipo informado ou nao haver candidatos do
+	 * tipo informado com votos, a lista estara vazia.
 	 *
-	 * @param numeroMinimo <strong>Inclusivo</strong>. O numero minimo do candidato para ser considerado na busca.
-	 * @param numeroMaximo <strong>Exclusivo</strong>. O numero maximo do candidato para ser considerado na busca.
-	 * @return Os cadidatos mais votados e que tenham numero entre <code>numeroMinimo</code> e
-	 * <code>numeroMaximo - 1</code>.
+	 * @param classeCandidato A classe de candidatos que se deseja considerar para o resultado (E.g.:
+	 *                        <code>Prefeito</code>, <code>Vereador</code>).
+	 * @return Lista contendo os candidatos mais votados do tipo informado, ou vazia caso nao existam candidatos que se
+	 * encaixem nos criterios.
 	 */
-	private List<Candidato> getCandidatosMaisVotados(int numeroMinimo, int numeroMaximo) {
+	private List<Candidato> getCandidatosMaisVotados(Class<? extends Candidato> classeCandidato) {
 		List<Candidato> maisVotados = new ArrayList<>();
 		// comecando em 1 pois se a quantidade de votos do candidato for 0 ele nao entra na lista
 		int totalVotos = 1;
 
 		for (Candidato c : candidatos) {
-			if (c.getNumero() < numeroMinimo || c.getNumero() >= numeroMaximo) {
+			if (!(classeCandidato.isAssignableFrom(c.getClass()))) {
 				continue;
 			}
 

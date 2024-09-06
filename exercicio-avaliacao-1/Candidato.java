@@ -1,9 +1,9 @@
 import java.util.Objects;
 
 /**
- * Classe que representa um candidato na eleicao.
+ * Classe abstrata que representa um candidato na eleicao.
  */
-public class Candidato {
+public abstract class Candidato {
 	/**
 	 * <p>Numero do candidato: se tiver apenas 2 digitos sera para prefeito,
 	 * se tiver 5 digitos sera para vereador.</p>
@@ -16,18 +16,38 @@ public class Candidato {
 	private Partido partido;
 
 	/**
-	 * Inicializa um objeto do tipo <code>Candidato</code>.
+	 * Inicializa um objeto do tipo <code>Candidato</code>. Define-o como <code>Prefeito</code>
+	 * ou <code>Vereador</code> com base no numero, i.e.: numeros entre 10 e 99, inclusos, sao
+	 * considerados para candidatos a prefeito e numeros entre 10000 e 99999, inclusos, sao
+	 * considerados para candidatos a vereador.
 	 *
-	 * @param numero    O numero do candidato.
+	 * @param numero    O numero do candidato (2 digitos para prefeito, 5 para vereador).
 	 * @param nome      O nome do candidato.
 	 * @param municipio O municipio da candidatura.
 	 * @param partido   O partido no qual o candidato esta filiado.
+	 * @return O objeto <code>Candidato</code> instanciado, ou <code>null</code> caso o numero
+	 * informado nao atenda aos criterios.
 	 */
-	public Candidato(int numero, String nome, String municipio, Partido partido) {
-		this.numero = numero;
-		this.nome = nome;
-		this.municipio = municipio;
-		this.partido = partido;
+	public static Candidato criaCandidato(int numero, String nome, String municipio, Partido partido) {
+		Candidato c = null;
+
+		if (numero >= 10 && numero <= 100) { // 2 digitos -> prefeito
+			c = new Prefeito();
+		}
+
+		if (numero >= 10000 && numero <= 100000) { // 5 digitos -> vereador
+			c = new Vereador();
+		}
+
+		if (c == null) {
+			return null;
+		}
+
+		c.numero = numero;
+		c.nome = nome;
+		c.municipio = municipio;
+		c.partido = partido;
+		return c;
 	}
 
 	/**
