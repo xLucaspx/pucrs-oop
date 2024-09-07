@@ -110,7 +110,7 @@ public class CadastroPartido {
 		int totalVotos = 1;
 
 		for (Partido p : partidos) {
-			int votosVereadoresPartido = p.getVereadores().stream().mapToInt(Candidato::getVotos).sum();
+			int votosVereadoresPartido = p.getVereadores().stream().mapToInt(Vereador::getVotos).sum();
 
 			if (votosVereadoresPartido == totalVotos) {
 				maisVotos.add(p);

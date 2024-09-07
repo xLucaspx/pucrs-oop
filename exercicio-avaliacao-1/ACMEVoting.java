@@ -52,7 +52,7 @@ public class ACMEVoting {
 	}
 
 	/**
-	 * <p>Executa o funcionamento da aplicacao. Redireciona a entrada e a saida para os arquivos informados e
+	 * <p>Executa o funcionamento da aplicacao. Redireciona a entrada e a saida para os arquivos definidos e
 	 * restaura ao final da execucao.</p>
 	 * <p>Deve realizar a sequencia de passos:</p>
 	 * <ol>
@@ -117,12 +117,12 @@ public class ACMEVoting {
 	 *     formato <code>10:municipio,quantidade</code>.
 	 *   </li>
 	 * </ol>
-	 *
-	 * <p>Nos passos 1, 2 e 3, cada linha de entrada correspondera a uma informacao necessaria para o cadastro sendo
-	 * realizado. Quando a informacao lida for <code>-1</code> significa que nao serao realizados mais cadastros naquele
-	 * passo especifico.</p>
-	 * <p>As demais linhas de entrada correspondem ao numero de um partido para o passo 4, numero de um candidato para o
-	 * passo 5 e nome de um partido para o passo 6.</p>
+	 * <p>Nos passos 1, 2 e 3, cada linha de entrada devera corresponder a uma informacao necessaria para o cadastro
+	 * sendo realizado. Quando a informacao lida for <code>-1</code> significa que nao serao realizados mais cadastros
+	 * naquele passo especifico.</p>
+	 * <p>As demais linhas de entrada devem corresponder ao numero de um partido para o passo 4, numero de um candidato
+	 * para o passo 5 e nome de um partido para o passo 6. Para os passos 7, 8, 9 e 10 nao e necessaria nenhuma entrada
+	 * para a execução.</p>
 	 *
 	 * @param caminhosArquivos Caminhos dos arquivos que serao utilizados para a entrada e para a saida; se os valores
 	 *                         forem <code>null</code>, serao utilizados os caminho especificados nas constantes
@@ -132,7 +132,6 @@ public class ACMEVoting {
 	public void executar(String[] caminhosArquivos) {
 		String arquivoEntrada = caminhosArquivos.length > 0 ? caminhosArquivos[0] : NOME_ARQUIVO_ENTRADA;
 		String arquivoSaida = caminhosArquivos.length > 1 ? caminhosArquivos[1] : NOME_ARQUIVO_SAIDA;
-
 		redirecionaEntrada(arquivoEntrada);
 		redirecionaSaida(arquivoSaida);
 
@@ -357,20 +356,20 @@ public class ACMEVoting {
 	}
 
 	/**
-	 * Metodo que mostra os dados do(s) candidato(s) com mais votados para prefeito e para vereador. Se, para algum dos
-	 * cargos, nao existir candidatos cadastrados ou nao existir candidatos com votos, sera exibida a mensagem
-	 * <code>8:Nenhum candidato encontrado.</code> (se essa condicao for verdadeira para ambos, a mensagem sera exibida
-	 * duas vezes). Caso contrario a saida mostrara os dados do(s) prefeito(s) e vereador(es) mais votados no formato
-	 * <code>8:numero,nome,municipio,votos</code>. (<em>em caso de empate, sao mostrados os dados de todos os candidatos
-	 * com o numero de votos correspondente</em>). É executado apenas uma vez.
+	 * Metodo que mostra os dados do(s) candidato(s) com mais votados para prefeito e para vereador. Se nao existir
+	 * candidatos, sera exibida a mensagem <code>8:Nenhum candidato encontrado.</code>; se nao existir candidatos com
+	 * votos (para cada cargo) nada sera exibdo. Caso contrario a saida mostrara os dados do(s) prefeito(s) e
+	 * vereador(es) mais votados no formato <code>8:numero,nome,municipio,votos</code>. (<em>em caso de empate, sao
+	 * mostrados os dados de todos os candidatos com o numero de votos correspondente</em>). É executado apenas uma vez.
 	 */
 	private void mostraCandidatosMaisVotados() {
+		if (candidaturaHandler.getTotalCandidatos() == 0) {
+			System.out.println("8:Nenhum candidato encontrado.");
+			return;
+		}
+
 		List<Candidato> prefeitosMaisVotados = candidaturaHandler.getPrefeitosMaisVotados();
 		List<Candidato> vereadoresMaisVotados = candidaturaHandler.getVereadoresMaisVotados();
-
-		if (prefeitosMaisVotados.isEmpty()) {
-			System.out.println("8:Nenhum candidato prefeito encontrado.");
-		}
 
 		prefeitosMaisVotados.forEach(p -> System.out.printf("8:%d,%s,%s,%d%n",
 			p.getNumero(),
@@ -378,10 +377,6 @@ public class ACMEVoting {
 			p.getMunicipio(),
 			p.getVotos()
 		));
-
-		if (vereadoresMaisVotados.isEmpty()) {
-			System.out.println("8:Nenhum candidato vereador encontrado.");
-		}
 
 		vereadoresMaisVotados.forEach(v -> System.out.printf("8:%d,%s,%s,%d%n",
 			v.getNumero(),

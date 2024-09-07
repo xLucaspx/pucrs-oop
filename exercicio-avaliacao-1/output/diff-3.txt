@@ -1,5 +1,5 @@
---- ./resources/exemplos-io-mais-dados/output.txt
-+++ ./output/output-3.txt
+--- ./resources/exemplos-io-mais-dados/output.txt	2024-09-07 14:09:26.054721000 -0300
++++ ./output/output-3.txt	2024-09-07 14:12:31.089467400 -0300
 @@ -26,6 +26,10 @@
  5:22111,Mario de Souza,Canoas,222
  6:Partido Gaucho,33,Paulo da Silva,Porto Alegre,3

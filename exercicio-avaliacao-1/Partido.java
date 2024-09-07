@@ -12,11 +12,11 @@ public class Partido {
 	/**
 	 * Armazena os candidatos a prefeito do partido.
 	 */
-	private List<Candidato> prefeitos;
+	private List<Prefeito> prefeitos;
 	/**
 	 * Armazena os candidatos a vereador do partido.
 	 */
-	private List<Candidato> vereadores;
+	private List<Vereador> vereadores;
 
 	/**
 	 * Inicializa um objeto do tipo <code>Partido</code>.
@@ -48,14 +48,14 @@ public class Partido {
 	/**
 	 * @return Lista nao modificavel contendo os candidatos a prefeito do partido.
 	 */
-	public List<Candidato> getPrefeitos() {
+	public List<Prefeito> getPrefeitos() {
 		return Collections.unmodifiableList(prefeitos);
 	}
 
 	/**
 	 * @return Lista nao modificavel contendo os candidatos a vereador do partido.
 	 */
-	public List<Candidato> getVereadores() {
+	public List<Vereador> getVereadores() {
 		return Collections.unmodifiableList(vereadores);
 	}
 
@@ -73,12 +73,11 @@ public class Partido {
 	 * @param c O candidato que sera filiado.
 	 */
 	public void adicionaCandidato(Candidato c) {
-		if (c instanceof Prefeito) {
-			this.prefeitos.add(c);
-			return;
+		switch (c) {
+			case Prefeito p -> prefeitos.add(p);
+			case Vereador v -> vereadores.add(v);
+			default -> {return;}
 		}
-
-		this.vereadores.add(c);
 	}
 
 	/**

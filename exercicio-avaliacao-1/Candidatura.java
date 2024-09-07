@@ -24,6 +24,13 @@ public class Candidatura {
 	}
 
 	/**
+	 * @return A quantidade de candidatos cadastrados no sistema.
+	 */
+	public int getTotalCandidatos() {
+		return candidatos.size();
+	}
+
+	/**
 	 * Cadastra um novo candidato no sistema. Não pode haver candidatos com o
 	 * mesmo numero no mesmo municipio.
 	 *

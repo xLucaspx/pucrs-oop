@@ -1,5 +1,5 @@
---- ./resources/exemplos-io/output.txt
-+++ ./output/output-1.txt
+--- ./resources/exemplos-io/output.txt	2024-09-07 14:09:00.814847400 -0300
++++ ./output/output-1.txt	2024-09-07 14:12:30.621243100 -0300
 @@ -9,3 +9,5 @@
  7:11,Partido Brasileiro,2
  8:11,Pedro da Silva,Porto Alegre,1
