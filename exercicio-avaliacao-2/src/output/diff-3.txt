@@ -1,0 +1,7 @@
+--- ../resources/io-invalid-data/output.txt	2024-10-25 10:54:31.835898100 -0300
++++ ../../output/output-3.txt	2024-10-25 11:23:24.834636100 -0300
+@@ -2,3 +2,4 @@
+ 3:Erro - nenhum video cadastrado.
+ 4:Erro - nenhum seriado cadastrado.
+ 5:Erro - nenhum filme cadastrado.
++6:Erro - nenhum video cadastrado.

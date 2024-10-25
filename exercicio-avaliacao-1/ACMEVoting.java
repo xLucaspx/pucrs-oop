@@ -125,7 +125,7 @@ public class ACMEVoting {
 	 * para a execução.</p>
 	 *
 	 * @param caminhosArquivos Caminhos dos arquivos que serao utilizados para a entrada e para a saida; se os valores
-	 *                         forem <code>null</code>, serao utilizados os caminho especificados nas constantes
+	 *                         forem <code>null</code>, serao utilizados os caminhos especificados nas constantes
 	 *                         <code>NOME_ARQUIVO_ENTRADA</code> e <code>NOME_ARQUIVO_SAIDA</code>. Caso o arquivo de
 	 *                         saida nao exista, sera criado.
 	 */
