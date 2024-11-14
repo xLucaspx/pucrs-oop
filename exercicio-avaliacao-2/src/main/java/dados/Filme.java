@@ -23,6 +23,9 @@ public class Filme extends Video {
 		this.duracao = duracao;
 	}
 
+	/**
+	 * @return O nome do diretor deste {@link Filme}.
+	 */
 	public String getDiretor() {
 		return diretor;
 	}

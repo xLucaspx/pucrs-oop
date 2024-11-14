@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+				 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>xLucaspx</groupId>
+	<artifactId>exercicio-avaliacao-3</artifactId>
+	<version>0.1</version>
+	<packaging>jar</packaging>
+
+	<name>Exercício de Avaliação 3</name>
+	<description>
+		Desenvolvimento da GUI de um dos formulários de cadastro solicitados no
+		trabalho final da disciplina, utilizando coleções para armazenar os dados.
+	</description>
+	<inceptionYear>2024</inceptionYear>
+
+	<properties>
+		<javaVersion>17</javaVersion>
+		<maven.compiler.source>${javaVersion}</maven.compiler.source>
+		<maven.compiler.target>${javaVersion}</maven.compiler.target>
+		<maven.compiler.release>${javaVersion}</maven.compiler.release>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-api</artifactId>
+				<version>5.11.3</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>3.5.0</version>
+				<configuration>
+					<mainClass>Main</mainClass>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.4.2</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<mainClass>Main</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<organization>
+		<name>Pontifícia Universidade Católica do Rio Grande do Sul - PUCRS</name>
+		<url>https://portal.pucrs.br/ensino-e-pesquisa/</url>
+	</organization>
+
+	<scm>
+		<connection>
+			scm:git:https://github.com/xLucaspx/pucrs-oop.git
+		</connection>
+		<developerConnection>
+			scm:git:https://github.com/xLucaspx/pucrs-oop.git
+		</developerConnection>
+		<tag>main</tag>
+		<url>https://github.com/xLucaspx/pucrs-oop</url>
+	</scm>
+
+	<developers>
+		<developer>
+			<id>xLucaspx</id>
+			<name>Lucas da Paz Oliveira</name>
+			<email>lucas.paz02@edu.pucrs.br</email>
+		</developer>
+	</developers>
+</project>
