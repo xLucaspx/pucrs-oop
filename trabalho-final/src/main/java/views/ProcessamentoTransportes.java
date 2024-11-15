@@ -79,6 +79,7 @@ public class ProcessamentoTransportes extends javax.swing.JInternalFrame {
     painelRegistro.setBorder(javax.swing.BorderFactory.createTitledBorder("Registros"));
     painelRegistro.setPreferredSize(new java.awt.Dimension(500, 225));
 
+    textAreaRegistro.setEditable(false);
     textAreaRegistro.setColumns(20);
     textAreaRegistro.setLineWrap(true);
     textAreaRegistro.setRows(5);

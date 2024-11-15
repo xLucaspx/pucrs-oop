@@ -46,9 +46,15 @@ public class TransporteCargaViva extends Transporte {
 
 	@Override
 	public String toString() {
-		return "{ %s, temperaturaMinima: %.1f, temperaturaMaxima: %.1f }".formatted(super.toString(),
+		return """
+			Transporte de Carga Viva:
+			%s
+			\t* Temperatura mínima: %.1f ºC;
+			\t* Temperatura máxima: %.1f ºC;
+			\t* Intervalo entre temperaturas: %.1f ºC;""".formatted(super.toString(),
 			temperaturaMinima,
-			temperaturaMaxima
+			temperaturaMaxima,
+			temperaturaMaxima - temperaturaMinima
 		);
 	}
 }

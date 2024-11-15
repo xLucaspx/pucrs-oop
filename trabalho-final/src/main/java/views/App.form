@@ -70,12 +70,18 @@
                 <Property name="text" type="java.lang.String" value="Relat&#xf3;rio Geral"/>
                 <Property name="toolTipText" type="java.lang.String" value="Gerar relat&#xf3;rio com informa&#xe7;&#xf5;es de todos os drones e transportes"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="abreRelatorioGeral"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="relatorioTransportesMenuItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Relat&#xf3;rio Transportes"/>
                 <Property name="toolTipText" type="java.lang.String" value="Gerar relat&#xf3;rio com informa&#xe7;&#xf5;es de todos os transportes"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="abreRelatorioTransportes"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

@@ -50,7 +50,10 @@ public class DroneCargaInanimada extends DroneCarga {
 
 	@Override
 	public String toString() {
-		return "{ %s, protecao: %b }".formatted(super.toString(), protecao);
+		return """
+			Drone de Carga Inanimada:
+			%s
+			\t* Proteção: %s;""".formatted(super.toString(), protecao ? "Sim" : "Não");
 	}
 
 	/**

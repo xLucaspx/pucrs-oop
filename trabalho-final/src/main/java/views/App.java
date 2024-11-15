@@ -108,10 +108,20 @@ public class App extends JFrame {
 
     relatorioGeralMenuItem.setText("Relatório Geral");
     relatorioGeralMenuItem.setToolTipText("Gerar relatório com informações de todos os drones e transportes");
+    relatorioGeralMenuItem.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        abreRelatorioGeral(evt);
+      }
+    });
     menuRelatorio.add(relatorioGeralMenuItem);
 
     relatorioTransportesMenuItem.setText("Relatório Transportes");
     relatorioTransportesMenuItem.setToolTipText("Gerar relatório com informações de todos os transportes");
+    relatorioTransportesMenuItem.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        abreRelatorioTransportes(evt);
+      }
+    });
     menuRelatorio.add(relatorioTransportesMenuItem);
 
     menuBar.add(menuRelatorio);
@@ -151,17 +161,25 @@ public class App extends JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
   private void abreCadastroDrone(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abreCadastroDrone
-    mostraFrameInterno(new CadastroDrone());
+		mostraFrameInterno(new CadastroDrone());
   }//GEN-LAST:event_abreCadastroDrone
 
   private void abreProcessamentoTransportes(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abreProcessamentoTransportes
-   mostraFrameInterno(new ProcessamentoTransportes());
+		mostraFrameInterno(new ProcessamentoTransportes());
   }//GEN-LAST:event_abreProcessamentoTransportes
 
   private void encerrarAplicacao(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_encerrarAplicacao
-    dispose();
+		dispose();
 		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
   }//GEN-LAST:event_encerrarAplicacao
+
+  private void abreRelatorioGeral(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abreRelatorioGeral
+		mostraFrameInterno(new RelatorioGeral());
+  }//GEN-LAST:event_abreRelatorioGeral
+
+  private void abreRelatorioTransportes(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abreRelatorioTransportes
+    mostraFrameInterno(new RelatorioTransportes());
+  }//GEN-LAST:event_abreRelatorioTransportes
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JMenuItem carregarDadosMenuItem;

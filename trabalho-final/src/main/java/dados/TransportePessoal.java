@@ -48,6 +48,9 @@ public class TransportePessoal extends Transporte {
 
 	@Override
 	public String toString() {
-		return "{ %s, qtdPessoas: %d }".formatted(super.toString(), qtdPessoas);
+		return """
+			Transporte Pessoal:
+			%s
+			\t* Quantidade de pessoas: %d""".formatted(super.toString(), qtdPessoas);
 	}
 }

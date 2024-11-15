@@ -128,6 +128,10 @@ public abstract class Drone implements Comparable<Drone> {
 	 */
 	@Override
 	public String toString() {
-		return "codigo: %d, custoFixo: R$ %.2f, autonomia: %.1f Km".formatted(codigo, custoFixo, autonomia);
+		return """
+			\t* Código: %d;
+			\t* Custo Fixo: R$ %.2f;
+			\t* Custo por Km: R$ %.2f;
+			\t* Autonomia: %.1f Km;""".formatted(codigo, custoFixo, calculaCustoKm(), autonomia);
 	}
 }

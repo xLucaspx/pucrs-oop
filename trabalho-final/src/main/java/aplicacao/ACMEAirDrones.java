@@ -13,7 +13,6 @@ import views.App;
 public class ACMEAirDrones {
 
 	public void executar() {
-
 		var dh = DroneHandler.getHandler();
 		dh.cadastra(new DronePessoal(1, 10, 100, 5));
 		dh.cadastra(new DroneCargaInanimada(2, 20, 200, 200, true));

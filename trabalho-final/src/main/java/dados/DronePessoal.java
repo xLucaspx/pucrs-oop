@@ -61,6 +61,9 @@ public class DronePessoal extends Drone {
 
 	@Override
 	public String toString() {
-		return "{ %s, maxPessoas: %d }".formatted(super.toString(), qtdMaxPessoas);
+		return """
+			Drone Pessoal:
+			%s
+			\t* Máximo de pessoas: %d;""".formatted(super.toString(), qtdMaxPessoas);
 	}
 }

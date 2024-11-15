@@ -61,23 +61,6 @@ public abstract class Transporte {
 	}
 
 	/**
-	 * Associa ao {@link Transporte} uma instância de {@link Drone}
-	 * e altera sua situação para {@link Estado#ALOCADO ALOCADO}. Caso
-	 * o transporte não esteja na situação {@link Estado#PENDENTE PENDENTE}
-	 * — i.e., caso já possua um drone ou caso já tenha sido finalizado —
-	 * nenhuma ação ocorrerá.
-	 *
-	 * @param drone O drone que será associado ao transporte.
-	 */
-	public void setDrone(Drone drone) {
-		if (!situacao.equals(Estado.PENDENTE)) {
-			return;
-		}
-		this.drone = drone;
-		situacao = Estado.ALOCADO;
-	}
-
-	/**
 	 * Define a situação deste {@link Transporte} como
 	 * {@link Estado#TERMINADO TERMINADO} e faz com que ele não possa
 	 * mais ser alterado. Caso o transporte não esteja com a situação
@@ -134,6 +117,32 @@ public abstract class Transporte {
 	}
 
 	/**
+	 * @return O {@link Drone} relacionado com este {@link Transporte},
+	 * ou {@code null} se o transporte não estiver relacionado com nenhum
+	 * drone, i.e., se a situação for {@link Estado#PENDENTE PENDENTE}.
+	 */
+	public Drone getDrone() {
+		return drone;
+	}
+
+	/**
+	 * Associa ao {@link Transporte} uma instância de {@link Drone}
+	 * e altera sua situação para {@link Estado#ALOCADO ALOCADO}. Caso
+	 * o transporte não esteja na situação {@link Estado#PENDENTE PENDENTE}
+	 * — i.e., caso já possua um drone ou caso já tenha sido finalizado —
+	 * nenhuma ação ocorrerá.
+	 *
+	 * @param drone O drone que será associado ao transporte.
+	 */
+	public void setDrone(Drone drone) {
+		if (!situacao.equals(Estado.PENDENTE)) {
+			return;
+		}
+		this.drone = drone;
+		situacao = Estado.ALOCADO;
+	}
+
+	/**
 	 * Calcula a distância em KM do transporte com base nas coordenadas
 	 * de origem e de destino. Utiliza a fórmula de Haversine, que assume
 	 * a Terra como uma esfera perfeita; sendo assim, para longas distâncias
@@ -184,14 +193,30 @@ public abstract class Transporte {
 	 */
 	@Override
 	public String toString() {
-		return "numero: %d, cliente: %s, descricao: %s, peso: %.2f KG, distancia: %.2f KM, custo: R$ %.2f, situacao: %s".formatted(
-			numero,
+		return """
+			\t* Número: %d;
+			\t* Cliente: %s;
+			\t* Descrição: %s;
+			\t* Peso: %.1f Kg;
+			\t* Coordenadas origem: { Latitude: %.6f, Longitude: %.6f };
+			\t* Coordenadas destino: { Latitude: %.6f, Longitude: %.6f };
+			\t* Distância: %.1f Km;
+			\t* Situação: %s;
+			\t* Valor base: %s;
+			\t* Valor final: %s;
+			\t* Acréscimos: R$ %.2f;""".formatted(numero,
 			nomeCliente,
 			descricao,
 			peso,
+			latitudeOrigem,
+			longitudeOrigem,
+			latitudeDestino,
+			longitudeDestino,
 			getDistancia(),
-			calculaCusto(),
-			situacao.toString()
+			situacao,
+			situacao.equals(Estado.PENDENTE) ? "Ainda não é possível calcular" : "R$ %.2f".formatted(getValorBase()),
+			situacao.equals(Estado.PENDENTE) ? "Ainda não é possível calcular" : "R$ %.2f".formatted(calculaCusto()),
+			calculaCusto() - getValorBase()
 		);
 	}
 }

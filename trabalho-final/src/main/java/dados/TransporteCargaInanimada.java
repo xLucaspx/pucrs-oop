@@ -48,6 +48,9 @@ public class TransporteCargaInanimada extends Transporte {
 
 	@Override
 	public String toString() {
-		return "{ %s, cargaPerigosa: %b }".formatted(super.toString(), cargaPerigosa);
+		return """
+			Transporte de Carga Inanimada:
+			%s
+			\t* Carga perigosa: %s""".formatted(super.toString(), cargaPerigosa ? "Sim" : "Não");
 	}
 }
