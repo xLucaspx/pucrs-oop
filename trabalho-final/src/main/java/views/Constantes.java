@@ -44,5 +44,6 @@ public class Constantes {
 	static {
 		FORMATO_INTEIRO.setGroupingUsed(false);
 		FORMATO_PONTO_FLUTUANTE.setGroupingUsed(false);
+		FORMATO_PONTO_FLUTUANTE.setMaximumFractionDigits(6);
 	}
 }

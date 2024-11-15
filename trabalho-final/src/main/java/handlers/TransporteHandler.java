@@ -70,6 +70,18 @@ public class TransporteHandler {
 	}
 
 	/**
+	 * Busca um {@link Transporte} utilizando o número
+	 * passado como argumento.
+	 *
+	 * @param numero O número do transporte buscado.
+	 * @return A instância de transporte correspondente, ou
+	 * {@code null} se não for encontrada correspondência.
+	 */
+	public Transporte buscaPorNumero(int numero) {
+		return transportes.stream().filter(t -> t.getNumero() == numero).findFirst().orElse(null);
+	}
+
+	/**
 	 * Realiza, para cada {@link Transporte} com situação
 	 * {@link Estado#PENDENTE PENDENTE}, a tentativa de alocar
 	 * um {@link Drone} contido na lista passada como argumento.

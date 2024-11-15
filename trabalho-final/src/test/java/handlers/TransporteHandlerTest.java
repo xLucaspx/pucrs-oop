@@ -17,6 +17,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TransporteHandlerTest {
@@ -139,5 +140,35 @@ class TransporteHandlerTest {
 		assertEquals(1, transporteHandler.getTotalPendentes());
 		assertTrue(transporteHandler.processaPendentes(drones));
 		assertEquals(1, transporteHandler.getTotalPendentes());
+	}
+
+	@Test
+	@DisplayName("Deve retornar o transporte correspondente")
+	void buscaPorNumero1() {
+		TransporteHandler transporteHandler = TransporteHandler.getHandler();
+
+		transporteHandler.cadastra(t1);
+		transporteHandler.cadastra(t2);
+		transporteHandler.cadastra(t3);
+
+		assertEquals(t2, transporteHandler.buscaPorNumero(t2.getNumero()));
+	}
+
+	@Test
+	@DisplayName("Deve retornar null se não houver correspondência")
+	void buscaPorNumero2() {
+		TransporteHandler transporteHandler = TransporteHandler.getHandler();
+
+		transporteHandler.cadastra(t1);
+		transporteHandler.cadastra(t2);
+
+		assertNull(transporteHandler.buscaPorNumero(t4.getNumero()));
+	}
+
+	@Test
+	@DisplayName("Deve retornar null se a lista estiver vazia")
+	void buscaPorNumero3() {
+		TransporteHandler transporteHandler = TransporteHandler.getHandler();
+		assertNull(transporteHandler.buscaPorNumero(t4.getNumero()));
 	}
 }

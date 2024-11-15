@@ -49,6 +49,9 @@ public class App extends JFrame {
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     setTitle("ACME Air Drones");
+    setPreferredSize(new java.awt.Dimension(900, 700));
+
+    desktopPane.setPreferredSize(new java.awt.Dimension(750, 600));
 
     javax.swing.GroupLayout desktopPaneLayout = new javax.swing.GroupLayout(desktopPane);
     desktopPane.setLayout(desktopPaneLayout);
@@ -58,7 +61,7 @@ public class App extends JFrame {
     );
     desktopPaneLayout.setVerticalGroup(
       desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 583, Short.MAX_VALUE)
+      .addGap(0, 600, Short.MAX_VALUE)
     );
 
     menuGeral.setText("Geral");
@@ -75,6 +78,11 @@ public class App extends JFrame {
 
     novoTransporteMenuItem.setText("Novo Transporte");
     novoTransporteMenuItem.setToolTipText("Cadastrar um novo transporte no sistema");
+    novoTransporteMenuItem.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        abreNovoTransporte(evt);
+      }
+    });
     menuGeral.add(novoTransporteMenuItem);
     menuGeral.add(separadorMenuGeral1);
 
@@ -150,11 +158,11 @@ public class App extends JFrame {
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(desktopPane)
+      .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(desktopPane)
+      .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
     );
 
     pack();
@@ -180,6 +188,10 @@ public class App extends JFrame {
   private void abreRelatorioTransportes(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abreRelatorioTransportes
     mostraFrameInterno(new RelatorioTransportes());
   }//GEN-LAST:event_abreRelatorioTransportes
+
+  private void abreNovoTransporte(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abreNovoTransporte
+    mostraFrameInterno(new CadastroTransporte());
+  }//GEN-LAST:event_abreNovoTransporte
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JMenuItem carregarDadosMenuItem;

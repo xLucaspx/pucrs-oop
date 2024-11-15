@@ -325,7 +325,7 @@ public class CadastroDrone extends javax.swing.JInternalFrame {
     pack();
   }// </editor-fold>//GEN-END:initComponents
 
-	private Drone getDrone(int codigo) {
+	private Drone criaDrone(int codigo) {
 		double custoFixo = Double.parseDouble(inputCustoFixo.getText());
 		double autonomia = Double.parseDouble(inputAutonomia.getText());
 
@@ -357,7 +357,7 @@ public class CadastroDrone extends javax.swing.JInternalFrame {
   private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
 		try {
 			int codigo = Integer.parseInt(inputCodigo.getText());
-			Drone novoDrone = getDrone(codigo);
+			Drone novoDrone = criaDrone(codigo);
 			boolean sucesso = droneHandler.cadastra(novoDrone);
 
 			if (!sucesso) {
@@ -371,7 +371,6 @@ public class CadastroDrone extends javax.swing.JInternalFrame {
 			limpaCampos();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "Erro ao cadastrar drone...\nVerifique o tipo de drone e se os campos estão preenchidos corretamente!", getTitle(), JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace(System.err);
 		}
   }//GEN-LAST:event_btnCadastrarActionPerformed
 

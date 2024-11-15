@@ -47,6 +47,13 @@ public abstract class Transporte {
 	}
 
 	/**
+	 * @return O número deste {@link Transporte}.
+	 */
+	public int getNumero() {
+		return numero;
+	}
+
+	/**
 	 * @return A situação atual deste {@link Transporte}.
 	 */
 	public Estado getSituacao() {
