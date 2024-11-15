@@ -12,20 +12,33 @@ import java.util.Set;
 
 /**
  * Classe que gerencia os {@link Transporte transportes}
- * cadastrados no sistema.
+ * cadastrados no sistema. Utiliza o padrão Singleton.
  *
- * @author Lucas da Paz Oliveira
+ * @author Lucas da Paz
  */
 public class TransporteHandler {
+	private static TransporteHandler handler;
+
 	private final Set<Transporte> transportes;
 	private final Queue<Transporte> pendentes;
 
 	/**
 	 * Inicializa um objeto {@link TransporteHandler}.
 	 */
-	public TransporteHandler() {
+	private TransporteHandler() {
 		transportes = new HashSet<>();
 		pendentes = new LinkedList<>();
+	}
+
+	/**
+	 * @return A instância de {@link TransporteHandler}
+	 * utilizada pelo sistema.
+	 */
+	public static TransporteHandler getHandler() {
+		if (handler == null) {
+			handler = new TransporteHandler();
+		}
+		return handler;
 	}
 
 	/**
@@ -88,5 +101,13 @@ public class TransporteHandler {
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * @return O total de {@link Transporte transportes} com a
+	 * situação {@link Estado#PENDENTE PENDENTE}.
+	 */
+	public int getTotalPendentes() {
+		return pendentes.size();
 	}
 }

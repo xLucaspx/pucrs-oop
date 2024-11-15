@@ -5,14 +5,13 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>xLucaspx</groupId>
-	<artifactId>exercicio-avaliacao-3</artifactId>
-	<version>0.1</version>
+	<artifactId>acme-drones</artifactId>
+	<version>0.2</version>
 	<packaging>jar</packaging>
 
-	<name>Exercício de Avaliação 3</name>
+	<name>ACME Air Drones</name>
 	<description>
-		Desenvolvimento da GUI de um dos formulários de cadastro solicitados no
-		trabalho final da disciplina, utilizando coleções para armazenar os dados.
+		Sistema de gerenciamento de drones e transportes aéreos da ACME Air Drones
 	</description>
 	<inceptionYear>2024</inceptionYear>
 

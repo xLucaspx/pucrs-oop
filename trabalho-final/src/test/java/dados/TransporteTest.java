@@ -90,7 +90,8 @@ class TransporteTest {
 	@Test
 	@DisplayName("Deve calcular corretamente o valor base")
 	void getValorBase1() {
-		Transporte t1 = new TransportePessoal(1, "fulano", "desc", 140.1, -30.027190, -51.161572, -30.061458, -51.173695, 2);
+		Transporte t1 =
+			new TransportePessoal(1, "fulano", "desc", 140.1, -30.027190, -51.161572, -30.061458, -51.173695, 2);
 		Transporte t2 =
 			new TransporteCargaInanimada(2, "fulano", "desc", 150.2, -29.378867, -50.873611, -30.027190, -51.161572, true);
 		Transporte t3 =
