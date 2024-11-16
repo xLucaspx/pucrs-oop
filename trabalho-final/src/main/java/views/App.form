@@ -46,6 +46,9 @@
                 <Property name="text" type="java.lang.String" value="Situa&#xe7;&#xe3;o Transporte"/>
                 <Property name="toolTipText" type="java.lang.String" value="Alterar a situa&#xe7;&#xe3;o de um transporte"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="abreSituacaoTransporte"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="separadorMenuGeral2">
             </MenuItem>

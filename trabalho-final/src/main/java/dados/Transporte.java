@@ -72,12 +72,16 @@ public abstract class Transporte {
 	 * {@link Estado#TERMINADO TERMINADO} e faz com que ele não possa
 	 * mais ser alterado. Caso o transporte não esteja com a situação
 	 * {@link Estado#ALOCADO ALOCADO}, nenhuma ação ocorrerá.
+	 *
+	 * @return {@code true} caso a situação tenha sido alterada,
+	 * {@code false} caso contrário.
 	 */
-	public void terminar() {
+	public boolean terminar() {
 		if (!situacao.equals(Estado.ALOCADO)) {
-			return;
+			return false;
 		}
 		situacao = Estado.TERMINADO;
+		return true;
 	}
 
 	/**
@@ -86,12 +90,16 @@ public abstract class Transporte {
 	 * mais ser alterado. Caso o transporte já tenha sido finalizado —
 	 * i.e., sua situação for {@link Estado#TERMINADO TERMINADO} ou
 	 * {@link Estado#CANCELADO CANCELADO} — nenhuma ação ocorrerá.
+	 *
+	 * @return {@code true} caso a situação tenha sido alterada,
+	 * {@code false} caso contrário.
 	 */
-	public void cancelar() {
+	public boolean cancelar() {
 		if (situacao.equals(Estado.TERMINADO) || situacao.equals(Estado.CANCELADO)) {
-			return;
+			return false;
 		}
 		situacao = Estado.CANCELADO;
+		return true;
 	}
 
 	/**
@@ -108,15 +116,14 @@ public abstract class Transporte {
 	/**
 	 * Calcula o valor base deste {@link Transporte} multiplicando
 	 * o custo por KM do {@link Drone} pela distância do transporte.
-	 * Se o transporte estivar com a situação {@link Estado#PENDENTE PENDENTE},
-	 * o valor retornado será zero (pois nenhum drone foi alocado).
+	 * Se nenhum drone foi alocado, o valor retornado será zero.
 	 *
 	 * @return O valor base deste transporte, sem a adição de acréscimos.
 	 * @see #calculaCusto()
 	 * @see #getDistancia()
 	 */
 	public double getValorBase() {
-		if (situacao.equals(Estado.PENDENTE)) {
+		if (drone == null) {
 			return 0;
 		}
 
@@ -221,8 +228,8 @@ public abstract class Transporte {
 			longitudeDestino,
 			getDistancia(),
 			situacao,
-			situacao.equals(Estado.PENDENTE) ? "Ainda não é possível calcular" : "R$ %.2f".formatted(getValorBase()),
-			situacao.equals(Estado.PENDENTE) ? "Ainda não é possível calcular" : "R$ %.2f".formatted(calculaCusto()),
+			drone == null ? "Não é possível calcular" : "R$ %.2f".formatted(getValorBase()),
+			drone == null ? "Não é possível calcular" : "R$ %.2f".formatted(calculaCusto()),
 			calculaCusto() - getValorBase()
 		);
 	}

@@ -31,7 +31,7 @@ public class RelatorioTransportes extends Relatorio {
 		relatorio.append(separador).append("\n- Transportes -\n\n");
 		transportes.forEach(t -> {
 			relatorio.append(t);
-			if (t.getSituacao() != Estado.PENDENTE) {
+			if (t.getDrone() != null) {
 				relatorio.append("\n> Transportador -> ").append(t.getDrone());
 			}
 			relatorio.append("\n\n");

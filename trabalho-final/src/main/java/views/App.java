@@ -12,7 +12,7 @@ public class App extends JFrame {
 		initComponents();
 		setVisible(true);
 	}
-	
+
 	private void mostraFrameInterno(JInternalFrame frame) {
 		desktopPane.add(frame);
 		frame.moveToFront();
@@ -97,6 +97,11 @@ public class App extends JFrame {
 
     situacaoTransporteMenuItem.setText("Situação Transporte");
     situacaoTransporteMenuItem.setToolTipText("Alterar a situação de um transporte");
+    situacaoTransporteMenuItem.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        abreSituacaoTransporte(evt);
+      }
+    });
     menuGeral.add(situacaoTransporteMenuItem);
     menuGeral.add(separadorMenuGeral2);
 
@@ -186,12 +191,16 @@ public class App extends JFrame {
   }//GEN-LAST:event_abreRelatorioGeral
 
   private void abreRelatorioTransportes(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abreRelatorioTransportes
-    mostraFrameInterno(new RelatorioTransportes());
+		mostraFrameInterno(new RelatorioTransportes());
   }//GEN-LAST:event_abreRelatorioTransportes
 
   private void abreNovoTransporte(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abreNovoTransporte
-    mostraFrameInterno(new CadastroTransporte());
+		mostraFrameInterno(new CadastroTransporte());
   }//GEN-LAST:event_abreNovoTransporte
+
+  private void abreSituacaoTransporte(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abreSituacaoTransporte
+		mostraFrameInterno(new SituacaoTransporte());
+  }//GEN-LAST:event_abreSituacaoTransporte
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JMenuItem carregarDadosMenuItem;

@@ -122,4 +122,36 @@ public class TransporteHandler {
 	public int getTotalPendentes() {
 		return pendentes.size();
 	}
+
+	/**
+	 * Tenta alterar a situação do {@link Transporte} passado como
+	 * argumento para o {@link Estado} informado; em caso de sucesso,
+	 * verifica se o transporte estava na fila de transportes pendentes
+	 * e, se afirmativo, remove-o da fila.
+	 *
+	 * @param t O transporte que terá a situação alterada.
+	 * @param e A nova situação.
+	 * @return {@code true} em caso de sucesso, {@code false} caso contrário.
+	 */
+	public boolean definirNovaSituacao(Transporte t, Estado e) {
+		boolean pendente = t.getSituacao().equals(Estado.PENDENTE);
+		boolean alterado = switch (e) {
+			case TERMINADO -> t.terminar();
+			case CANCELADO -> t.cancelar();
+			default -> false;
+		};
+
+		if (pendente && alterado) {
+			int totalPendentes = pendentes.size();
+			for (int i = 0; i < totalPendentes; i++) {
+				Transporte tp = pendentes.remove();
+				if (tp.equals(t)) {
+					continue;
+				}
+				pendentes.add(tp);
+			}
+		}
+
+		return alterado;
+	}
 }
