@@ -500,6 +500,7 @@ public class CadastroTransporte extends javax.swing.JInternalFrame {
 				getTitle(), JOptionPane.INFORMATION_MESSAGE);
 			limpaCampos();
 		} catch (Exception e) {
+			e.printStackTrace(System.err);
 			JOptionPane.showMessageDialog(this, "Erro ao cadastrar transporte...\nVerifique o tipo de transporte e se os campos estão preenchidos corretamente!", getTitle(), JOptionPane.ERROR_MESSAGE);
 		}
   }//GEN-LAST:event_btnCadastrarActionPerformed

@@ -137,6 +137,7 @@ public class SituacaoTransporte extends javax.swing.JInternalFrame {
     textAreaTransporte.setLineWrap(true);
     textAreaTransporte.setRows(5);
     textAreaTransporte.setTabSize(2);
+    textAreaTransporte.setWrapStyleWord(true);
     scrollPaneTransporte.setViewportView(textAreaTransporte);
 
     javax.swing.GroupLayout painelLocalizarLayout = new javax.swing.GroupLayout(painelLocalizar);
@@ -226,11 +227,8 @@ public class SituacaoTransporte extends javax.swing.JInternalFrame {
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(painelLocalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(painelSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-      .addGroup(layout.createSequentialGroup()
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addComponent(painelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(painelSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(painelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
@@ -262,6 +260,7 @@ public class SituacaoTransporte extends javax.swing.JInternalFrame {
 			mostraTransporte();
 			ativaPainelSituacao();
 		} catch (Exception e) {
+			e.printStackTrace(System.err);
 			JOptionPane.showMessageDialog(this, "Erro ao buscar transporte...\nVerifique o número digitado e tente novamente!", getTitle(), JOptionPane.ERROR_MESSAGE);
 		}
   }//GEN-LAST:event_buscaTransporte

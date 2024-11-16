@@ -35,12 +35,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="painelLocalizar" alignment="0" min="-2" pref="450" max="-2" attributes="0"/>
                   <Component id="painelSituacao" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="painelHeader" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="painelHeader" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -222,6 +218,7 @@
                 <Property name="lineWrap" type="boolean" value="true"/>
                 <Property name="rows" type="int" value="5"/>
                 <Property name="tabSize" type="int" value="2"/>
+                <Property name="wrapStyleWord" type="boolean" value="true"/>
               </Properties>
             </Component>
           </SubComponents>

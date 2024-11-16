@@ -33,9 +33,12 @@ public class RelatorioGeral extends Relatorio {
 		String separador = "%75s".formatted(" ").replace(" ", "-");
 
 		relatorio.append(separador).append("\n- Drones -\n\n");
+		relatorio.append("Total cadastrado: %d\n\n".formatted(drones.size()));
 		droneHandler.buscaTodos().forEach(d -> relatorio.append(d).append("\n\n"));
 
 		relatorio.append(separador).append("\n- Transportes -\n\n");
+		relatorio.append("Total cadastrado: %d\n".formatted(transportes.size()));
+		relatorio.append("Pendentes: %d\n\n".formatted(transporteHandler.getTotalPendentes()));
 		transporteHandler.buscaTodos().forEach(t -> relatorio.append(t).append("\n\n"));
 
 		relatorio.append(separador).append("\n");

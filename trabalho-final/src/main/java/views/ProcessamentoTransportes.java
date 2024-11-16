@@ -85,6 +85,7 @@ public class ProcessamentoTransportes extends javax.swing.JInternalFrame {
     textAreaRegistro.setRows(5);
     textAreaRegistro.setTabSize(2);
     textAreaRegistro.setToolTipText("Registros do processamento de transportes pendentes");
+    textAreaRegistro.setWrapStyleWord(true);
     scrollPaneRegistro.setViewportView(textAreaRegistro);
 
     javax.swing.GroupLayout painelRegistroLayout = new javax.swing.GroupLayout(painelRegistro);

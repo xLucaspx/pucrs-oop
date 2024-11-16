@@ -1,6 +1,5 @@
 package views;
 
-import dados.Estado;
 import dados.Transporte;
 import handlers.TransporteHandler;
 
@@ -29,6 +28,8 @@ public class RelatorioTransportes extends Relatorio {
 		String separador = "%75s".formatted(" ").replace(" ", "-");
 
 		relatorio.append(separador).append("\n- Transportes -\n\n");
+		relatorio.append("Total cadastrado: %d\n".formatted(transportes.size()));
+		relatorio.append("Pendentes: %d\n\n".formatted(transporteHandler.getTotalPendentes()));
 		transportes.forEach(t -> {
 			relatorio.append(t);
 			if (t.getDrone() != null) {

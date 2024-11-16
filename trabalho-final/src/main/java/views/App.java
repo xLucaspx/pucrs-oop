@@ -153,6 +153,11 @@ public class App extends JFrame {
 
     simulacaoMenuItem.setText("Simulação");
     simulacaoMenuItem.setToolTipText("Realizar leitura de dados de simulação");
+    simulacaoMenuItem.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        abreSimulacao(evt);
+      }
+    });
     menuArquivo.add(simulacaoMenuItem);
 
     menuBar.add(menuArquivo);
@@ -201,6 +206,10 @@ public class App extends JFrame {
   private void abreSituacaoTransporte(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abreSituacaoTransporte
 		mostraFrameInterno(new SituacaoTransporte());
   }//GEN-LAST:event_abreSituacaoTransporte
+
+  private void abreSimulacao(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abreSimulacao
+		mostraFrameInterno(new LeituraSimulacao());
+  }//GEN-LAST:event_abreSimulacao
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JMenuItem carregarDadosMenuItem;

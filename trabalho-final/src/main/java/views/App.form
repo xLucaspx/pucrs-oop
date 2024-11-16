@@ -118,6 +118,9 @@
                 <Property name="text" type="java.lang.String" value="Simula&#xe7;&#xe3;o"/>
                 <Property name="toolTipText" type="java.lang.String" value="Realizar leitura de dados de simula&#xe7;&#xe3;o"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="abreSimulacao"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

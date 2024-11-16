@@ -1,5 +1,9 @@
 package views;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+
 /**
  *
  * @author Lucas da Paz
@@ -30,7 +34,7 @@ public abstract class Relatorio extends javax.swing.JInternalFrame {
     textAreaRelatorio = new javax.swing.JTextArea();
     painelBotoes = new javax.swing.JPanel();
     btnGerar = new javax.swing.JButton();
-    btnLimpar = new javax.swing.JButton();
+    btnCopiar = new javax.swing.JButton();
 
     setClosable(true);
     setIconifiable(true);
@@ -71,13 +75,14 @@ public abstract class Relatorio extends javax.swing.JInternalFrame {
     textAreaRelatorio.setLineWrap(true);
     textAreaRelatorio.setRows(5);
     textAreaRelatorio.setTabSize(2);
+    textAreaRelatorio.setWrapStyleWord(true);
     scrollPaneRelatorio.setViewportView(textAreaRelatorio);
 
     javax.swing.GroupLayout painelRelatorioLayout = new javax.swing.GroupLayout(painelRelatorio);
     painelRelatorio.setLayout(painelRelatorioLayout);
     painelRelatorioLayout.setHorizontalGroup(
       painelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(scrollPaneRelatorio, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+      .addComponent(scrollPaneRelatorio, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
     );
     painelRelatorioLayout.setVerticalGroup(
       painelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,13 +100,13 @@ public abstract class Relatorio extends javax.swing.JInternalFrame {
       }
     });
 
-    btnLimpar.setText("Limpar");
-    btnLimpar.setToolTipText("Limpar relatório");
-    btnLimpar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    btnLimpar.setPreferredSize(new java.awt.Dimension(95, 30));
-    btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+    btnCopiar.setText("Copiar");
+    btnCopiar.setToolTipText("Limpar relatório");
+    btnCopiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    btnCopiar.setPreferredSize(new java.awt.Dimension(95, 30));
+    btnCopiar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        limpaRelatorio(evt);
+        copiaRelatorio(evt);
       }
     });
 
@@ -113,7 +118,7 @@ public abstract class Relatorio extends javax.swing.JInternalFrame {
         .addContainerGap(103, Short.MAX_VALUE)
         .addComponent(btnGerar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
-        .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addComponent(btnCopiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addContainerGap(104, Short.MAX_VALUE))
     );
     painelBotoesLayout.setVerticalGroup(
@@ -122,7 +127,7 @@ public abstract class Relatorio extends javax.swing.JInternalFrame {
         .addContainerGap()
         .addGroup(painelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(btnGerar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(btnCopiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
@@ -132,9 +137,9 @@ public abstract class Relatorio extends javax.swing.JInternalFrame {
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addComponent(painelHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
       .addGroup(layout.createSequentialGroup()
-        .addContainerGap(30, Short.MAX_VALUE)
-        .addComponent(painelRelatorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addContainerGap(31, Short.MAX_VALUE))
+        .addContainerGap(26, Short.MAX_VALUE)
+        .addComponent(painelRelatorio, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
+        .addContainerGap(27, Short.MAX_VALUE))
       .addGroup(layout.createSequentialGroup()
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addComponent(painelBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -143,10 +148,10 @@ public abstract class Relatorio extends javax.swing.JInternalFrame {
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
-        .addContainerGap(20, Short.MAX_VALUE)
+        .addContainerGap(22, Short.MAX_VALUE)
         .addComponent(painelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(18, 18, 18)
-        .addComponent(painelRelatorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addComponent(painelRelatorio, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
         .addGap(18, 18, 18)
         .addComponent(painelBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addContainerGap(35, Short.MAX_VALUE))
@@ -155,18 +160,20 @@ public abstract class Relatorio extends javax.swing.JInternalFrame {
     pack();
   }// </editor-fold>//GEN-END:initComponents
 
-  private void limpaRelatorio(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpaRelatorio
-		textAreaRelatorio.setText("");
-  }//GEN-LAST:event_limpaRelatorio
+  private void copiaRelatorio(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copiaRelatorio
+		StringSelection selecao = new StringSelection(textAreaRelatorio.getText());
+    Clipboard areaDeTransferencia = Toolkit.getDefaultToolkit().getSystemClipboard();
+    areaDeTransferencia.setContents(selecao, null);
+  }//GEN-LAST:event_copiaRelatorio
 
   private void mostraRelatorio(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostraRelatorio
-		textAreaRelatorio.append("\n%s\n".formatted(geraRelatorio()));
+		textAreaRelatorio.setText("\n%s\n".formatted(geraRelatorio()));
+		textAreaRelatorio.setCaretPosition(0);
   }//GEN-LAST:event_mostraRelatorio
 
-
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JButton btnCopiar;
   private javax.swing.JButton btnGerar;
-  private javax.swing.JButton btnLimpar;
   private javax.swing.JPanel painelBotoes;
   private javax.swing.JPanel painelHeader;
   private javax.swing.JPanel painelRelatorio;

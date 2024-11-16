@@ -370,6 +370,7 @@ public class CadastroDrone extends javax.swing.JInternalFrame {
 				getTitle(), JOptionPane.INFORMATION_MESSAGE);
 			limpaCampos();
 		} catch (Exception e) {
+			e.printStackTrace(System.err);
 			JOptionPane.showMessageDialog(this, "Erro ao cadastrar drone...\nVerifique o tipo de drone e se os campos estão preenchidos corretamente!", getTitle(), JOptionPane.ERROR_MESSAGE);
 		}
   }//GEN-LAST:event_btnCadastrarActionPerformed
