@@ -29,6 +29,14 @@ public abstract class DroneCarga extends Drone {
 		this.pesoMaximo = pesoMaximo;
 	}
 
+	/**
+	 * @return A quantidade máxima de peso, em KG,
+	 * que este {@link DroneCarga} pode transportar.
+	 */
+	public double getPesoMaximo() {
+		return pesoMaximo;
+	}
+
 	@Override
 	public boolean adicionaTransporte(Transporte t) {
 		List<ValidadorDroneTransporte> validacoes = new ArrayList<>(List.of(new ValidadorPesoMaximo()));
@@ -45,11 +53,15 @@ public abstract class DroneCarga extends Drone {
 		return "%s\n\t* Peso máximo: %.1f Kg".formatted(super.toString(), pesoMaximo);
 	}
 
-	/**
-	 * @return A quantidade máxima de peso, em KG,
-	 * que este {@link DroneCarga} pode transportar.
-	 */
-	public double getPesoMaximo() {
-		return pesoMaximo;
+	@Override
+	public String toCSV() {
+		return "%s;%f".formatted(super.toCSV(), pesoMaximo);
+	}
+
+	@Override
+	public String toJSON() {
+		return """
+			%s,
+			\t\t\t\t"pesoMaximo": %f""".formatted(super.toJSON(), pesoMaximo);
 	}
 }

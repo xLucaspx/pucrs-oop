@@ -1,5 +1,7 @@
 package dados;
 
+import formatos.ObjetoCSV;
+import formatos.ObjetoJSON;
 import validacoes.ValidadorAutonomia;
 import validacoes.ValidadorDroneTransporte;
 
@@ -15,7 +17,7 @@ import java.util.Set;
  *
  * @author Lucas da Paz
  */
-public abstract class Drone implements Comparable<Drone> {
+public abstract class Drone implements Comparable<Drone>, ObjetoJSON, ObjetoCSV {
 	private int codigo;
 	private double custoFixo;
 	private double autonomia;
@@ -33,6 +35,13 @@ public abstract class Drone implements Comparable<Drone> {
 		this.custoFixo = custoFixo;
 		this.autonomia = autonomia;
 		transportes = new HashSet<>();
+	}
+
+	/**
+	 * @return O código deste {@link Drone}.
+	 */
+	public int getCodigo() {
+		return codigo;
 	}
 
 	/**
@@ -133,5 +142,24 @@ public abstract class Drone implements Comparable<Drone> {
 			\t* Custo Fixo: R$ %.2f;
 			\t* Custo por Km: R$ %.2f;
 			\t* Autonomia: %.1f Km;""".formatted(codigo, custoFixo, calculaCustoKm(), autonomia);
+	}
+
+	/**
+	 * @return Representação deste {@link Drone} no formato CSV;
+	 * utiliza {@code ;} como separador de campos.
+	 */
+	@Override
+	public String toCSV() {
+		return "%d;%f;%f".formatted(codigo, custoFixo, autonomia);
+	}
+
+	/**
+	 * @return Representação deste {@link Drone} no formato JSON.
+	 */
+	public String toJSON() {
+		return """
+			\t\t\t\t"codigo": %d,
+			\t\t\t\t"custoFixo": %f,
+			\t\t\t\t"autonomia": %f""".formatted(codigo, custoFixo, autonomia);
 	}
 }

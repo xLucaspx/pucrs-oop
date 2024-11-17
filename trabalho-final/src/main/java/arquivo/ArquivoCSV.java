@@ -4,6 +4,7 @@ import dados.Drone;
 import dados.DroneCargaInanimada;
 import dados.DroneCargaViva;
 import dados.DronePessoal;
+import dados.Estado;
 import dados.Transporte;
 import dados.TransporteCargaInanimada;
 import dados.TransporteCargaViva;
@@ -14,7 +15,7 @@ import handlers.TransporteHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArquivoSimulacao extends ArquivoIO {
+public class ArquivoCSV extends ArquivoIO {
 	private static final String SUFIXO_DRONES = "-drones.csv";
 	private static final String SUFIXO_TRANSPORTES = "-transportes.csv";
 	private static final String SEPARADOR = ";";
@@ -23,10 +24,28 @@ public class ArquivoSimulacao extends ArquivoIO {
 	private final TransporteHandler transporteHandler;
 	private final String nomeArquivo;
 
-	public ArquivoSimulacao(String nomeArquivo) {
+	public ArquivoCSV(String nomeArquivo) {
 		droneHandler = DroneHandler.getHandler();
 		transporteHandler = TransporteHandler.getHandler();
 		this.nomeArquivo = nomeArquivo;
+	}
+
+	public void realizaEscrita() {
+		abreArquivoSaida("%s%s".formatted(nomeArquivo, SUFIXO_DRONES));
+		StringBuilder droneCsv =
+			new StringBuilder("tipo;codigo;custoFixo;autonomia;qtdMaxPessoas_pesoMaximo;protecao_climatizado\n");
+
+		droneHandler.buscaTodos().forEach(d -> droneCsv.append(d.toCSV()).append("\n"));
+		escreve(droneCsv.toString());
+
+		fechaArquivoSaida();
+		abreArquivoSaida("%s%s".formatted(nomeArquivo, SUFIXO_TRANSPORTES));
+		StringBuilder transporteCsv = new StringBuilder(
+			"tipo;numero;cliente;descricao;peso;latOrigem;longOrigem;latDestino;longDestino;qtdPessoas_perigosa_tempMin;tempMax;situacao;codDrone\n");
+
+		transporteHandler.buscaTodos().forEach(t -> transporteCsv.append(t.toCSV()).append("\n"));
+		escreve(transporteCsv.toString());
+		fechaArquivoSaida();
 	}
 
 	public void realizaLeitura() {
@@ -53,7 +72,7 @@ public class ArquivoSimulacao extends ArquivoIO {
 	}
 
 	private void leDrones(List<String> erros) {
-		redirecionaEntrada("%s%s".formatted(nomeArquivo, SUFIXO_DRONES));
+		abreArquivoEntrada("%s%s".formatted(nomeArquivo, SUFIXO_DRONES));
 		String linha = proximaLinha(); // cabeçalho
 		int cont = 0;
 		while ((linha = proximaLinha()) != null) {
@@ -92,11 +111,11 @@ public class ArquivoSimulacao extends ArquivoIO {
 				e.printStackTrace(System.err);
 			}
 		}
-		fechaEntrada();
+		fechaArquivoEntrada();
 	}
 
 	private void leTransportes(List<String> erros) {
-		redirecionaEntrada("%s%s".formatted(nomeArquivo, SUFIXO_TRANSPORTES));
+		abreArquivoEntrada("%s%s".formatted(nomeArquivo, SUFIXO_TRANSPORTES));
 		String linha = proximaLinha(); // cabeçalho
 		int cont = 0;
 		while ((linha = proximaLinha()) != null) {
@@ -135,12 +154,13 @@ public class ArquivoSimulacao extends ArquivoIO {
 				e.printStackTrace(System.err);
 			}
 		}
-		fechaEntrada();
+		fechaArquivoEntrada();
 	}
 
 	private Drone criaDrone(int tipo, int codigo, String[] campos) {
 		double custoFixo = Double.parseDouble(campos[2]);
 		double autonomia = Double.parseDouble(campos[3]);
+
 
 		return switch (tipo) {
 			case 1 -> {
@@ -173,6 +193,24 @@ public class ArquivoSimulacao extends ArquivoIO {
 		return switch (tipo) {
 			case 1 -> {
 				int qtdPessoas = Integer.parseInt(campos[9]);
+
+				if (campos.length > 10) {
+					Estado situacao = Estado.valueOf(campos[10]);
+					Drone drone = droneHandler.buscaPorCodigo(Integer.parseInt(campos[11]));
+					yield new TransportePessoal(numero,
+						cliente,
+						descricao,
+						peso,
+						latOrigem,
+						longOrigem,
+						latDestino,
+						longDestino,
+						qtdPessoas,
+						situacao,
+						drone
+					);
+				}
+
 				yield new TransportePessoal(numero,
 					cliente,
 					descricao,
@@ -186,6 +224,24 @@ public class ArquivoSimulacao extends ArquivoIO {
 			}
 			case 2 -> {
 				boolean perigosa = Boolean.parseBoolean(campos[9]);
+
+				if (campos.length > 10) {
+					Estado situacao = Estado.valueOf(campos[10]);
+					Drone drone = droneHandler.buscaPorCodigo(Integer.parseInt(campos[11]));
+					yield new TransporteCargaInanimada(numero,
+						cliente,
+						descricao,
+						peso,
+						latOrigem,
+						longOrigem,
+						latDestino,
+						longDestino,
+						perigosa,
+						situacao,
+						drone
+					);
+				}
+
 				yield new TransporteCargaInanimada(numero,
 					cliente,
 					descricao,
@@ -200,6 +256,25 @@ public class ArquivoSimulacao extends ArquivoIO {
 			case 3 -> {
 				double temperaturaMin = Double.parseDouble(campos[9]);
 				double temperaturaMax = Double.parseDouble(campos[10]);
+
+				if (campos.length > 11) {
+					Estado situacao = Estado.valueOf(campos[11]);
+					Drone drone = droneHandler.buscaPorCodigo(Integer.parseInt(campos[12]));
+					yield new TransporteCargaViva(numero,
+						cliente,
+						descricao,
+						peso,
+						latOrigem,
+						longOrigem,
+						latDestino,
+						longDestino,
+						temperaturaMin,
+						temperaturaMax,
+						situacao,
+						drone
+					);
+				}
+
 				yield new TransporteCargaViva(numero,
 					cliente,
 					descricao,

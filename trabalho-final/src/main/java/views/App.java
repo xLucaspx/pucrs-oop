@@ -144,10 +144,20 @@ public class App extends JFrame {
 
     salvarDadosMenuItem.setText("Salvar Dados");
     salvarDadosMenuItem.setToolTipText("Salvar todos os dados do sitema");
+    salvarDadosMenuItem.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        abreEscritaDados(evt);
+      }
+    });
     menuArquivo.add(salvarDadosMenuItem);
 
     carregarDadosMenuItem.setText("Carregar Dados");
     carregarDadosMenuItem.setToolTipText("Carregar dados salvos para o sistema");
+    carregarDadosMenuItem.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        abreLeituraDados(evt);
+      }
+    });
     menuArquivo.add(carregarDadosMenuItem);
     menuArquivo.add(separatorMenuArquivo1);
 
@@ -210,6 +220,14 @@ public class App extends JFrame {
   private void abreSimulacao(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abreSimulacao
 		mostraFrameInterno(new LeituraSimulacao());
   }//GEN-LAST:event_abreSimulacao
+
+  private void abreEscritaDados(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abreEscritaDados
+    mostraFrameInterno(new EscritaDados());
+  }//GEN-LAST:event_abreEscritaDados
+
+  private void abreLeituraDados(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abreLeituraDados
+    mostraFrameInterno(new LeituraDados());
+  }//GEN-LAST:event_abreLeituraDados
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JMenuItem carregarDadosMenuItem;

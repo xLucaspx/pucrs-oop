@@ -56,6 +56,20 @@ public class DroneCargaInanimada extends DroneCarga {
 			\t* Proteção: %s;""".formatted(super.toString(), protecao ? "Sim" : "Não");
 	}
 
+	@Override
+	public String toCSV() {
+		return "2;%s;%b".formatted(super.toCSV(), protecao);
+	}
+
+	@Override
+	public String toJSON() {
+		return """
+			\t\t\t"%s": {
+			%s,
+			\t\t\t\t"protecao": %b
+			\t\t\t}""".formatted(this.getClass().getSimpleName(), super.toJSON(), protecao);
+	}
+
 	/**
 	 * {@inheritDoc} Para uma instância de {@link DroneCargaInanimada},
 	 * o custo variável depende da proteção, i.e., drones com proteção

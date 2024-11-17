@@ -9,7 +9,8 @@ public class TransportePessoal extends Transporte {
 	private int qtdPessoas;
 
 	/**
-	 * Inicializa um objeto {@link TransportePessoal}.
+	 * Inicializa um objeto {@link TransportePessoal} com os
+	 * valores informados e com a situação {@link Estado#PENDENTE PENDENTE}.
 	 *
 	 * @param numero           O número do transporte.
 	 * @param nomeCliente      O nome do cliente associado ao transporte.
@@ -24,6 +25,39 @@ public class TransportePessoal extends Transporte {
 	public TransportePessoal(int numero, String nomeCliente, String descricao, double peso, double latitudeOrigem,
 		double longitudeOrigem, double latitudeDestino, double longitudeDestino, int qtdPessoas) {
 		super(numero, nomeCliente, descricao, peso, latitudeOrigem, longitudeOrigem, latitudeDestino, longitudeDestino);
+		this.qtdPessoas = qtdPessoas;
+	}
+
+	/**
+	 * Inicializa um objeto {@link TransportePessoal} com os
+	 * valores informados.
+	 *
+	 * @param numero           O número do transporte.
+	 * @param nomeCliente      O nome do cliente associado ao transporte.
+	 * @param descricao        A descrição do transporte.
+	 * @param peso             O peso do transporte.
+	 * @param latitudeOrigem   A latitude de origem do transporte.
+	 * @param longitudeOrigem  A longitude de origem do transporte.
+	 * @param latitudeDestino  A latitude de destino do transporte.
+	 * @param longitudeDestino A longitude de destino do transporte.
+	 * @param qtdPessoas       A quantidade de pessoas que serão transportadas.
+	 * @param situacao         O {@link Estado} que representa a situação do drone.
+	 * @param drone            O {@link Drone} responsável pelo transporte, se existir.
+	 */
+	public TransportePessoal(int numero, String nomeCliente, String descricao, double peso, double latitudeOrigem,
+		double longitudeOrigem, double latitudeDestino, double longitudeDestino, int qtdPessoas, Estado situacao,
+		Drone drone) {
+		super(numero,
+			nomeCliente,
+			descricao,
+			peso,
+			latitudeOrigem,
+			longitudeOrigem,
+			latitudeDestino,
+			longitudeDestino,
+			situacao,
+			drone
+		);
 		this.qtdPessoas = qtdPessoas;
 	}
 
@@ -52,5 +86,23 @@ public class TransportePessoal extends Transporte {
 			Transporte Pessoal:
 			%s
 			\t* Quantidade de pessoas: %d""".formatted(super.toString(), qtdPessoas);
+	}
+
+	@Override
+	public String toCSV() {
+		return "1;%s;%d;%s;%d".formatted(super.toCSV(),
+			qtdPessoas,
+			getSituacao(),
+			getDrone() == null ? -1 : getDrone().getCodigo()
+		);
+	}
+
+	@Override
+	public String toJSON() {
+		return """
+			\t\t\t"%s": {
+			%s,
+			\t\t\t\t"qtdPessoas": %d
+			\t\t\t}""".formatted(this.getClass().getSimpleName(), super.toJSON(), qtdPessoas);
 	}
 }

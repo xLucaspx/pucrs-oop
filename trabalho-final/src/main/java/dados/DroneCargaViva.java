@@ -40,6 +40,20 @@ public class DroneCargaViva extends DroneCarga {
 		return """
 			Drone de Carga Viva:
 			%s
-			\t* Climatização: %s;""".formatted(super.toString(), climatizado ? "Sim" : "Não");
+			\t* Climatizado: %s;""".formatted(super.toString(), climatizado ? "Sim" : "Não");
+	}
+
+	@Override
+	public String toCSV() {
+		return "3;%s;%b".formatted(super.toCSV(), climatizado);
+	}
+
+	@Override
+	public String toJSON() {
+		return """
+			\t\t\t"%s": {
+			%s,
+			\t\t\t\t"climatizado": %b
+			\t\t\t}""".formatted(this.getClass().getSimpleName(), super.toJSON(), climatizado);
 	}
 }

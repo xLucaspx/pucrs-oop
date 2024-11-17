@@ -1,5 +1,8 @@
 package dados;
 
+import formatos.ObjetoCSV;
+import formatos.ObjetoJSON;
+
 import java.util.Objects;
 
 /**
@@ -8,7 +11,7 @@ import java.util.Objects;
  *
  * @author Lucas da Paz
  */
-public abstract class Transporte {
+public abstract class Transporte implements ObjetoJSON, ObjetoCSV {
 	private int numero;
 	private String nomeCliente;
 	private String descricao;
@@ -35,6 +38,35 @@ public abstract class Transporte {
 	 */
 	public Transporte(int numero, String nomeCliente, String descricao, double peso, double latitudeOrigem,
 		double longitudeOrigem, double latitudeDestino, double longitudeDestino) {
+		this(numero,
+			nomeCliente,
+			descricao,
+			peso,
+			latitudeOrigem,
+			longitudeOrigem,
+			latitudeDestino,
+			longitudeDestino,
+			Estado.PENDENTE,
+			null
+		);
+	}
+
+	/**
+	 * Inicializa um objeto {@link Transporte} com os valores informados.
+	 *
+	 * @param numero           O número do transporte.
+	 * @param nomeCliente      O nome do cliente associado ao transporte.
+	 * @param descricao        A descrição do transporte.
+	 * @param peso             O peso do transporte.
+	 * @param latitudeOrigem   A latitude de origem do transporte.
+	 * @param longitudeOrigem  A longitude de origem do transporte.
+	 * @param latitudeDestino  A latitude de destino do transporte.
+	 * @param longitudeDestino A longitude de destino do transporte.
+	 * @param situacao         O {@link Estado} que representa a situação do drone.
+	 * @param drone            O {@link Drone} responsável pelo transporte, se existir.
+	 */
+	public Transporte(int numero, String nomeCliente, String descricao, double peso, double latitudeOrigem,
+		double longitudeOrigem, double latitudeDestino, double longitudeDestino, Estado situacao, Drone drone) {
 		this.numero = numero;
 		this.nomeCliente = nomeCliente;
 		this.descricao = descricao;
@@ -43,7 +75,8 @@ public abstract class Transporte {
 		this.longitudeOrigem = longitudeOrigem;
 		this.latitudeDestino = latitudeDestino;
 		this.longitudeDestino = longitudeDestino;
-		this.situacao = Estado.PENDENTE;
+		this.situacao = situacao;
+		this.drone = drone;
 	}
 
 	/**
@@ -231,6 +264,49 @@ public abstract class Transporte {
 			drone == null ? "Não é possível calcular" : "R$ %.2f".formatted(getValorBase()),
 			drone == null ? "Não é possível calcular" : "R$ %.2f".formatted(calculaCusto()),
 			calculaCusto() - getValorBase()
+		);
+	}
+
+	/**
+	 * @return Representação deste {@link Transporte} no formato CSV.
+	 */
+	@Override
+	public String toCSV() {
+		return "%d;%s;%s;%f;%f;%f;%f;%f".formatted(numero,
+			nomeCliente,
+			descricao,
+			peso,
+			latitudeOrigem,
+			longitudeOrigem,
+			latitudeDestino,
+			longitudeDestino
+		);
+	}
+
+	/**
+	 * @return Representação deste {@link Transporte} no formato JSON.
+	 */
+	@Override
+	public String toJSON() {
+		return """
+			\t\t\t\t"numero": %d,
+			\t\t\t\t"nomeCliente": "%s",
+			\t\t\t\t"descricao": "%s",
+			\t\t\t\t"peso": %f,
+			\t\t\t\t"latitudeOrigem": %f,
+			\t\t\t\t"longitudeOrigem": %f,
+			\t\t\t\t"latitudeDestino": %f,
+			\t\t\t\t"longitudeDestino": %f,
+			\t\t\t\t"situacao": "%s"%s""".formatted(numero,
+			nomeCliente,
+			descricao,
+			peso,
+			latitudeOrigem,
+			longitudeOrigem,
+			latitudeDestino,
+			longitudeDestino,
+			situacao,
+			drone == null ? "" : ",\n\t\t\t\t\"codigoDrone\": %d".formatted(drone.getCodigo())
 		);
 	}
 }

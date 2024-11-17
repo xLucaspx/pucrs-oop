@@ -66,4 +66,18 @@ public class DronePessoal extends Drone {
 			%s
 			\t* Máximo de pessoas: %d;""".formatted(super.toString(), qtdMaxPessoas);
 	}
+
+	@Override
+	public String toCSV() {
+		return "1;%s;%d".formatted(super.toCSV(), qtdMaxPessoas);
+	}
+
+	@Override
+	public String toJSON() {
+		return """
+			\t\t\t"%s": {
+			%s,
+			\t\t\t\t"qtdMaxPessoas": %d
+			\t\t\t}""".formatted(this.getClass().getSimpleName(), super.toJSON(), qtdMaxPessoas);
+	}
 }

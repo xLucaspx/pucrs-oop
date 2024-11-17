@@ -1,15 +1,16 @@
 package views;
 
 import arquivo.ArquivoCSV;
+import arquivo.ArquivoJSON;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Lucas da Paz
  */
-public class LeituraSimulacao extends javax.swing.JInternalFrame {
+public class LeituraDados extends javax.swing.JInternalFrame {
 
-	public LeituraSimulacao() {
+	public LeituraDados() {
 		initComponents();
 	}
 
@@ -22,12 +23,15 @@ public class LeituraSimulacao extends javax.swing.JInternalFrame {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
+    tipoArquivoButtonGroup = new javax.swing.ButtonGroup();
     painelHeader = new javax.swing.JPanel();
     title = new javax.swing.JLabel();
     painelArquivo = new javax.swing.JPanel();
     labelArquivo = new javax.swing.JLabel();
     inputArquivo = new javax.swing.JTextField();
-    btnRealizarSimulacao = new javax.swing.JButton();
+    btnCarregar = new javax.swing.JButton();
+    painelTipoArquivo = new javax.swing.JPanel();
+    radioTipoCsv = new javax.swing.JRadioButton();
     paineAjuda = new javax.swing.JPanel();
     btnAjuda = new javax.swing.JButton();
 
@@ -35,8 +39,8 @@ public class LeituraSimulacao extends javax.swing.JInternalFrame {
     setIconifiable(true);
     setMaximizable(true);
     setResizable(true);
-    setTitle("Realizar simulação");
-    setPreferredSize(new java.awt.Dimension(500, 270));
+    setTitle("Carregar dados");
+    setPreferredSize(new java.awt.Dimension(500, 320));
     setVisible(true);
 
     title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -60,7 +64,7 @@ public class LeituraSimulacao extends javax.swing.JInternalFrame {
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
-    painelArquivo.setBorder(javax.swing.BorderFactory.createTitledBorder("Arquivo de simulação"));
+    painelArquivo.setBorder(javax.swing.BorderFactory.createTitledBorder("Arquivo"));
     painelArquivo.setPreferredSize(new java.awt.Dimension(500, 225));
 
     labelArquivo.setLabelFor(inputArquivo);
@@ -70,28 +74,42 @@ public class LeituraSimulacao extends javax.swing.JInternalFrame {
     inputArquivo.setToolTipText("Informe o nome do cliente");
     inputArquivo.setPreferredSize(new java.awt.Dimension(125, 30));
 
-    btnRealizarSimulacao.setText("Simular");
-    btnRealizarSimulacao.setToolTipText("Buscar arquivos e realizar simulação");
-    btnRealizarSimulacao.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    btnRealizarSimulacao.setPreferredSize(new java.awt.Dimension(95, 30));
-    getRootPane().setDefaultButton(btnRealizarSimulacao);
-    btnRealizarSimulacao.addActionListener(new java.awt.event.ActionListener() {
+    btnCarregar.setText("Carregar");
+    btnCarregar.setToolTipText("Carregar para o sistema os dados do arquivo informado");
+    btnCarregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    btnCarregar.setPreferredSize(new java.awt.Dimension(95, 30));
+    getRootPane().setDefaultButton(btnCarregar);
+    btnCarregar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        realizaSimulacao(evt);
+        carregaDados(evt);
       }
     });
+
+    painelTipoArquivo.setBorder(javax.swing.BorderFactory.createTitledBorder("Formato"));
+    painelTipoArquivo.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+    tipoArquivoButtonGroup.add(radioTipoCsv);
+    radioTipoCsv.setSelected(true);
+    radioTipoCsv.setText("CSV");
+    radioTipoCsv.setToolTipText("Salvar dados em formato CSV");
+    radioTipoCsv.setActionCommand("CSV");
+    radioTipoCsv.setPreferredSize(new java.awt.Dimension(100, 15));
+    painelTipoArquivo.add(radioTipoCsv);
 
     javax.swing.GroupLayout painelArquivoLayout = new javax.swing.GroupLayout(painelArquivo);
     painelArquivo.setLayout(painelArquivoLayout);
     painelArquivoLayout.setHorizontalGroup(
       painelArquivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(painelArquivoLayout.createSequentialGroup()
+      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelArquivoLayout.createSequentialGroup()
         .addContainerGap()
-        .addComponent(labelArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(inputArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addComponent(btnRealizarSimulacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGroup(painelArquivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+          .addComponent(painelTipoArquivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addGroup(painelArquivoLayout.createSequentialGroup()
+            .addComponent(labelArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(inputArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 22, Short.MAX_VALUE)
+            .addComponent(btnCarregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         .addContainerGap())
     );
     painelArquivoLayout.setVerticalGroup(
@@ -100,15 +118,17 @@ public class LeituraSimulacao extends javax.swing.JInternalFrame {
         .addContainerGap()
         .addGroup(painelArquivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(labelArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(btnRealizarSimulacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(btnCarregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(inputArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addComponent(painelTipoArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
     paineAjuda.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 15, 5));
 
     btnAjuda.setText("Ajuda");
-    btnAjuda.setToolTipText("Mostrar informações sobre a simulação");
+    btnAjuda.setToolTipText("Mostrar informações de ajuda ao usuário");
     btnAjuda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     btnAjuda.setPreferredSize(new java.awt.Dimension(95, 30));
     btnAjuda.addActionListener(new java.awt.event.ActionListener() {
@@ -136,8 +156,8 @@ public class LeituraSimulacao extends javax.swing.JInternalFrame {
         .addContainerGap(20, Short.MAX_VALUE)
         .addComponent(painelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(18, 18, 18)
-        .addComponent(painelArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGap(18, 18, 18)
+        .addComponent(painelArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addComponent(paineAjuda, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addContainerGap(35, Short.MAX_VALUE))
     );
@@ -147,41 +167,55 @@ public class LeituraSimulacao extends javax.swing.JInternalFrame {
 
   private void mostraAjuda(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostraAjuda
 		String ajuda = """
-			Digite o nome do arquivo de simulação, sem extensão.
-			O sistema buscará, na pasta raíz, pelos arquivos com o
-			nome digitado e com seguintes sufixos:
-			- "-DRONES.csv";
-			- "-TRANSPORTES.csv".
+			Digite o nome do arquivo do qual deseja carregar os dados,
+			sem extensão; os dados serão salvos conforme o formato escolhido.
+			
+			E.g.: Considerando "dados" como o nome do arquivo inserido, se o
+			formato selecionado for CSV, os dados serão lidos de dois arquivos
+			distintos, "dados-drones.csv" e "dados-transportes.csv", buscados na
+			pasta raíz.
 
-			E.g.: Ao digitar "simula", o sistema buscará pelos arquivos
-			"simula-drones.csv" e "simula-transportes.csv".
-
-			O formato dos arquivos deve corresponder à especificação no
-			enunciado da tarefa; se algum erro ocorrer durante a leitura,
-			o sistema continuará tentando ler os arquivos até o final e
-			depois mostrará quais erros ocorreram.""";
+			Se algum erro ocorrer durante a operação, uma mensagem será exibida.
+			""";
 		JOptionPane.showMessageDialog(this, ajuda, getTitle(), JOptionPane.INFORMATION_MESSAGE);
   }//GEN-LAST:event_mostraAjuda
 
-  private void realizaSimulacao(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realizaSimulacao
+  private void carregaDados(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carregaDados
 		try {
 			String nomeArquivo = inputArquivo.getText();
-			new ArquivoCSV(nomeArquivo).realizaLeitura();
-			JOptionPane.showMessageDialog(this, "Simulação realizada com sucesso!", getTitle(), JOptionPane.INFORMATION_MESSAGE);
+			if (nomeArquivo.isBlank()) {
+				JOptionPane.showMessageDialog(this, "O nome do arquivo deve ser informado!", getTitle(), JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+
+			String formato = tipoArquivoButtonGroup.getSelection().getActionCommand();
+			switch (formato) {
+				case "CSV" -> new ArquivoCSV(nomeArquivo).realizaLeitura();
+				default -> {
+					JOptionPane.showMessageDialog(this, "Erro ao selecionar formato do arquivo...\nTente novamente!",
+						getTitle(), JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+			}
+
+			JOptionPane.showMessageDialog(this, "Importação realizada com sucesso!", getTitle(), JOptionPane.INFORMATION_MESSAGE);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, "Os seguintes erros ocorreram durante a simulação:\n%s".formatted(e.getMessage()), getTitle(), JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Erro inesperado durante a importação:\n%s".formatted(e.getMessage()), getTitle(), JOptionPane.WARNING_MESSAGE);
 			e.printStackTrace(System.err);
 		}
-  }//GEN-LAST:event_realizaSimulacao
+  }//GEN-LAST:event_carregaDados
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton btnAjuda;
-  private javax.swing.JButton btnRealizarSimulacao;
+  private javax.swing.JButton btnCarregar;
   private javax.swing.JTextField inputArquivo;
   private javax.swing.JLabel labelArquivo;
   private javax.swing.JPanel paineAjuda;
   private javax.swing.JPanel painelArquivo;
   private javax.swing.JPanel painelHeader;
+  private javax.swing.JPanel painelTipoArquivo;
+  private javax.swing.JRadioButton radioTipoCsv;
+  private javax.swing.ButtonGroup tipoArquivoButtonGroup;
   private javax.swing.JLabel title;
   // End of variables declaration//GEN-END:variables
 }

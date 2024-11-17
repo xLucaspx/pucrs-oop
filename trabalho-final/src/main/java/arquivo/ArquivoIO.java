@@ -35,12 +35,11 @@ abstract class ArquivoIO {
 		return true;
 	}
 
-	protected void redirecionaEntrada(String nomeArquivo) {
+	protected void abreArquivoEntrada(String nomeArquivo) {
 		try {
-			fechaEntrada();
+			fechaArquivoEntrada();
 			BufferedReader br = Files.newBufferedReader(Paths.get(nomeArquivo), StandardCharsets.UTF_8);
 			in = new Scanner(br);
-			Locale.setDefault(Locale.ENGLISH);
 			in.useLocale(Locale.ENGLISH);
 		} catch (IOException e) {
 			e.printStackTrace(System.err);
@@ -48,19 +47,17 @@ abstract class ArquivoIO {
 		}
 	}
 
-	protected void redirecionaSaida(String nomeArquivo) {
+	protected void abreArquivoSaida(String nomeArquivo) {
 		try {
-			fechaSaida();
-			PrintStream ps = new PrintStream(Paths.get(nomeArquivo).toString(), StandardCharsets.UTF_8);
-			System.setOut(ps);
-			Locale.setDefault(Locale.ENGLISH);
+			fechaArquivoSaida();
+			out = new PrintStream(Paths.get(nomeArquivo).toString(), StandardCharsets.UTF_8);
 		} catch (IOException e) {
 			e.printStackTrace(System.err);
 			throw new RuntimeException("Erro ao tentar abrir arquivo \"%s\"!".formatted(nomeArquivo));
 		}
 	}
 
-	protected void fechaEntrada() {
+	protected void fechaArquivoEntrada() {
 		if (in == null) {
 			return;
 		}
@@ -68,7 +65,7 @@ abstract class ArquivoIO {
 		in = null;
 	}
 
-	protected void fechaSaida() {
+	protected void fechaArquivoSaida() {
 		if (out == null) {
 			return;
 		}

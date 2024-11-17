@@ -57,4 +57,16 @@ public class DroneHandler {
 	public List<Drone> buscaTodos() {
 		return List.copyOf(drones);
 	}
+
+	/**
+	 * Busca um {@link Drone} utilizando o código
+	 * passado como argumento.
+	 *
+	 * @param codigo O código do drone buscado.
+	 * @return A instância de drone correspondente, ou
+	 * {@code null} se não for encontrada correspondência.
+	 */
+	public Drone buscaPorCodigo(int codigo) {
+		return drones.stream().filter(t -> t.getCodigo() == codigo).findFirst().orElse(null);
+	}
 }

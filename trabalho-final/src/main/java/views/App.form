@@ -104,12 +104,18 @@
                 <Property name="text" type="java.lang.String" value="Salvar Dados"/>
                 <Property name="toolTipText" type="java.lang.String" value="Salvar todos os dados do sitema"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="abreEscritaDados"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="carregarDadosMenuItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Carregar Dados"/>
                 <Property name="toolTipText" type="java.lang.String" value="Carregar dados salvos para o sistema"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="abreLeituraDados"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="separatorMenuArquivo1">
             </MenuItem>

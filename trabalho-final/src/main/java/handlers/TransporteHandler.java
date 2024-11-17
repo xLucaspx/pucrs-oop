@@ -43,7 +43,9 @@ public class TransporteHandler {
 
 	/**
 	 * Cadastra um {@link Transporte} no sistema, caso
-	 * ainda não tenha sido cadastrado.
+	 * ainda não tenha sido cadastrado; se o transporte estiver
+	 * com a situação {@link Estado#PENDENTE PENDENTE} será
+	 * adicionado à fila de transportes pendentes.
 	 *
 	 * @param t O transporte que será cadastrado.
 	 * @return {@code true} se o cadastro foi realizado
