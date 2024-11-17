@@ -17,7 +17,6 @@ public class CadastroTransporte extends javax.swing.JInternalFrame {
 	public CadastroTransporte() {
 		transporteHandler = TransporteHandler.getHandler();
 		initComponents();
-		setVisible(true);
 	}
 
 	private void limpaCampos() {
@@ -85,6 +84,7 @@ public class CadastroTransporte extends javax.swing.JInternalFrame {
     setResizable(true);
     setTitle("Cadastro de Transporte");
     setPreferredSize(new java.awt.Dimension(550, 625));
+    setVisible(true);
 
     title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     title.setLabelFor(this);
@@ -270,7 +270,7 @@ public class CadastroTransporte extends javax.swing.JInternalFrame {
     painelAbas.setToolTipText("Escolha o tipo de transporte que será cadastrado e preencha as informações");
 
     labelQtdPessoasPessoal.setLabelFor(inputQtdPessoasPessoal);
-    labelQtdPessoasPessoal.setText("Quantidade de Pessoas:");
+    labelQtdPessoasPessoal.setText("Quantidade de pessoas:");
     labelQtdPessoasPessoal.setPreferredSize(new java.awt.Dimension(125, 15));
 
     inputQtdPessoasPessoal.setToolTipText("Informe a quantidade de pessoas que será transportada");
@@ -445,12 +445,32 @@ public class CadastroTransporte extends javax.swing.JInternalFrame {
 
 	private Transporte criaTransporte(int numero) {
 		double peso = Double.parseDouble(inputPeso.getText());
+		if (peso <= 0) {
+			JOptionPane.showMessageDialog(this, "O peso do transporte deve ser maior do que zero!", getTitle(), JOptionPane.WARNING_MESSAGE);
+			return null;
+		}
+
 		String cliente = inputCliente.getText();
+		if (cliente.isEmpty()) {
+			JOptionPane.showMessageDialog(this, "O nome do cliente deve ser informado!", getTitle(), JOptionPane.WARNING_MESSAGE);
+			return null;
+		}
+
 		String descricao = inputDescricao.getText();
+		if (descricao.isEmpty()) {
+			JOptionPane.showMessageDialog(this, "A descrição do transporte deve ser preenchida!", getTitle(), JOptionPane.WARNING_MESSAGE);
+			return null;
+		}
+
 		double latitudeOrigem = Double.parseDouble(inputLatOrigem.getText());
 		double longitudeOrigem = Double.parseDouble(inputLongOrigem.getText());
 		double latitudeDestino = Double.parseDouble(inputLatDestino.getText());
 		double longitudeDestino = Double.parseDouble(inputLongDestino.getText());
+
+		if (latitudeOrigem == latitudeDestino && longitudeOrigem == longitudeDestino) {
+			JOptionPane.showMessageDialog(this, "As coordenadas de origem e de destino devem ser diferentes!", getTitle(), JOptionPane.WARNING_MESSAGE);
+			return null;
+		}
 
 		int tipoTransporte = painelAbas.getSelectedIndex();
 		return switch (tipoTransporte) {
@@ -468,6 +488,11 @@ public class CadastroTransporte extends javax.swing.JInternalFrame {
 	private Transporte criaTransportePessoal(int numero, String cliente, String descricao, double peso,
 		double latitudeOrigem, double longitudeOrigem, double latitudeDestino, double longitudeDestino) {
 		int qtdPessoas = Integer.parseInt(inputQtdPessoasPessoal.getText());
+		if (qtdPessoas < 0) {
+			JOptionPane.showMessageDialog(this, "O campo \"Quantidade de pessoas\" não pode ser negativo!", getTitle(), JOptionPane.WARNING_MESSAGE);
+			return null;
+		}
+
 		return new TransportePessoal(numero, cliente, descricao, peso, latitudeOrigem,  longitudeOrigem,  latitudeDestino,  longitudeDestino, qtdPessoas);
 	}
 
@@ -481,17 +506,27 @@ public class CadastroTransporte extends javax.swing.JInternalFrame {
 		double latitudeOrigem, double longitudeOrigem, double latitudeDestino, double longitudeDestino) {
 		double temperaturaMinima = Double.parseDouble(inputTemperaturaMinimaCargaViva.getText());
 		double temperaturaMaxima = Double.parseDouble(inputTemperaturaMaximaCargaViva.getText());
+
+		if (temperaturaMaxima < temperaturaMinima) {
+			JOptionPane.showMessageDialog(this, "A temperatura mínima não pode ser maior do que a temperatura máxima!", getTitle(), JOptionPane.WARNING_MESSAGE);
+			return null;
+		}
+
 		return new TransporteCargaViva(numero, cliente, descricao, peso, latitudeOrigem,  longitudeOrigem,  latitudeDestino,  longitudeDestino, temperaturaMinima, temperaturaMaxima);
 	}
 
   private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
 		try {
-			int codigo = Integer.parseInt(inputNumero.getText());
-			Transporte novoTransporte = criaTransporte(codigo);
-			boolean sucesso = transporteHandler.cadastra(novoTransporte);
+			int numero = Integer.parseInt(inputNumero.getText());
+			Transporte novoTransporte = criaTransporte(numero);
 
+			if (novoTransporte == null) {
+				return;
+			}
+
+			boolean sucesso = transporteHandler.cadastra(novoTransporte);
 			if (!sucesso) {
-				JOptionPane.showMessageDialog(this, "Já existe um transporte cadastrado com o código %d".formatted(codigo),
+				JOptionPane.showMessageDialog(this, "Já existe um transporte cadastrado com o número %d".formatted(numero),
 					getTitle(), JOptionPane.WARNING_MESSAGE);
 				return;
 			}

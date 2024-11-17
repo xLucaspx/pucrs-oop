@@ -49,6 +49,7 @@ public class App extends JFrame {
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     setTitle("ACME Air Drones");
+    setName(getTitle());
     setPreferredSize(new java.awt.Dimension(900, 700));
 
     desktopPane.setPreferredSize(new java.awt.Dimension(750, 600));

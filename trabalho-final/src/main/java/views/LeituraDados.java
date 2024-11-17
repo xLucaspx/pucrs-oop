@@ -199,8 +199,9 @@ public class LeituraDados extends javax.swing.JInternalFrame {
 			}
 
 			JOptionPane.showMessageDialog(this, "Importação realizada com sucesso!", getTitle(), JOptionPane.INFORMATION_MESSAGE);
+			inputArquivo.setText("");
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, "Erro inesperado durante a importação:\n%s".formatted(e.getMessage()), getTitle(), JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Erros ocorridos durante a importação:\n%s".formatted(e.getMessage()), getTitle(), JOptionPane.WARNING_MESSAGE);
 			e.printStackTrace(System.err);
 		}
   }//GEN-LAST:event_carregaDados

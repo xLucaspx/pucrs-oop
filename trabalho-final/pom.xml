@@ -6,7 +6,7 @@
 
 	<groupId>xLucaspx</groupId>
 	<artifactId>acme-drones</artifactId>
-	<version>0.2</version>
+	<version>1.0-BETA</version>
 	<packaging>jar</packaging>
 
 	<name>ACME Air Drones</name>

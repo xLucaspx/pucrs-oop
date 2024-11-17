@@ -17,7 +17,6 @@ public class CadastroDrone extends javax.swing.JInternalFrame {
 	public CadastroDrone() {
 		droneHandler = DroneHandler.getHandler();
 		initComponents();
-		setVisible(true);
 	}
 
 	private void limpaCampos() {
@@ -71,6 +70,7 @@ public class CadastroDrone extends javax.swing.JInternalFrame {
     setResizable(true);
     setTitle("Cadastro de Drone");
     setPreferredSize(new java.awt.Dimension(550, 400));
+    setVisible(true);
 
     title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     title.setLabelFor(this);
@@ -327,7 +327,16 @@ public class CadastroDrone extends javax.swing.JInternalFrame {
 
 	private Drone criaDrone(int codigo) {
 		double custoFixo = Double.parseDouble(inputCustoFixo.getText());
+		if (custoFixo < 0) {
+			JOptionPane.showMessageDialog(this, "O custo fixo do drone não pode ser negativo!", getTitle(), JOptionPane.WARNING_MESSAGE);
+			return null;
+		}
+
 		double autonomia = Double.parseDouble(inputAutonomia.getText());
+		if (autonomia <= 0) {
+			JOptionPane.showMessageDialog(this, "A autonomia do drone deve ser maior do que zero!", getTitle(), JOptionPane.WARNING_MESSAGE);
+			return null;
+		}
 
 		int tipoDrone = painelAbas.getSelectedIndex();
 		return switch (tipoDrone) {
@@ -340,16 +349,31 @@ public class CadastroDrone extends javax.swing.JInternalFrame {
 
 	private Drone criaDronePessoal(int codigo, double custoFixo, double autonomia) {
 		int maximoPessoas = Integer.parseInt(inputMaxPessoasPessoal.getText());
+		if (maximoPessoas < 0) {
+			JOptionPane.showMessageDialog(this, "O campo \"Máximo de pessoas\" não pode ser negativo!", getTitle(), JOptionPane.WARNING_MESSAGE);
+			return null;
+		}
+
 		return new DronePessoal(codigo, custoFixo, autonomia, maximoPessoas);
 	}
 
 	private Drone criaDroneCargaInanimada(int codigo, double custoFixo, double autonomia) {
 		double pesoMaximo = Double.parseDouble(inputPesoMaximoCargaInanimada.getText());
+		if (pesoMaximo <= 0) {
+			JOptionPane.showMessageDialog(this, "O campo \"Peso máximo\" deve ser maior do que zero!", getTitle(), JOptionPane.WARNING_MESSAGE);
+			return null;
+		}
+
 		boolean protecao = checkProtecaoCargaInanimada.isSelected();
 		return new DroneCargaInanimada(codigo, custoFixo, autonomia, pesoMaximo, protecao);
 	}
 	private Drone criaDroneCargaViva(int codigo, double custoFixo, double autonomia) {
 		double pesoMaximo = Double.parseDouble(inputPesoMaximoCargaViva.getText());
+		if (pesoMaximo <= 0) {
+			JOptionPane.showMessageDialog(this, "O campo \"Peso máximo\" deve ser maior do que zero!", getTitle(), JOptionPane.WARNING_MESSAGE);
+			return null;
+		}
+
 		boolean climatizacao = checkClimatizacaoCargaViva.isSelected();
 		return new DroneCargaViva(codigo, custoFixo, autonomia, pesoMaximo, climatizacao);
 	}
@@ -358,8 +382,12 @@ public class CadastroDrone extends javax.swing.JInternalFrame {
 		try {
 			int codigo = Integer.parseInt(inputCodigo.getText());
 			Drone novoDrone = criaDrone(codigo);
-			boolean sucesso = droneHandler.cadastra(novoDrone);
 
+			if (novoDrone == null) {
+				return;
+			}
+
+			boolean sucesso = droneHandler.cadastra(novoDrone);
 			if (!sucesso) {
 				JOptionPane.showMessageDialog(this, "Já existe um drone cadastrado com o código %d".formatted(codigo),
 					getTitle(), JOptionPane.WARNING_MESSAGE);

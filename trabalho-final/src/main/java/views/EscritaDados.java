@@ -176,19 +176,20 @@ public class EscritaDados extends javax.swing.JInternalFrame {
   private void mostraAjuda(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostraAjuda
 		String ajuda = """
 			Digite o nome do arquivo no qual deseja salvar os dados,
-			sem extensão; caso o arquivo não exista na pasta raíz do
-			projeto, será criado; caso exista, seu conteúdo será sobrescrito
-			pelos novos dados.
+			sem extensão. Caso o arquivo já exista na pasta raíz do
+			projeto, seu conteúdo será sobrescrito; caso não exista,
+			será criado.
 
 			Os dados serão salvos conforme o formato escolhido. E.g.:
 			Considerando "dados" como o nome do arquivo inserido, se o
 			formato selecionado for JSON o sistema salvará os dados da
 			aplicação no arquivo "dados.json" na pasta raíz. Se o formato
-			se o formato selecionado for CSV, os dados serão salvos em
-			dois arquivos distintos, "dados-drones.csv" e "dados-transportes.csv",
+			selecionado for CSV, os dados serão salvos em dois arquivos
+			distintos, "dados-drones.csv" e "dados-transportes.csv",
 			também na pasta raíz.
 
-			Se algum erro ocorrer durante a operação, uma mensagem será exibida.
+			Se algum erro ocorrer durante a operação, uma mensagem será
+			exibida para o usuário.
 			""";
 		JOptionPane.showMessageDialog(this, ajuda, getTitle(), JOptionPane.INFORMATION_MESSAGE);
   }//GEN-LAST:event_mostraAjuda
@@ -213,6 +214,7 @@ public class EscritaDados extends javax.swing.JInternalFrame {
 			}
 
 			JOptionPane.showMessageDialog(this, "Exportação realizada com sucesso!", getTitle(), JOptionPane.INFORMATION_MESSAGE);
+			inputArquivo.setText("");
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "Erro inesperado durante a exportação:\n%s".formatted(e.getMessage()), getTitle(), JOptionPane.WARNING_MESSAGE);
 			e.printStackTrace(System.err);

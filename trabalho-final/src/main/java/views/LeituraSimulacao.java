@@ -168,6 +168,7 @@ public class LeituraSimulacao extends javax.swing.JInternalFrame {
 			String nomeArquivo = inputArquivo.getText();
 			new ArquivoCSV(nomeArquivo).realizaLeitura();
 			JOptionPane.showMessageDialog(this, "Simulação realizada com sucesso!", getTitle(), JOptionPane.INFORMATION_MESSAGE);
+			inputArquivo.setText("");
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "Os seguintes erros ocorreram durante a simulação:\n%s".formatted(e.getMessage()), getTitle(), JOptionPane.WARNING_MESSAGE);
 			e.printStackTrace(System.err);

@@ -191,7 +191,7 @@ public class SituacaoTransporte extends javax.swing.JInternalFrame {
     btnDefinir.setPreferredSize(new java.awt.Dimension(95, 30));
     btnDefinir.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        definirNovaSituacao(evt);
+        defineNovaSituacao(evt);
       }
     });
 
@@ -265,7 +265,7 @@ public class SituacaoTransporte extends javax.swing.JInternalFrame {
 		}
   }//GEN-LAST:event_buscaTransporte
 
-  private void definirNovaSituacao(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_definirNovaSituacao
+  private void defineNovaSituacao(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_defineNovaSituacao
 		Estado estado = (Estado) comboSituacao.getSelectedItem();
 
 		String[] opcoes = {"Sim", "Não"};
@@ -281,12 +281,14 @@ public class SituacaoTransporte extends javax.swing.JInternalFrame {
 
 		if (!sucesso) {
 			JOptionPane.showMessageDialog(this, "Ocorreu um erro ao tentar realizar a operação...\nTente novamente!", getTitle(), JOptionPane.ERROR_MESSAGE);
+			return;
 		}
 
 		JOptionPane.showMessageDialog(this, "Operação realizada com sucesso!", getTitle(), JOptionPane.INFORMATION_MESSAGE);
+		inputNumero.setText("");
 		mostraTransporte();
 		desativaPainelSituacao();
-  }//GEN-LAST:event_definirNovaSituacao
+  }//GEN-LAST:event_defineNovaSituacao
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton btnBuscar;
