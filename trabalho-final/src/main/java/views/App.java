@@ -1,22 +1,41 @@
 package views;
 
-import java.awt.event.WindowEvent;
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import java.awt.Component;
+import java.awt.event.WindowEvent;
 
 /**
+ * Tela principal da aplicação; contém um {@link JDesktopPane}
+ * onde qualquer outra tela implementada como {@link JInternalFrame}
+ * será exibida.
+ *
  * @author Lucas da Paz
  */
 public class App extends JFrame {
+
+	/**
+	 * Inicializa a classe {@link App} e seus componentes
+	 * e define-a como visível.
+	 */
 	public App() {
 		initComponents();
 		setVisible(true);
 	}
 
+	/**
+	 * Adiciona um {@link JInternalFrame} ao {@link JDesktopPane}
+	 * desta tela e exibe-o.
+	 *
+	 * @param frame O frame que será exibido.
+	 * @see JDesktopPane#add(Component)
+	 * @see JInternalFrame#requestFocusInWindow()
+	 */
 	private void mostraFrameInterno(JInternalFrame frame) {
 		desktopPane.add(frame);
-		frame.moveToFront();
-		frame.requestFocus();
+		frame.setLocation(20, 20);
+		frame.requestFocusInWindow();
 	}
 
 	/**

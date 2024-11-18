@@ -62,6 +62,6 @@ public abstract class DroneCarga extends Drone {
 	public String toJSON() {
 		return """
 			%s,
-			\t\t\t\t"pesoMaximo": %f""".formatted(super.toJSON(), pesoMaximo);
+			\t\t\t"pesoMaximo": %f""".formatted(super.toJSON(), pesoMaximo);
 	}
 }

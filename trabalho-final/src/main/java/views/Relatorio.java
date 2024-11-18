@@ -1,21 +1,30 @@
 package views;
 
+import javax.swing.JInternalFrame;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 
 /**
+ * Classe abstrata que serve para encapsular o {@link JInternalFrame}
+ * que contém o formulário utilizado para gerar relatórios.
  *
  * @author Lucas da Paz
  */
 public abstract class Relatorio extends javax.swing.JInternalFrame {
 	private final String titulo;
-	
+
+  /**
+   * Inicializa um novo frame {@link Relatorio}.
+   */
 	public Relatorio(String titulo) {
 		this.titulo = titulo;
 		initComponents();
 	}
-	
+
+  /**
+   * @return Relatório que deve ser exibido na área de texto.
+   */
 	protected abstract String geraRelatorio();
 
 	/**

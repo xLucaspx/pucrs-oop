@@ -3,11 +3,15 @@ package views;
 import dados.Estado;
 import dados.Transporte;
 import handlers.TransporteHandler;
-import java.util.List;
+
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import java.util.List;
 
 /**
+ * {@link JInternalFrame} que contém o formulário utilizado
+ * para buscar e alterar a situação de determinado {@link Transporte}.
  *
  * @author Lucas da Paz
  */
@@ -15,11 +19,17 @@ public class SituacaoTransporte extends javax.swing.JInternalFrame {
 	private final TransporteHandler transporteHandler;
 	private Transporte transporte;
 
+	/**
+	 * Inicializa um novo frame {@link SituacaoTransporte}.
+	 */
 	public SituacaoTransporte() {
 		transporteHandler = TransporteHandler.getHandler();
 		initComponents();
 	}
 
+	/**
+	 * Habilita o painel de escolha de situação do {@link Transporte}.
+	 */
 	private void ativaPainelSituacao() {
 		List<Estado> estados = switch (transporte.getSituacao()) {
 			case PENDENTE -> List.of(Estado.CANCELADO);
@@ -39,12 +49,19 @@ public class SituacaoTransporte extends javax.swing.JInternalFrame {
 		btnDefinir.setEnabled(true);
 	}
 
+	/**
+	 * Desabilita o painel de escolha de situação do {@link Transporte}.
+	 */
 	private void desativaPainelSituacao() {
 		comboSituacao.setSelectedIndex(-1);
 		comboSituacao.setEnabled(false);
 		btnDefinir.setEnabled(false);
 	}
-	
+
+	/**
+	 * Mostra as informações do {@link Transporte} buscado na
+	 * área de texto.
+	 */
 	private void mostraTransporte() {
 		textAreaTransporte.setText(transporte.toString());
 		if (transporte.getDrone() != null) {

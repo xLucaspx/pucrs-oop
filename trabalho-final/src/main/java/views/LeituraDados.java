@@ -2,14 +2,21 @@ package views;
 
 import arquivo.ArquivoCSV;
 import arquivo.ArquivoJSON;
+
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
 /**
+ * {@link JInternalFrame} que contém o formulário utilizado
+ * para importar dados de um arquivo estruturado para a aplicação.
  *
  * @author Lucas da Paz
  */
 public class LeituraDados extends javax.swing.JInternalFrame {
 
+	/**
+	 * Inicializa um novo frame {@link LeituraDados}.
+	 */
 	public LeituraDados() {
 		initComponents();
 	}
@@ -32,6 +39,7 @@ public class LeituraDados extends javax.swing.JInternalFrame {
     btnCarregar = new javax.swing.JButton();
     painelTipoArquivo = new javax.swing.JPanel();
     radioTipoCsv = new javax.swing.JRadioButton();
+    radioTipoCsv1 = new javax.swing.JRadioButton();
     paineAjuda = new javax.swing.JPanel();
     btnAjuda = new javax.swing.JButton();
 
@@ -91,10 +99,17 @@ public class LeituraDados extends javax.swing.JInternalFrame {
     tipoArquivoButtonGroup.add(radioTipoCsv);
     radioTipoCsv.setSelected(true);
     radioTipoCsv.setText("CSV");
-    radioTipoCsv.setToolTipText("Salvar dados em formato CSV");
+    radioTipoCsv.setToolTipText("Carregar dados de arquivos em formato CSV");
     radioTipoCsv.setActionCommand("CSV");
     radioTipoCsv.setPreferredSize(new java.awt.Dimension(100, 15));
     painelTipoArquivo.add(radioTipoCsv);
+
+    tipoArquivoButtonGroup.add(radioTipoCsv1);
+    radioTipoCsv1.setText("JSON");
+    radioTipoCsv1.setToolTipText("Carregar dados de arquivo em formato JSON");
+    radioTipoCsv1.setActionCommand("JSON");
+    radioTipoCsv1.setPreferredSize(new java.awt.Dimension(100, 15));
+    painelTipoArquivo.add(radioTipoCsv1);
 
     javax.swing.GroupLayout painelArquivoLayout = new javax.swing.GroupLayout(painelArquivo);
     painelArquivo.setLayout(painelArquivoLayout);
@@ -191,6 +206,7 @@ public class LeituraDados extends javax.swing.JInternalFrame {
 			String formato = tipoArquivoButtonGroup.getSelection().getActionCommand();
 			switch (formato) {
 				case "CSV" -> new ArquivoCSV(nomeArquivo).realizaLeitura();
+				case "JSON" -> new ArquivoJSON(nomeArquivo).realizaLeitura();
 				default -> {
 					JOptionPane.showMessageDialog(this, "Erro ao selecionar formato do arquivo...\nTente novamente!",
 						getTitle(), JOptionPane.ERROR_MESSAGE);
@@ -201,7 +217,12 @@ public class LeituraDados extends javax.swing.JInternalFrame {
 			JOptionPane.showMessageDialog(this, "Importação realizada com sucesso!", getTitle(), JOptionPane.INFORMATION_MESSAGE);
 			inputArquivo.setText("");
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, "Erros ocorridos durante a importação:\n%s".formatted(e.getMessage()), getTitle(), JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(this,
+				"Erros ocorridos durante a importação:\n%s\nPara mais informações consulte o log de erros.".formatted(
+					e.getMessage()),
+				getTitle(),
+				JOptionPane.WARNING_MESSAGE
+			);
 			e.printStackTrace(System.err);
 		}
   }//GEN-LAST:event_carregaDados
@@ -216,6 +237,7 @@ public class LeituraDados extends javax.swing.JInternalFrame {
   private javax.swing.JPanel painelHeader;
   private javax.swing.JPanel painelTipoArquivo;
   private javax.swing.JRadioButton radioTipoCsv;
+  private javax.swing.JRadioButton radioTipoCsv1;
   private javax.swing.ButtonGroup tipoArquivoButtonGroup;
   private javax.swing.JLabel title;
   // End of variables declaration//GEN-END:variables

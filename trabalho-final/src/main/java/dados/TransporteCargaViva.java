@@ -33,41 +33,6 @@ public class TransporteCargaViva extends Transporte {
 	}
 
 	/**
-	 * Inicializa um objeto {@link TransporteCargaViva} com os
-	 * valores informados.
-	 *
-	 * @param numero            O número do transporte.
-	 * @param nomeCliente       O nome do cliente associado ao transporte.
-	 * @param descricao         A descrição do transporte.
-	 * @param peso              O peso do transporte.
-	 * @param latitudeOrigem    A latitude de origem do transporte.
-	 * @param longitudeOrigem   A longitude de origem do transporte.
-	 * @param latitudeDestino   A latitude de destino do transporte.
-	 * @param longitudeDestino  A longitude de destino do transporte.
-	 * @param temperaturaMinima A temperatura mínima do transporte.
-	 * @param temperaturaMaxima A temperatura máxima do transporte.
-	 * @param situacao          O {@link Estado} que representa a situação do drone.
-	 * @param drone             O {@link Drone} responsável pelo transporte, se existir.
-	 */
-	public TransporteCargaViva(int numero, String nomeCliente, String descricao, double peso, double latitudeOrigem,
-		double longitudeOrigem, double latitudeDestino, double longitudeDestino, double temperaturaMinima,
-		double temperaturaMaxima, Estado situacao, Drone drone) {
-		super(numero,
-			nomeCliente,
-			descricao,
-			peso,
-			latitudeOrigem,
-			longitudeOrigem,
-			latitudeDestino,
-			longitudeDestino,
-			situacao,
-			drone
-		);
-		this.temperaturaMinima = temperaturaMinima;
-		this.temperaturaMaxima = temperaturaMaxima;
-	}
-
-	/**
 	 * {@inheritDoc} Para uma instância de {@link TransporteCargaViva},
 	 * haverá um acréscimo no valor do transporte caso o intervalo entre
 	 * as temperaturas mínima e máxima for maior do que 10 graus Celsius.
@@ -100,17 +65,18 @@ public class TransporteCargaViva extends Transporte {
 			temperaturaMinima,
 			temperaturaMaxima,
 			getSituacao(),
-			getDrone() == null ? -1 : getDrone().getCodigo()
+			getDrone() == null ? 0 : getDrone().getCodigo()
 		);
 	}
 
 	@Override
 	public String toJSON() {
 		return """
-			\t\t\t"%s": {
+			\t\t{
+			\t\t\t"tipo": 3,
 			%s,
-			\t\t\t\t"temperaturaMinima": %f,
-			\t\t\t\t"temperaturaMaxima": %f
-			\t\t\t}""".formatted(this.getClass().getSimpleName(), super.toJSON(), temperaturaMinima, temperaturaMaxima);
+			\t\t\t"temperaturaMinima": %f,
+			\t\t\t"temperaturaMaxima": %f
+			\t\t}""".formatted(super.toJSON(), temperaturaMinima, temperaturaMaxima);
 	}
 }

@@ -29,39 +29,6 @@ public class TransporteCargaInanimada extends Transporte {
 	}
 
 	/**
-	 * Inicializa um objeto {@link TransporteCargaInanimada} com os
-	 * valores informados.
-	 *
-	 * @param numero           O número do transporte.
-	 * @param nomeCliente      O nome do cliente associado ao transporte.
-	 * @param descricao        A descrição do transporte.
-	 * @param peso             O peso do transporte.
-	 * @param latitudeOrigem   A latitude de origem do transporte.
-	 * @param longitudeOrigem  A longitude de origem do transporte.
-	 * @param latitudeDestino  A latitude de destino do transporte.
-	 * @param longitudeDestino A longitude de destino do transporte.
-	 * @param cargaPerigosa    Se a carga do transporte é perigosa.
-	 * @param situacao         O {@link Estado} que representa a situação do drone.
-	 * @param drone            O {@link Drone} responsável pelo transporte, se existir.
-	 */
-	public TransporteCargaInanimada(int numero, String nomeCliente, String descricao, double peso, double latitudeOrigem,
-		double longitudeOrigem, double latitudeDestino, double longitudeDestino, boolean cargaPerigosa, Estado situacao,
-		Drone drone) {
-		super(numero,
-			nomeCliente,
-			descricao,
-			peso,
-			latitudeOrigem,
-			longitudeOrigem,
-			latitudeDestino,
-			longitudeDestino,
-			situacao,
-			drone
-		);
-		this.cargaPerigosa = cargaPerigosa;
-	}
-
-	/**
 	 * @return {@code true} se a carga do transporte é perigosa,
 	 * {@code false} caso contrário.
 	 */
@@ -93,16 +60,17 @@ public class TransporteCargaInanimada extends Transporte {
 		return "2;%s;%b;%s;%d".formatted(super.toCSV(),
 			cargaPerigosa,
 			getSituacao(),
-			getDrone() == null ? -1 : getDrone().getCodigo()
+			getDrone() == null ? 0 : getDrone().getCodigo()
 		);
 	}
 
 	@Override
 	public String toJSON() {
 		return """
-			\t\t\t"%s": {
+			\t\t{
+			\t\t\t"tipo": 2,
 			%s,
-			\t\t\t\t"cargaPerigosa": %b
-			\t\t\t}""".formatted(this.getClass().getSimpleName(), super.toJSON(), cargaPerigosa);
+			\t\t\t"cargaPerigosa": %b
+			\t\t}""".formatted(super.toJSON(), cargaPerigosa);
 	}
 }

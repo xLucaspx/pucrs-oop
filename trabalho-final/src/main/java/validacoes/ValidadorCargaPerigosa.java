@@ -5,6 +5,13 @@ import dados.DroneCargaInanimada;
 import dados.Transporte;
 import dados.TransporteCargaInanimada;
 
+/**
+ * Classe que implementa a validação da carga perigosa
+ * de um {@link TransporteCargaInanimada} com relação à
+ * proteção de um {@link DroneCargaInanimada}.
+ *
+ * @author Lucas da Paz
+ */
 public class ValidadorCargaPerigosa implements ValidadorDroneTransporte {
 	/**
 	 * {@inheritDoc} Valida se o drone informado é um

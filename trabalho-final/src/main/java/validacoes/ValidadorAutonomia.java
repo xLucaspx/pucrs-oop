@@ -3,6 +3,13 @@ package validacoes;
 import dados.Drone;
 import dados.Transporte;
 
+/**
+ * Classe que implementa a validação de autonomia
+ * de um {@link Double} com relação à distância de
+ * um {@link Transporte}.
+ *
+ * @author Lucas da Paz
+ */
 public class ValidadorAutonomia implements ValidadorDroneTransporte {
 	/**
 	 * {@inheritDoc} Retorna verdadeiro se a autonomia

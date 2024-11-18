@@ -3,9 +3,12 @@ package views;
 import handlers.DroneHandler;
 import handlers.TransporteHandler;
 
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
 /**
+ * {@link JInternalFrame} que contém o formulário utilizado
+ * para realizar o processamento dos transportes pendentes.
  *
  * @author Lucas da Paz
  */
@@ -13,6 +16,9 @@ public class ProcessamentoTransportes extends javax.swing.JInternalFrame {
 	private final DroneHandler droneHandler;
 	private final TransporteHandler transporteHandler;
 
+	/**
+	 * Inicializa um novo frame {@link ProcessamentoTransportes}.
+	 */
 	public ProcessamentoTransportes() {
 		droneHandler = DroneHandler.getHandler();
 		transporteHandler = TransporteHandler.getHandler();
@@ -20,6 +26,10 @@ public class ProcessamentoTransportes extends javax.swing.JInternalFrame {
 		mostraTotalPendentes();
 	}
 
+	/**
+	 * Exibe, na área de texto, a quantidade de transportes
+	 * pendentes no sistema.
+	 */
 	private void mostraTotalPendentes() {
 		int qtdPendentes = transporteHandler.getTotalPendentes();
 		StringBuilder textoRegistro = new StringBuilder();

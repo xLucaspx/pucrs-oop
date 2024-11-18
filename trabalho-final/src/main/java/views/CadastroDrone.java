@@ -5,20 +5,32 @@ import dados.DroneCargaInanimada;
 import dados.DroneCargaViva;
 import dados.DronePessoal;
 import handlers.DroneHandler;
+
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
 /**
+ * {@link JInternalFrame} que contém o formulário
+ * para o cadastro de novas instâncias de {@link Drone}
+ * no sistema.
  *
  * @author Lucas da Paz
  */
 public class CadastroDrone extends javax.swing.JInternalFrame {
 	private final DroneHandler droneHandler;
 
+	/**
+	 * Inicializa um novo frame {@link CadastroDrone}.
+	 */
 	public CadastroDrone() {
 		droneHandler = DroneHandler.getHandler();
 		initComponents();
 	}
 
+	/**
+	 * Limpa todos os campos de texto e caixas de seleção
+	 * do formulário.
+	 */
 	private void limpaCampos() {
 		inputCodigo.setText("");
 		inputCustoFixo.setText("");
@@ -260,7 +272,7 @@ public class CadastroDrone extends javax.swing.JInternalFrame {
     getRootPane().setDefaultButton(btnCadastrar);
     btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        btnCadastrarActionPerformed(evt);
+        cadastraDrone(evt);
       }
     });
 
@@ -270,7 +282,7 @@ public class CadastroDrone extends javax.swing.JInternalFrame {
     btnLimpar.setPreferredSize(new java.awt.Dimension(95, 30));
     btnLimpar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        btnLimparActionPerformed(evt);
+        chamaLimpaCampos(evt);
       }
     });
 
@@ -325,6 +337,14 @@ public class CadastroDrone extends javax.swing.JInternalFrame {
     pack();
   }// </editor-fold>//GEN-END:initComponents
 
+	/**
+	 * Valida os campos e cria um novo {@link Drone} com
+	 * o código passado como argumento.
+	 *
+	 * @param codigo O código do drone que será criado.
+	 * @return O drone instanciado, ou {@code null} se alguma
+	 * das validações realizadas falhar.
+	 */
 	private Drone criaDrone(int codigo) {
 		double custoFixo = Double.parseDouble(inputCustoFixo.getText());
 		if (custoFixo < 0) {
@@ -347,6 +367,17 @@ public class CadastroDrone extends javax.swing.JInternalFrame {
 		};
 	}
 
+	/**
+	 * Lê os campos necessários, realiza as validações e cria uma
+	 * nova instância de {@link DronePessoal} com os valores passados
+	 * como argumento.
+	 *
+	 * @param codigo    O código do drone.
+	 * @param custoFixo O custo fixo do drone.
+	 * @param autonomia A autonomia do drone.
+	 * @return O drone instanciado, ou {@code null} se alguma das
+	 * validações realizadas falhar.
+	 */
 	private Drone criaDronePessoal(int codigo, double custoFixo, double autonomia) {
 		int maximoPessoas = Integer.parseInt(inputMaxPessoasPessoal.getText());
 		if (maximoPessoas < 0) {
@@ -357,6 +388,17 @@ public class CadastroDrone extends javax.swing.JInternalFrame {
 		return new DronePessoal(codigo, custoFixo, autonomia, maximoPessoas);
 	}
 
+	/**
+	 * Lê os campos necessários, realiza as validações e cria uma
+	 * nova instância de {@link DroneCargaInanimada} com os valores
+	 * passados como argumento.
+	 *
+	 * @param codigo    O código do drone.
+	 * @param custoFixo O custo fixo do drone.
+	 * @param autonomia A autonomia do drone.
+	 * @return O drone instanciado, ou {@code null} se alguma das
+	 * validações realizadas falhar.
+	 */
 	private Drone criaDroneCargaInanimada(int codigo, double custoFixo, double autonomia) {
 		double pesoMaximo = Double.parseDouble(inputPesoMaximoCargaInanimada.getText());
 		if (pesoMaximo <= 0) {
@@ -367,6 +409,18 @@ public class CadastroDrone extends javax.swing.JInternalFrame {
 		boolean protecao = checkProtecaoCargaInanimada.isSelected();
 		return new DroneCargaInanimada(codigo, custoFixo, autonomia, pesoMaximo, protecao);
 	}
+
+	/**
+	 * Lê os campos necessários, realiza as validações e cria
+	 * uma nova instância de {@link DroneCargaViva} com os valores
+	 * passados como argumento.
+	 *
+	 * @param codigo    O código do drone.
+	 * @param custoFixo O custo fixo do drone.
+	 * @param autonomia A autonomia do drone.
+	 * @return O drone instanciado, ou {@code null} se alguma das
+	 * validações realizadas falhar.
+	 */
 	private Drone criaDroneCargaViva(int codigo, double custoFixo, double autonomia) {
 		double pesoMaximo = Double.parseDouble(inputPesoMaximoCargaViva.getText());
 		if (pesoMaximo <= 0) {
@@ -378,9 +432,14 @@ public class CadastroDrone extends javax.swing.JInternalFrame {
 		return new DroneCargaViva(codigo, custoFixo, autonomia, pesoMaximo, climatizacao);
 	}
 
-  private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+  private void cadastraDrone(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastraDrone
 		try {
 			int codigo = Integer.parseInt(inputCodigo.getText());
+			if (codigo <= 0) {
+				JOptionPane.showMessageDialog(this, "O código do drone deve ser um inteiro positivo!", getTitle(), JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+
 			Drone novoDrone = criaDrone(codigo);
 
 			if (novoDrone == null) {
@@ -401,11 +460,11 @@ public class CadastroDrone extends javax.swing.JInternalFrame {
 			e.printStackTrace(System.err);
 			JOptionPane.showMessageDialog(this, "Erro ao cadastrar drone...\nVerifique o tipo de drone e se os campos estão preenchidos corretamente!", getTitle(), JOptionPane.ERROR_MESSAGE);
 		}
-  }//GEN-LAST:event_btnCadastrarActionPerformed
+  }//GEN-LAST:event_cadastraDrone
 
-	private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+	private void chamaLimpaCampos(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chamaLimpaCampos
 		limpaCampos();
-  }//GEN-LAST:event_btnLimparActionPerformed
+  }//GEN-LAST:event_chamaLimpaCampos
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton btnCadastrar;

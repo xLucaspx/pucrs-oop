@@ -4,6 +4,13 @@ import dados.Drone;
 import dados.DroneCarga;
 import dados.Transporte;
 
+/**
+ * Classe que implementa a validação do peso de um
+ * {@link Transporte} com relação ao peso máximo de
+ * um {@link DroneCarga}.
+ *
+ * @author Lucas da Paz
+ */
 public class ValidadorPesoMaximo implements ValidadorDroneTransporte {
 	/**
 	 * {@inheritDoc} Valida se o drone informado é um

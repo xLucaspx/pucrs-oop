@@ -15,6 +15,12 @@ import handlers.TransporteHandler;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe de utilidades que permite a leitura e
+ * escrita de arquivos estruturados em formato CSV.
+ *
+ * @author Lucas da Paz
+ */
 public class ArquivoCSV extends ArquivoIO {
 	private static final String SUFIXO_DRONES = "-drones.csv";
 	private static final String SUFIXO_TRANSPORTES = "-transportes.csv";
@@ -24,30 +30,81 @@ public class ArquivoCSV extends ArquivoIO {
 	private final TransporteHandler transporteHandler;
 	private final String nomeArquivo;
 
+	/**
+	 * Inicializa um objeto {@link ArquivoCSV}.
+	 *
+	 * @param nomeArquivo O nome do arquivo que será utilizado
+	 *                    por este objeto.
+	 */
 	public ArquivoCSV(String nomeArquivo) {
 		droneHandler = DroneHandler.getHandler();
 		transporteHandler = TransporteHandler.getHandler();
 		this.nomeArquivo = nomeArquivo;
 	}
 
+	/**
+	 * Abre arquivos de saída com o nome do arquivo indicado e
+	 * com os sufixos previamente definidos; escreve, em formato
+	 * CSV, todas as instâncias de {@link Drone} e {@link Transporte}
+	 * salvas em memória durante a execução.
+	 *
+	 * @throws RuntimeException Se algo de errado ocorrer com os arquivos.
+	 */
 	public void realizaEscrita() {
 		abreArquivoSaida("%s%s".formatted(nomeArquivo, SUFIXO_DRONES));
-		StringBuilder droneCsv =
-			new StringBuilder("tipo;codigo;custoFixo;autonomia;qtdMaxPessoas_pesoMaximo;protecao_climatizado\n");
+		StringBuilder droneCsv = new StringBuilder();
+		droneCsv.append("tipo;");
+		droneCsv.append("codigo;");
+		droneCsv.append("custoFixo;");
+		droneCsv.append("autonomia;");
+		droneCsv.append("qtdMaxPessoas_pesoMaximo;");
+		droneCsv.append("protecao_climatizado\n");
 
 		droneHandler.buscaTodos().forEach(d -> droneCsv.append(d.toCSV()).append("\n"));
-		escreve(droneCsv.toString());
-
+		boolean sucesso = escreve(droneCsv.toString());
 		fechaArquivoSaida();
+
+		if (!sucesso) {
+			throw new RuntimeException("Erro ao tentar escrever no arquivo \"%s%s\"!".formatted(nomeArquivo, SUFIXO_DRONES));
+		}
+
 		abreArquivoSaida("%s%s".formatted(nomeArquivo, SUFIXO_TRANSPORTES));
-		StringBuilder transporteCsv = new StringBuilder(
-			"tipo;numero;cliente;descricao;peso;latOrigem;longOrigem;latDestino;longDestino;qtdPessoas_perigosa_tempMin;tempMax;situacao;codDrone\n");
+		StringBuilder transporteCsv = new StringBuilder();
+		transporteCsv.append("tipo;");
+		transporteCsv.append("numero;");
+		transporteCsv.append("cliente;");
+		transporteCsv.append("descricao;");
+		transporteCsv.append("peso;");
+		transporteCsv.append("latOrigem;");
+		transporteCsv.append("longOrigem;");
+		transporteCsv.append("latDestino;");
+		transporteCsv.append("longDestino;");
+		transporteCsv.append("qtdPessoas_perigosa_tempMin;");
+		transporteCsv.append("tempMax;");
+		transporteCsv.append("situacao;");
+		transporteCsv.append("codDrone\n");
 
 		transporteHandler.buscaTodos().forEach(t -> transporteCsv.append(t.toCSV()).append("\n"));
-		escreve(transporteCsv.toString());
+		sucesso = escreve(transporteCsv.toString());
 		fechaArquivoSaida();
+
+		if (!sucesso) {
+			throw new RuntimeException("Erro ao tentar escrever no arquivo \"%s%s\"!".formatted(nomeArquivo,
+				SUFIXO_TRANSPORTES
+			));
+		}
 	}
 
+	/**
+	 * Lê o conteúdo dos arquivos de entrada com o nome indicado e
+	 * com os sufixos previamente definidos; tenta criar as instâncias
+	 * de {@link Drone} e {@link Transporte} salvas em formato CSV no
+	 * arquivo e salvá-las em memória. Se ocorrerem erros durante a leitura,
+	 * após o fim da execução é lançada uma exceção que detalha em quais linhas
+	 * de quais arquivos houve problemas.
+	 *
+	 * @throws RuntimeException Se algo de errado ocorrer com os arquivos.
+	 */
 	public void realizaLeitura() {
 		List<String> errosDrones = new ArrayList<>();
 		List<String> errosTransportes = new ArrayList<>();
@@ -71,6 +128,17 @@ public class ArquivoCSV extends ArquivoIO {
 		}
 	}
 
+	/**
+	 * Lê o arquivo com o nome informado e o sufixo {@link #SUFIXO_DRONES},
+	 * linha a linha; separa os campos utilizando o {@link #SEPARADOR}
+	 * definido e tenta instânciar um {@link Drone} para cada linha. Em caso
+	 * de sucesso, adiciona o drone instânciado ao sistema; se ocorrer algum
+	 * erro, adiciona à lista de erros passada como argumento.
+	 *
+	 * @param erros Lista de erros; erros que ocorrerem durante a leitura
+	 *              serão adicionados à lista.
+	 * @throws RuntimeException Se algo de errado ocorrer com o arquivo.
+	 */
 	private void leDrones(List<String> erros) {
 		abreArquivoEntrada("%s%s".formatted(nomeArquivo, SUFIXO_DRONES));
 		String linha = proximaLinha(); // cabeçalho
@@ -114,6 +182,17 @@ public class ArquivoCSV extends ArquivoIO {
 		fechaArquivoEntrada();
 	}
 
+	/**
+	 * Lê o arquivo com o nome informado e o sufixo {@link #SUFIXO_TRANSPORTES},
+	 * linha a linha; separa os campos utilizando o {@link #SEPARADOR}
+	 * definido e tenta instânciar um {@link Transporte} para cada linha. Em caso
+	 * de sucesso, adiciona o transporte instânciado ao sistema; se ocorrer algum
+	 * erro, adiciona à lista de erros passada como argumento.
+	 *
+	 * @param erros Lista de erros; erros que ocorrerem durante a leitura
+	 *              serão adicionados à lista.
+	 * @throws RuntimeException Se algo de errado ocorrer com o arquivo.
+	 */
 	private void leTransportes(List<String> erros) {
 		abreArquivoEntrada("%s%s".formatted(nomeArquivo, SUFIXO_TRANSPORTES));
 		String linha = proximaLinha(); // cabeçalho
@@ -157,6 +236,17 @@ public class ArquivoCSV extends ArquivoIO {
 		fechaArquivoEntrada();
 	}
 
+	/**
+	 * Define o tipo de {@link Drone} a ser criado e instancia-o
+	 * com os campos passados como argumento.
+	 *
+	 * @param tipo   O tipo de drone a ser criado, conforme especificado
+	 *               no enunciado do trabalho.
+	 * @param codigo O código do drone.
+	 * @param campos Os campos contendo os dados do drone, conforme especificado
+	 *               no enunciado do trabalho.
+	 * @return O drone instanciado, ou {@code null} se o tipo for inválido.
+	 */
 	private Drone criaDrone(int tipo, int codigo, String[] campos) {
 		double custoFixo = Double.parseDouble(campos[2]);
 		double autonomia = Double.parseDouble(campos[3]);
@@ -181,6 +271,20 @@ public class ArquivoCSV extends ArquivoIO {
 		};
 	}
 
+	/**
+	 * Define o tipo de {@link Transporte} a ser criado e instancia-o
+	 * com os campos passados como argumento.
+	 *
+	 * @param tipo   O tipo de transporte a ser criado, conforme especificado
+	 *               no enunciado do trabalho.
+	 * @param numero O número do transporte.
+	 * @param campos Os campos contendo os dados do transporte, conforme especificado
+	 *               no enunciado do trabalho.
+	 * @return O transporte instanciado, ou {@code null} se o tipo for inválido.
+	 * @throws NumberFormatException    Se não for possível converter algum campo numérico.
+	 * @throws IllegalArgumentException Se for informada uma situação sem valor correspondente
+	 *                                  na enumeração {@link Estado}.
+	 */
 	private Transporte criaTransporte(int tipo, int numero, String[] campos) {
 		String cliente = campos[2];
 		String descricao = campos[3];
@@ -193,25 +297,7 @@ public class ArquivoCSV extends ArquivoIO {
 		return switch (tipo) {
 			case 1 -> {
 				int qtdPessoas = Integer.parseInt(campos[9]);
-
-				if (campos.length > 10) {
-					Estado situacao = Estado.valueOf(campos[10]);
-					Drone drone = droneHandler.buscaPorCodigo(Integer.parseInt(campos[11]));
-					yield new TransportePessoal(numero,
-						cliente,
-						descricao,
-						peso,
-						latOrigem,
-						longOrigem,
-						latDestino,
-						longDestino,
-						qtdPessoas,
-						situacao,
-						drone
-					);
-				}
-
-				yield new TransportePessoal(numero,
+				Transporte t = new TransportePessoal(numero,
 					cliente,
 					descricao,
 					peso,
@@ -221,28 +307,18 @@ public class ArquivoCSV extends ArquivoIO {
 					longDestino,
 					qtdPessoas
 				);
-			}
-			case 2 -> {
-				boolean perigosa = Boolean.parseBoolean(campos[9]);
 
 				if (campos.length > 10) {
 					Estado situacao = Estado.valueOf(campos[10]);
 					Drone drone = droneHandler.buscaPorCodigo(Integer.parseInt(campos[11]));
-					yield new TransporteCargaInanimada(numero,
-						cliente,
-						descricao,
-						peso,
-						latOrigem,
-						longOrigem,
-						latDestino,
-						longDestino,
-						perigosa,
-						situacao,
-						drone
-					);
+					t.carrega(situacao, drone);
 				}
 
-				yield new TransporteCargaInanimada(numero,
+				yield t;
+			}
+			case 2 -> {
+				boolean perigosa = Boolean.parseBoolean(campos[9]);
+				Transporte t = new TransporteCargaInanimada(numero,
 					cliente,
 					descricao,
 					peso,
@@ -252,30 +328,19 @@ public class ArquivoCSV extends ArquivoIO {
 					longDestino,
 					perigosa
 				);
+
+				if (campos.length > 10) {
+					Estado situacao = Estado.valueOf(campos[10]);
+					Drone drone = droneHandler.buscaPorCodigo(Integer.parseInt(campos[11]));
+					t.carrega(situacao, drone);
+				}
+
+				yield t;
 			}
 			case 3 -> {
 				double temperaturaMin = Double.parseDouble(campos[9]);
 				double temperaturaMax = Double.parseDouble(campos[10]);
-
-				if (campos.length > 11) {
-					Estado situacao = Estado.valueOf(campos[11]);
-					Drone drone = droneHandler.buscaPorCodigo(Integer.parseInt(campos[12]));
-					yield new TransporteCargaViva(numero,
-						cliente,
-						descricao,
-						peso,
-						latOrigem,
-						longOrigem,
-						latDestino,
-						longDestino,
-						temperaturaMin,
-						temperaturaMax,
-						situacao,
-						drone
-					);
-				}
-
-				yield new TransporteCargaViva(numero,
+				Transporte t = new TransporteCargaViva(numero,
 					cliente,
 					descricao,
 					peso,
@@ -286,6 +351,14 @@ public class ArquivoCSV extends ArquivoIO {
 					temperaturaMin,
 					temperaturaMax
 				);
+
+				if (campos.length > 11) {
+					Estado situacao = Estado.valueOf(campos[11]);
+					Drone drone = droneHandler.buscaPorCodigo(Integer.parseInt(campos[12]));
+					t.carrega(situacao, drone);
+				}
+
+				yield t;
 			}
 			default -> null;
 		};

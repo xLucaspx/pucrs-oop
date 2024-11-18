@@ -29,39 +29,6 @@ public class TransportePessoal extends Transporte {
 	}
 
 	/**
-	 * Inicializa um objeto {@link TransportePessoal} com os
-	 * valores informados.
-	 *
-	 * @param numero           O número do transporte.
-	 * @param nomeCliente      O nome do cliente associado ao transporte.
-	 * @param descricao        A descrição do transporte.
-	 * @param peso             O peso do transporte.
-	 * @param latitudeOrigem   A latitude de origem do transporte.
-	 * @param longitudeOrigem  A longitude de origem do transporte.
-	 * @param latitudeDestino  A latitude de destino do transporte.
-	 * @param longitudeDestino A longitude de destino do transporte.
-	 * @param qtdPessoas       A quantidade de pessoas que serão transportadas.
-	 * @param situacao         O {@link Estado} que representa a situação do drone.
-	 * @param drone            O {@link Drone} responsável pelo transporte, se existir.
-	 */
-	public TransportePessoal(int numero, String nomeCliente, String descricao, double peso, double latitudeOrigem,
-		double longitudeOrigem, double latitudeDestino, double longitudeDestino, int qtdPessoas, Estado situacao,
-		Drone drone) {
-		super(numero,
-			nomeCliente,
-			descricao,
-			peso,
-			latitudeOrigem,
-			longitudeOrigem,
-			latitudeDestino,
-			longitudeDestino,
-			situacao,
-			drone
-		);
-		this.qtdPessoas = qtdPessoas;
-	}
-
-	/**
 	 * @return A quantidade de pessoas deste {@link TransportePessoal}.
 	 */
 	public int getQtdPessoas() {
@@ -93,16 +60,17 @@ public class TransportePessoal extends Transporte {
 		return "1;%s;%d;%s;%d".formatted(super.toCSV(),
 			qtdPessoas,
 			getSituacao(),
-			getDrone() == null ? -1 : getDrone().getCodigo()
+			getDrone() == null ? 0 : getDrone().getCodigo()
 		);
 	}
 
 	@Override
 	public String toJSON() {
 		return """
-			\t\t\t"%s": {
+			\t\t{
+			\t\t\t"tipo": 1,
 			%s,
-			\t\t\t\t"qtdPessoas": %d
-			\t\t\t}""".formatted(this.getClass().getSimpleName(), super.toJSON(), qtdPessoas);
+			\t\t\t"qtdPessoas": %d
+			\t\t}""".formatted(super.toJSON(), qtdPessoas);
 	}
 }

@@ -2,14 +2,21 @@ package views;
 
 import arquivo.ArquivoCSV;
 import arquivo.ArquivoJSON;
+
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
 /**
+ * {@link JInternalFrame} que contém o formulário utilizado
+ * para exportar os dados da aplicação para um arquivo estruturado.
  *
  * @author Lucas da Paz
  */
 public class EscritaDados extends javax.swing.JInternalFrame {
 
+	/**
+	 * Inicializa um novo frame {@link EscritaDados}.
+	 */
 	public EscritaDados() {
 		initComponents();
 	}
@@ -216,7 +223,12 @@ public class EscritaDados extends javax.swing.JInternalFrame {
 			JOptionPane.showMessageDialog(this, "Exportação realizada com sucesso!", getTitle(), JOptionPane.INFORMATION_MESSAGE);
 			inputArquivo.setText("");
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, "Erro inesperado durante a exportação:\n%s".formatted(e.getMessage()), getTitle(), JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(this,
+				"Erro inesperado durante a exportação:\n%s\nPara mais informações consulte o log de erros.".formatted(
+					e.getMessage()),
+				getTitle(),
+				JOptionPane.WARNING_MESSAGE
+			);
 			e.printStackTrace(System.err);
 		}
   }//GEN-LAST:event_salvaDados

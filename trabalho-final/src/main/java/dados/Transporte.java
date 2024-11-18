@@ -38,35 +38,6 @@ public abstract class Transporte implements ObjetoJSON, ObjetoCSV {
 	 */
 	public Transporte(int numero, String nomeCliente, String descricao, double peso, double latitudeOrigem,
 		double longitudeOrigem, double latitudeDestino, double longitudeDestino) {
-		this(numero,
-			nomeCliente,
-			descricao,
-			peso,
-			latitudeOrigem,
-			longitudeOrigem,
-			latitudeDestino,
-			longitudeDestino,
-			Estado.PENDENTE,
-			null
-		);
-	}
-
-	/**
-	 * Inicializa um objeto {@link Transporte} com os valores informados.
-	 *
-	 * @param numero           O número do transporte.
-	 * @param nomeCliente      O nome do cliente associado ao transporte.
-	 * @param descricao        A descrição do transporte.
-	 * @param peso             O peso do transporte.
-	 * @param latitudeOrigem   A latitude de origem do transporte.
-	 * @param longitudeOrigem  A longitude de origem do transporte.
-	 * @param latitudeDestino  A latitude de destino do transporte.
-	 * @param longitudeDestino A longitude de destino do transporte.
-	 * @param situacao         O {@link Estado} que representa a situação do drone.
-	 * @param drone            O {@link Drone} responsável pelo transporte, se existir.
-	 */
-	public Transporte(int numero, String nomeCliente, String descricao, double peso, double latitudeOrigem,
-		double longitudeOrigem, double latitudeDestino, double longitudeDestino, Estado situacao, Drone drone) {
 		this.numero = numero;
 		this.nomeCliente = nomeCliente;
 		this.descricao = descricao;
@@ -75,8 +46,26 @@ public abstract class Transporte implements ObjetoJSON, ObjetoCSV {
 		this.longitudeOrigem = longitudeOrigem;
 		this.latitudeDestino = latitudeDestino;
 		this.longitudeDestino = longitudeDestino;
+	}
+
+	/**
+	 * <p><strong>Este método deve ser utilizado apenas ao carregar
+	 * transportes já existentes de um arquivo ou banco de dados.</strong></p>
+	 * <p>Define a situação do {@link Transporte} com o valor de {@link Estado}
+	 * passado como argumento e, se o {@link Drone} informado for válido,
+	 * relaciona-o a este transporte e chama seu método
+	 * {@link Drone#carregaTransporte(Transporte) carregaTransporte}.</p>
+	 *
+	 * @param situacao A situação do transporte.
+	 * @param drone    O drone relacionado, se existir.
+	 */
+	public void carrega(Estado situacao, Drone drone) {
 		this.situacao = situacao;
 		this.drone = drone;
+
+		if (drone != null) {
+			drone.carregaTransporte(this);
+		}
 	}
 
 	/**
@@ -289,15 +278,16 @@ public abstract class Transporte implements ObjetoJSON, ObjetoCSV {
 	@Override
 	public String toJSON() {
 		return """
-			\t\t\t\t"numero": %d,
-			\t\t\t\t"nomeCliente": "%s",
-			\t\t\t\t"descricao": "%s",
-			\t\t\t\t"peso": %f,
-			\t\t\t\t"latitudeOrigem": %f,
-			\t\t\t\t"longitudeOrigem": %f,
-			\t\t\t\t"latitudeDestino": %f,
-			\t\t\t\t"longitudeDestino": %f,
-			\t\t\t\t"situacao": "%s"%s""".formatted(numero,
+			\t\t\t"numero": %d,
+			\t\t\t"nomeCliente": "%s",
+			\t\t\t"descricao": "%s",
+			\t\t\t"peso": %f,
+			\t\t\t"latitudeOrigem": %f,
+			\t\t\t"longitudeOrigem": %f,
+			\t\t\t"latitudeDestino": %f,
+			\t\t\t"longitudeDestino": %f,
+			\t\t\t"situacao": "%s",
+			\t\t\t"codigoDrone": %d""".formatted(numero,
 			nomeCliente,
 			descricao,
 			peso,
@@ -306,7 +296,7 @@ public abstract class Transporte implements ObjetoJSON, ObjetoCSV {
 			latitudeDestino,
 			longitudeDestino,
 			situacao,
-			drone == null ? "" : ",\n\t\t\t\t\"codigoDrone\": %d".formatted(drone.getCodigo())
+			drone == null ? 0 : drone.getCodigo()
 		);
 	}
 }

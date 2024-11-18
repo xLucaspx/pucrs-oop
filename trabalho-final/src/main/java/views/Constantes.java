@@ -37,7 +37,7 @@ public class Constantes {
 	public static final Color AMARELO_ESCURO = new Color(221, 127, 3);
 
 	// formatos
-	public static final DateTimeFormatter FORMATO_DATA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	public static final DateTimeFormatter FORMATO_DATA = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 	public static final NumberFormat FORMATO_INTEIRO = NumberFormat.getIntegerInstance(Locale.ENGLISH);
 	public static final NumberFormat FORMATO_PONTO_FLUTUANTE = NumberFormat.getInstance(Locale.ENGLISH);
 	

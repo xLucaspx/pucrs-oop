@@ -64,10 +64,11 @@ public class DroneCargaInanimada extends DroneCarga {
 	@Override
 	public String toJSON() {
 		return """
-			\t\t\t"%s": {
+			\t\t{
+			\t\t\t"tipo": 2,
 			%s,
-			\t\t\t\t"protecao": %b
-			\t\t\t}""".formatted(this.getClass().getSimpleName(), super.toJSON(), protecao);
+			\t\t\t"protecao": %b
+			\t\t}""".formatted(super.toJSON(), protecao);
 	}
 
 	/**

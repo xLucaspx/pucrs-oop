@@ -51,9 +51,10 @@ public class DroneCargaViva extends DroneCarga {
 	@Override
 	public String toJSON() {
 		return """
-			\t\t\t"%s": {
+			\t\t{
+			\t\t\t"tipo": 3,
 			%s,
-			\t\t\t\t"climatizado": %b
-			\t\t\t}""".formatted(this.getClass().getSimpleName(), super.toJSON(), climatizado);
+			\t\t\t"climatizado": %b
+			\t\t}""".formatted(super.toJSON(), climatizado);
 	}
 }

@@ -5,6 +5,13 @@ import dados.DronePessoal;
 import dados.Transporte;
 import dados.TransportePessoal;
 
+/**
+ * Classe que implementa a validação do máximo de pessoas
+ * de um {@link TransportePessoal} com relação à quantidade
+ * máxima de pessoas de um {@link TransportePessoal}.
+ *
+ * @author Lucas da Paz
+ */
 public class ValidadorMaximoPessoas implements ValidadorDroneTransporte {
 	/**
 	 * {@inheritDoc} Valida se o drone informado é um

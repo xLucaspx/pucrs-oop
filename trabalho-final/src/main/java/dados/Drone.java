@@ -91,6 +91,20 @@ public abstract class Drone implements Comparable<Drone>, ObjetoJSON, ObjetoCSV 
 	}
 
 	/**
+	 * <p><strong>Este método deve ser utilizado apenas ao carregar
+	 * transportes já existentes de um arquivo ou banco de dados.</strong></p>
+	 * <p>Adiciona o {@link Transporte} passado como argumento ao conjunto de
+	 * transportes deste {@link Drone}, sem realizar validações.</p>
+	 *
+	 * @param t O transporte a ser adicionado.
+	 * @return {@code true} caso seja adicionado com sucesso, {@code} false
+	 * caso contrário (e.g. o transporte já pertence ao conjunto).
+	 */
+	public boolean carregaTransporte(Transporte t) {
+		return transportes.add(t);
+	}
+
+	/**
 	 * Compara esta instância de {@link Drone} com o drone passado como
 	 * argumento para ordem. Utiliza o código para realizar a comparação,
 	 * portanto é válido que {@code (x.compareTo(y) == 0) == (x.equals(y))}.
@@ -158,8 +172,8 @@ public abstract class Drone implements Comparable<Drone>, ObjetoJSON, ObjetoCSV 
 	 */
 	public String toJSON() {
 		return """
-			\t\t\t\t"codigo": %d,
-			\t\t\t\t"custoFixo": %f,
-			\t\t\t\t"autonomia": %f""".formatted(codigo, custoFixo, autonomia);
+			\t\t\t"codigo": %d,
+			\t\t\t"custoFixo": %f,
+			\t\t\t"autonomia": %f""".formatted(codigo, custoFixo, autonomia);
 	}
 }

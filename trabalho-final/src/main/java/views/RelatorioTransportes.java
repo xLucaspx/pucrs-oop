@@ -4,11 +4,23 @@ import dados.Transporte;
 import handlers.TransporteHandler;
 
 import javax.swing.JOptionPane;
+import java.time.LocalDateTime;
 import java.util.List;
 
+import static views.Constantes.FORMATO_DATA;
+
+/**
+ * Classe utilizada para gerar um relatório sobre os
+ * {@link Transporte transportes} cadastrados no sistema.
+ *
+ * @author Lucas da Paz
+ */
 public class RelatorioTransportes extends Relatorio {
 	private final TransporteHandler transporteHandler;
 
+	/**
+	 * Inicializa um novo frame {@link RelatorioTransportes}.
+	 */
 	public RelatorioTransportes() {
 		super("Relatório de Transportes");
 		transporteHandler = TransporteHandler.getHandler();
@@ -39,6 +51,7 @@ public class RelatorioTransportes extends Relatorio {
 		});
 
 		relatorio.append(separador).append("\n");
+		relatorio.append("Relatório emitido em %s".formatted(LocalDateTime.now().format(FORMATO_DATA)));
 		return relatorio.toString();
 	}
 }

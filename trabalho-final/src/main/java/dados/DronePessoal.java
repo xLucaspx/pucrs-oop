@@ -75,9 +75,10 @@ public class DronePessoal extends Drone {
 	@Override
 	public String toJSON() {
 		return """
-			\t\t\t"%s": {
+			\t\t{
+			\t\t\t"tipo": 1,
 			%s,
-			\t\t\t\t"qtdMaxPessoas": %d
-			\t\t\t}""".formatted(this.getClass().getSimpleName(), super.toJSON(), qtdMaxPessoas);
+			\t\t\t"qtdMaxPessoas": %d
+			\t\t}""".formatted(super.toJSON(), qtdMaxPessoas);
 	}
 }

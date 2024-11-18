@@ -5,20 +5,32 @@ import dados.TransporteCargaInanimada;
 import dados.TransporteCargaViva;
 import dados.TransportePessoal;
 import handlers.TransporteHandler;
+
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
 /**
+ * {@link JInternalFrame} que contém o formulário para
+ * o cadastro de novas instâncias de {@link Transporte}
+ * no sistema.
  *
  * @author Lucas da Paz
  */
 public class CadastroTransporte extends javax.swing.JInternalFrame {
 	private final TransporteHandler transporteHandler;
 
+	/**
+	 * Inicializa um novo frame {@link CadastroTransporte}.
+	 */
 	public CadastroTransporte() {
 		transporteHandler = TransporteHandler.getHandler();
 		initComponents();
 	}
 
+	/**
+	 * Limpa todos os campos de texto e caixas de seleção
+	 * do formulário.
+	 */
 	private void limpaCampos() {
 		inputNumero.setText("");
 		inputPeso.setText("");
@@ -375,7 +387,7 @@ public class CadastroTransporte extends javax.swing.JInternalFrame {
     getRootPane().setDefaultButton(btnCadastrar);
     btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        btnCadastrarActionPerformed(evt);
+        cadastraTransporte(evt);
       }
     });
 
@@ -385,7 +397,7 @@ public class CadastroTransporte extends javax.swing.JInternalFrame {
     btnLimpar.setPreferredSize(new java.awt.Dimension(95, 30));
     btnLimpar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        btnLimparActionPerformed(evt);
+        chamaLimpaCampos(evt);
       }
     });
 
@@ -443,6 +455,14 @@ public class CadastroTransporte extends javax.swing.JInternalFrame {
     pack();
   }// </editor-fold>//GEN-END:initComponents
 
+	/**
+	 * Valida os campos e cria um novo {@link Transporte} com
+	 * o número passado como argumento.
+	 *
+	 * @param numero O número do transporte que será criado.
+	 * @return O transporte instanciado, ou {@code null} se alguma
+	 * das validações realizadas falhar.
+	 */
 	private Transporte criaTransporte(int numero) {
 		double peso = Double.parseDouble(inputPeso.getText());
 		if (peso <= 0) {
@@ -485,6 +505,22 @@ public class CadastroTransporte extends javax.swing.JInternalFrame {
 		};
 	}
 
+	/**
+	 * Lê os campos necessários, realiza as validações e cria uma
+	 * nova instância de {@link TransportePessoal} com os valores
+	 * passados como argumento.
+	 *
+	 * @param numero           O número do transporte.
+	 * @param cliente          O nome do cliente relacionado.
+	 * @param descricao        A descrição do transporte.
+	 * @param peso             O peso do transporte, em kg.
+	 * @param latitudeOrigem   A latitude de origem do transporte, em graus.
+	 * @param longitudeOrigem  A longitude de origem do transporte, em graus.
+	 * @param latitudeDestino  A latitude de destino do transporte, em graus.
+	 * @param longitudeDestino A longitude de destino do transporte, em graus.
+	 * @return O transporte instanciado, ou {@code null} se alguma das
+	 * validações realizadas falhar.
+	 */
 	private Transporte criaTransportePessoal(int numero, String cliente, String descricao, double peso,
 		double latitudeOrigem, double longitudeOrigem, double latitudeDestino, double longitudeDestino) {
 		int qtdPessoas = Integer.parseInt(inputQtdPessoasPessoal.getText());
@@ -496,12 +532,44 @@ public class CadastroTransporte extends javax.swing.JInternalFrame {
 		return new TransportePessoal(numero, cliente, descricao, peso, latitudeOrigem,  longitudeOrigem,  latitudeDestino,  longitudeDestino, qtdPessoas);
 	}
 
+	/**
+	 * Lê os campos necessários, realiza as validações e cria uma
+	 * nova instância de {@link TransporteCargaInanimada} com os
+	 * valores passados como argumento.
+	 *
+	 * @param numero           O número do transporte.
+	 * @param cliente          O nome do cliente relacionado.
+	 * @param descricao        A descrição do transporte.
+	 * @param peso             O peso do transporte, em kg.
+	 * @param latitudeOrigem   A latitude de origem do transporte, em graus.
+	 * @param longitudeOrigem  A longitude de origem do transporte, em graus.
+	 * @param latitudeDestino  A latitude de destino do transporte, em graus.
+	 * @param longitudeDestino A longitude de destino do transporte, em graus.
+	 * @return O transporte instanciado, ou {@code null} se alguma das
+	 * validações realizadas falhar.
+	 */
 	private Transporte criaTransporteCargaInanimada(int numero, String cliente, String descricao, double peso,
 		double latitudeOrigem, double longitudeOrigem, double latitudeDestino, double longitudeDestino) {
 		boolean cargaPerigosa = checkPerigosaCargaInanimada.isSelected();
 		return new TransporteCargaInanimada(numero, cliente, descricao, peso, latitudeOrigem,  longitudeOrigem,  latitudeDestino,  longitudeDestino, cargaPerigosa);
 	}
 
+	/**
+	 * Lê os campos necessários, realiza as validações e cria uma
+	 * nova instância de {@link TransporteCargaViva} com os valores
+	 * passados como argumento.
+	 *
+	 * @param numero           O número do transporte.
+	 * @param cliente          O nome do cliente relacionado.
+	 * @param descricao        A descrição do transporte.
+	 * @param peso             O peso do transporte, em kg.
+	 * @param latitudeOrigem   A latitude de origem do transporte, em graus.
+	 * @param longitudeOrigem  A longitude de origem do transporte, em graus.
+	 * @param latitudeDestino  A latitude de destino do transporte, em graus.
+	 * @param longitudeDestino A longitude de destino do transporte, em graus.
+	 * @return O transporte instanciado, ou {@code null} se alguma das
+	 * validações realizadas falhar.
+	 */
 	private Transporte criaTransporteCargaViva(int numero, String cliente, String descricao, double peso,
 		double latitudeOrigem, double longitudeOrigem, double latitudeDestino, double longitudeDestino) {
 		double temperaturaMinima = Double.parseDouble(inputTemperaturaMinimaCargaViva.getText());
@@ -515,11 +583,15 @@ public class CadastroTransporte extends javax.swing.JInternalFrame {
 		return new TransporteCargaViva(numero, cliente, descricao, peso, latitudeOrigem,  longitudeOrigem,  latitudeDestino,  longitudeDestino, temperaturaMinima, temperaturaMaxima);
 	}
 
-  private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+  private void cadastraTransporte(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastraTransporte
 		try {
 			int numero = Integer.parseInt(inputNumero.getText());
-			Transporte novoTransporte = criaTransporte(numero);
+			if (numero <= 0) {
+				JOptionPane.showMessageDialog(this, "O número do transporte deve ser um inteiro positivo!", getTitle(), JOptionPane.WARNING_MESSAGE);
+				return;
+			}
 
+			Transporte novoTransporte = criaTransporte(numero);
 			if (novoTransporte == null) {
 				return;
 			}
@@ -538,11 +610,11 @@ public class CadastroTransporte extends javax.swing.JInternalFrame {
 			e.printStackTrace(System.err);
 			JOptionPane.showMessageDialog(this, "Erro ao cadastrar transporte...\nVerifique o tipo de transporte e se os campos estão preenchidos corretamente!", getTitle(), JOptionPane.ERROR_MESSAGE);
 		}
-  }//GEN-LAST:event_btnCadastrarActionPerformed
+  }//GEN-LAST:event_cadastraTransporte
 
-	private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+	private void chamaLimpaCampos(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chamaLimpaCampos
 		limpaCampos();
-  }//GEN-LAST:event_btnLimparActionPerformed
+  }//GEN-LAST:event_chamaLimpaCampos
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JPanel PainelCoordenadas;
