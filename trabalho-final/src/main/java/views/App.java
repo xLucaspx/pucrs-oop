@@ -30,11 +30,13 @@ public class App extends JFrame {
 	 *
 	 * @param frame O frame que será exibido.
 	 * @see JDesktopPane#add(Component)
+   * @see JInternalFrame#moveToFront()
 	 * @see JInternalFrame#requestFocusInWindow()
 	 */
 	private void mostraFrameInterno(JInternalFrame frame) {
 		desktopPane.add(frame);
 		frame.setLocation(20, 20);
+    frame.moveToFront();
 		frame.requestFocusInWindow();
 	}
 
@@ -69,7 +71,7 @@ public class App extends JFrame {
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     setTitle("ACME Air Drones");
     setName(getTitle());
-    setPreferredSize(new java.awt.Dimension(900, 700));
+    setPreferredSize(new java.awt.Dimension(900, 750));
 
     desktopPane.setPreferredSize(new java.awt.Dimension(750, 600));
 

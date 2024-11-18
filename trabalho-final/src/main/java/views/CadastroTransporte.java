@@ -596,6 +596,15 @@ public class CadastroTransporte extends javax.swing.JInternalFrame {
 				return;
 			}
 
+			String[] opcoes = {"Sim", "Não"};
+			int resposta = JOptionPane.showOptionDialog(this,
+				"%s\n\nConfirma a criação do transporte?".formatted(novoTransporte),
+				getTitle(), JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[1]);
+
+			if (resposta != 0) {
+				return;
+			}
+
 			boolean sucesso = transporteHandler.cadastra(novoTransporte);
 			if (!sucesso) {
 				JOptionPane.showMessageDialog(this, "Já existe um transporte cadastrado com o número %d".formatted(numero),

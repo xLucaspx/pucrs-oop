@@ -73,4 +73,14 @@ public class TransportePessoal extends Transporte {
 			\t\t\t"qtdPessoas": %d
 			\t\t}""".formatted(super.toJSON(), qtdPessoas);
 	}
+
+	@Override
+	public String toXML() {
+		return """
+			\t\t<transporte>
+			\t\t\t<tipo>1</tipo>
+			%s
+			\t\t\t<qtdPessoas>%d</qtdPessoas>
+			\t\t</transporte>""".formatted(super.toXML(), qtdPessoas);
+	}
 }

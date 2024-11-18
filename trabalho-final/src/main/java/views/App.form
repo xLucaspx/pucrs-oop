@@ -140,7 +140,7 @@
       <Connection code="getTitle()" type="code"/>
     </Property>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[900, 700]"/>
+      <Dimension value="[900, 750]"/>
     </Property>
   </Properties>
   <SyntheticProperties>

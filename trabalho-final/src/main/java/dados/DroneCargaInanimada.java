@@ -37,6 +37,18 @@ public class DroneCargaInanimada extends DroneCarga {
 		return protecao;
 	}
 
+	/**
+	 * {@inheritDoc} Para uma instância de {@link DroneCargaInanimada},
+	 * o custo variável depende da proteção, i.e., drones com proteção
+	 * possuem um acréscimo maior do que drones sem proteção.
+	 *
+	 * @return {@inheritDoc}
+	 */
+	@Override
+	public double calculaCustoKm() {
+		return getCustoFixo() + (protecao ? 10 : 5);
+	}
+
 	@Override
 	public boolean adicionaTransporte(Transporte t) {
 		List<ValidadorDroneTransporte> validacoes = new ArrayList<>(List.of(new ValidadorCargaPerigosa()));
@@ -71,15 +83,13 @@ public class DroneCargaInanimada extends DroneCarga {
 			\t\t}""".formatted(super.toJSON(), protecao);
 	}
 
-	/**
-	 * {@inheritDoc} Para uma instância de {@link DroneCargaInanimada},
-	 * o custo variável depende da proteção, i.e., drones com proteção
-	 * possuem um acréscimo maior do que drones sem proteção.
-	 *
-	 * @return {@inheritDoc}
-	 */
 	@Override
-	public double calculaCustoKm() {
-		return getCustoFixo() + (protecao ? 10 : 5);
+	public String toXML() {
+		return """
+			\t\t<drone>
+			\t\t\t<tipo>2</tipo>
+			%s
+			\t\t\t<protecao>%b</protecao>
+			\t\t</drone>""".formatted(super.toXML(), protecao);
 	}
 }

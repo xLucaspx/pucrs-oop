@@ -64,4 +64,9 @@ public abstract class DroneCarga extends Drone {
 			%s,
 			\t\t\t"pesoMaximo": %f""".formatted(super.toJSON(), pesoMaximo);
 	}
+
+	@Override
+	public String toXML() {
+		return "%s\n\t\t\t<pesoMaximo>%f</pesoMaximo>".formatted(super.toXML(), pesoMaximo);
+	}
 }

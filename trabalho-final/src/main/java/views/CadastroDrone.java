@@ -446,6 +446,16 @@ public class CadastroDrone extends javax.swing.JInternalFrame {
 				return;
 			}
 
+			String[] opcoes = {"Sim", "Não"};
+			int resposta = JOptionPane.showOptionDialog(this,
+				("%s" +
+					"\n\nConfirma a criação do drone?").formatted(novoDrone),
+				getTitle(), JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[1]);
+
+			if (resposta != 0) {
+				return;
+			}
+
 			boolean sucesso = droneHandler.cadastra(novoDrone);
 			if (!sucesso) {
 				JOptionPane.showMessageDialog(this, "Já existe um drone cadastrado com o código %d".formatted(codigo),

@@ -2,6 +2,7 @@ package dados;
 
 import formatos.ObjetoCSV;
 import formatos.ObjetoJSON;
+import formatos.ObjetoXML;
 
 import java.util.Objects;
 
@@ -11,7 +12,7 @@ import java.util.Objects;
  *
  * @author Lucas da Paz
  */
-public abstract class Transporte implements ObjetoJSON, ObjetoCSV {
+public abstract class Transporte implements ObjetoJSON, ObjetoCSV, ObjetoXML {
 	private int numero;
 	private String nomeCliente;
 	private String descricao;
@@ -46,6 +47,7 @@ public abstract class Transporte implements ObjetoJSON, ObjetoCSV {
 		this.longitudeOrigem = longitudeOrigem;
 		this.latitudeDestino = latitudeDestino;
 		this.longitudeDestino = longitudeDestino;
+		this.situacao = Estado.PENDENTE;
 	}
 
 	/**
@@ -56,10 +58,14 @@ public abstract class Transporte implements ObjetoJSON, ObjetoCSV {
 	 * relaciona-o a este transporte e chama seu método
 	 * {@link Drone#carregaTransporte(Transporte) carregaTransporte}.</p>
 	 *
-	 * @param situacao A situação do transporte.
+	 * @param situacao A situação do transporte; não pode ser nula.
 	 * @param drone    O drone relacionado, se existir.
 	 */
 	public void carrega(Estado situacao, Drone drone) {
+		if (situacao == null) {
+			return;
+		}
+
 		this.situacao = situacao;
 		this.drone = drone;
 
@@ -288,6 +294,34 @@ public abstract class Transporte implements ObjetoJSON, ObjetoCSV {
 			\t\t\t"longitudeDestino": %f,
 			\t\t\t"situacao": "%s",
 			\t\t\t"codigoDrone": %d""".formatted(numero,
+			nomeCliente,
+			descricao,
+			peso,
+			latitudeOrigem,
+			longitudeOrigem,
+			latitudeDestino,
+			longitudeDestino,
+			situacao,
+			drone == null ? 0 : drone.getCodigo()
+		);
+	}
+
+	/**
+	 * @return Representação deste {@link Transporte} no formato XML.
+	 */
+	@Override
+	public String toXML() {
+		return """
+			\t\t\t<numero>%d</numero>
+			\t\t\t<nomeCliente>%s</nomeCliente>
+			\t\t\t<descricao>%s</descricao>
+			\t\t\t<peso>%f</peso>
+			\t\t\t<latitudeOrigem>%f</latitudeOrigem>
+			\t\t\t<longitudeOrigem>%f</longitudeOrigem>
+			\t\t\t<latitudeDestino>%f</latitudeDestino>
+			\t\t\t<longitudeDestino>%f</longitudeDestino>
+			\t\t\t<situacao>%s</situacao>
+			\t\t\t<codigoDrone>%d</codigoDrone>""".formatted(numero,
 			nomeCliente,
 			descricao,
 			peso,

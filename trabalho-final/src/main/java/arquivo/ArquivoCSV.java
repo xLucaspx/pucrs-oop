@@ -98,7 +98,7 @@ public class ArquivoCSV extends ArquivoIO {
 	/**
 	 * Lê o conteúdo dos arquivos de entrada com o nome indicado e
 	 * com os sufixos previamente definidos; tenta criar as instâncias
-	 * de {@link Drone} e {@link Transporte} salvas em formato CSV no
+	 * de {@link Drone} e {@link Transporte} declaradas em formato CSV no
 	 * arquivo e salvá-las em memória. Se ocorrerem erros durante a leitura,
 	 * após o fim da execução é lançada uma exceção que detalha em quais linhas
 	 * de quais arquivos houve problemas.

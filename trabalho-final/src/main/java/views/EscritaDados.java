@@ -2,6 +2,8 @@ package views;
 
 import arquivo.ArquivoCSV;
 import arquivo.ArquivoJSON;
+import arquivo.ArquivoXML;
+import formatos.FormatoArquivo;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
@@ -39,7 +41,8 @@ public class EscritaDados extends javax.swing.JInternalFrame {
     btnSalvar = new javax.swing.JButton();
     painelTipoArquivo = new javax.swing.JPanel();
     radioTipoCsv = new javax.swing.JRadioButton();
-    radioTipoCsv1 = new javax.swing.JRadioButton();
+    radioTipoJson = new javax.swing.JRadioButton();
+    radioTipoXml = new javax.swing.JRadioButton();
     paineAjuda = new javax.swing.JPanel();
     btnAjuda = new javax.swing.JButton();
 
@@ -100,16 +103,28 @@ public class EscritaDados extends javax.swing.JInternalFrame {
     radioTipoCsv.setSelected(true);
     radioTipoCsv.setText("CSV");
     radioTipoCsv.setToolTipText("Salvar dados em formato CSV");
-    radioTipoCsv.setActionCommand("CSV");
+    radioTipoCsv.setActionCommand(FormatoArquivo.CSV.name());
     radioTipoCsv.setPreferredSize(new java.awt.Dimension(100, 15));
     painelTipoArquivo.add(radioTipoCsv);
 
-    tipoArquivoButtonGroup.add(radioTipoCsv1);
-    radioTipoCsv1.setText("JSON");
-    radioTipoCsv1.setToolTipText("Salvar dados em formato JSON");
-    radioTipoCsv1.setActionCommand("JSON");
-    radioTipoCsv1.setPreferredSize(new java.awt.Dimension(100, 15));
-    painelTipoArquivo.add(radioTipoCsv1);
+    tipoArquivoButtonGroup.add(radioTipoJson);
+    radioTipoJson.setText("JSON");
+    radioTipoJson.setToolTipText("Salvar dados em formato JSON");
+    radioTipoJson.setActionCommand(FormatoArquivo.JSON.name());
+    radioTipoJson.setPreferredSize(new java.awt.Dimension(100, 15));
+    radioTipoJson.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        radioTipoJsonActionPerformed(evt);
+      }
+    });
+    painelTipoArquivo.add(radioTipoJson);
+
+    tipoArquivoButtonGroup.add(radioTipoXml);
+    radioTipoXml.setText("XML");
+    radioTipoXml.setToolTipText("Salvar dados em formato XML");
+    radioTipoXml.setActionCommand(FormatoArquivo.XML.name());
+    radioTipoXml.setPreferredSize(new java.awt.Dimension(100, 15));
+    painelTipoArquivo.add(radioTipoXml);
 
     javax.swing.GroupLayout painelArquivoLayout = new javax.swing.GroupLayout(painelArquivo);
     painelArquivo.setLayout(painelArquivoLayout);
@@ -209,10 +224,11 @@ public class EscritaDados extends javax.swing.JInternalFrame {
 				return;
 			}
 
-			String formato = tipoArquivoButtonGroup.getSelection().getActionCommand();
+			FormatoArquivo formato = FormatoArquivo.valueOf(tipoArquivoButtonGroup.getSelection().getActionCommand());
 			switch (formato) {
-				case "CSV" -> new ArquivoCSV(nomeArquivo).realizaEscrita();
-				case "JSON" -> new ArquivoJSON(nomeArquivo).realizaEscrita();
+				case CSV -> new ArquivoCSV(nomeArquivo).realizaEscrita();
+				case JSON -> new ArquivoJSON(nomeArquivo).realizaEscrita();
+				case XML -> new ArquivoXML(nomeArquivo).realizaEscrita();
 				default -> {
 					JOptionPane.showMessageDialog(this, "Erro ao selecionar formato do arquivo...\nTente novamente!",
 						getTitle(), JOptionPane.ERROR_MESSAGE);
@@ -233,6 +249,10 @@ public class EscritaDados extends javax.swing.JInternalFrame {
 		}
   }//GEN-LAST:event_salvaDados
 
+  private void radioTipoJsonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioTipoJsonActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_radioTipoJsonActionPerformed
+
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton btnAjuda;
   private javax.swing.JButton btnSalvar;
@@ -243,7 +263,8 @@ public class EscritaDados extends javax.swing.JInternalFrame {
   private javax.swing.JPanel painelHeader;
   private javax.swing.JPanel painelTipoArquivo;
   private javax.swing.JRadioButton radioTipoCsv;
-  private javax.swing.JRadioButton radioTipoCsv1;
+  private javax.swing.JRadioButton radioTipoJson;
+  private javax.swing.JRadioButton radioTipoXml;
   private javax.swing.ButtonGroup tipoArquivoButtonGroup;
   private javax.swing.JLabel title;
   // End of variables declaration//GEN-END:variables

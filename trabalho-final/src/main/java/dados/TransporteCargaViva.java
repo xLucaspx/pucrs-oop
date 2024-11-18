@@ -79,4 +79,15 @@ public class TransporteCargaViva extends Transporte {
 			\t\t\t"temperaturaMaxima": %f
 			\t\t}""".formatted(super.toJSON(), temperaturaMinima, temperaturaMaxima);
 	}
+
+	@Override
+	public String toXML() {
+		return """
+			\t\t<transporte>
+			\t\t\t<tipo>3</tipo>
+			%s
+			\t\t\t<temperaturaMinima>%f</temperaturaMinima>
+			\t\t\t<temperaturaMaxima>%f</temperaturaMaxima>
+			\t\t</transporte>""".formatted(super.toXML(), temperaturaMinima, temperaturaMaxima);
+	}
 }

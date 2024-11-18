@@ -2,6 +2,7 @@ package dados;
 
 import formatos.ObjetoCSV;
 import formatos.ObjetoJSON;
+import formatos.ObjetoXML;
 import validacoes.ValidadorAutonomia;
 import validacoes.ValidadorDroneTransporte;
 
@@ -17,7 +18,7 @@ import java.util.Set;
  *
  * @author Lucas da Paz
  */
-public abstract class Drone implements Comparable<Drone>, ObjetoJSON, ObjetoCSV {
+public abstract class Drone implements Comparable<Drone>, ObjetoJSON, ObjetoCSV, ObjetoXML {
 	private int codigo;
 	private double custoFixo;
 	private double autonomia;
@@ -175,5 +176,16 @@ public abstract class Drone implements Comparable<Drone>, ObjetoJSON, ObjetoCSV 
 			\t\t\t"codigo": %d,
 			\t\t\t"custoFixo": %f,
 			\t\t\t"autonomia": %f""".formatted(codigo, custoFixo, autonomia);
+	}
+
+	/**
+	 * @return Representação deste {@link Drone} no formato XML.
+	 */
+	@Override
+	public String toXML() {
+		return """
+			\t\t\t<codigo>%d</codigo>
+			\t\t\t<custoFixo>%f</custoFixo>
+			\t\t\t<autonomia>%f</autonomia>""".formatted(codigo, custoFixo, autonomia);
 	}
 }

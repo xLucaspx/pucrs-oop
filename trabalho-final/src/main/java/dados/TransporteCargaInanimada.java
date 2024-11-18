@@ -73,4 +73,14 @@ public class TransporteCargaInanimada extends Transporte {
 			\t\t\t"cargaPerigosa": %b
 			\t\t}""".formatted(super.toJSON(), cargaPerigosa);
 	}
+
+	@Override
+	public String toXML() {
+		return """
+			\t\t<transporte>
+			\t\t\t<tipo>2</tipo>
+			%s
+			\t\t\t<cargaPerigosa>%b</cargaPerigosa>
+			\t\t</transporte>""".formatted(super.toXML(), cargaPerigosa);
+	}
 }

@@ -81,4 +81,14 @@ public class DronePessoal extends Drone {
 			\t\t\t"qtdMaxPessoas": %d
 			\t\t}""".formatted(super.toJSON(), qtdMaxPessoas);
 	}
+
+	@Override
+	public String toXML() {
+		return """
+			\t\t<drone>
+			\t\t\t<tipo>1</tipo>
+			%s
+			\t\t\t<qtdMaxPessoas>%d</qtdMaxPessoas>
+			\t\t</drone>""".formatted(super.toXML(), qtdMaxPessoas);
+	}
 }

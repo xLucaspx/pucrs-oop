@@ -1,34 +1,33 @@
 package arquivo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import dados.Drone;
 import dados.Transporte;
-import formatos.ObjetoJSON;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.util.List;
 
 /**
  * Classe de utilidades que permite a leitura e
- * escrita de arquivos estruturados em formato JSON.
+ * escrita de arquivos estruturados em formato XML.
  *
  * @author Lucas da Paz
  */
-public class ArquivoJSON extends ArquivoEstruturado {
+public class ArquivoXML extends ArquivoEstruturado {
 	/**
-	 * Inicializa um objeto {@link ArquivoJSON}.
+	 * Inicializa um objeto {@link ArquivoXML}.
 	 *
 	 * @param nomeArquivo O nome do arquivo que será utilizado
 	 *                    por este objeto.
 	 */
-	public ArquivoJSON(String nomeArquivo) {
-		super("%s.json".formatted(nomeArquivo));
+	public ArquivoXML(String nomeArquivo) {
+		super("%s.xml".formatted(nomeArquivo));
 	}
 
 	/**
 	 * Abre o arquivo de saída com o nome indicado e escreve, em
-	 * formato JSON, todas as instâncias de {@link Drone} e
+	 * formato XML, todas as instâncias de {@link Drone} e
 	 * {@link Transporte} salvas em memória durante a execução.
 	 *
 	 * @throws RuntimeException Se algo de errado ocorrer com o arquivo.
@@ -36,23 +35,21 @@ public class ArquivoJSON extends ArquivoEstruturado {
 	public void realizaEscrita() {
 		abreArquivoSaida(nomeArquivo);
 
-		StringBuilder json = new StringBuilder("{\n");
-		json.append("\t\"drones\": [\n");
-		json.append(toJson(droneHandler.buscaTodos()));
-		json.append("\t],\n");
+		StringBuilder xml = new StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+		xml.append("<dados>\n\t<drones>\n");
+		droneHandler.buscaTodos().forEach(d -> xml.append(d.toXML()).append('\n'));
+		xml.append("\t</drones>\n\t<transportes>\n");
+		transporteHandler.buscaTodos().forEach(t -> xml.append(t.toXML()).append('\n'));
+		xml.append("\t</transportes>\n</dados>");
 
-		json.append("\t\"transportes\": [\n");
-		json.append(toJson(transporteHandler.buscaTodos()));
-		json.append("\t]\n}");
-
-		escreve(json.toString());
+		escreve(xml.toString());
 		fechaArquivoSaida();
 	}
 
 	/**
 	 * Lê o conteúdo do arquivo de entrada com o nome indicado e tenta criar
 	 * as instâncias de {@link Drone} e {@link Transporte} declaradas em formato
-	 * JSON no arquivo e salvá-las em memória. Se ocorrerem erros durante a
+	 * XML no arquivo e salvá-las em memória. Se ocorrerem erros durante a
 	 * leitura, a mesma é interrompida. Se quaisquer dos objetos já foram
 	 * cadastrados previamente, após o fim da execução é lançada uma exceção
 	 * que detalha em quais objetos houve problemas.
@@ -63,8 +60,8 @@ public class ArquivoJSON extends ArquivoEstruturado {
 	public void realizaLeitura() {
 		Reader leitorArquivo = getReader(nomeArquivo);
 		StringBuilder erros = new StringBuilder();
-		ObjectMapper mapeadorJson = new ObjectMapper();
-		realizaLeitura(mapeadorJson, leitorArquivo, erros);
+		ObjectMapper mapeadorXml = new XmlMapper();
+		realizaLeitura(mapeadorXml, leitorArquivo, erros);
 
 		try {
 			leitorArquivo.close();
@@ -76,25 +73,5 @@ public class ArquivoJSON extends ArquivoEstruturado {
 		if (!erros.isEmpty()) {
 			throw new RuntimeException(erros.toString());
 		}
-	}
-
-	/**
-	 * Converte uma lista de {@link ObjetoJSON} para o
-	 * formato JSON.
-	 *
-	 * @param lista A lista de objetos.
-	 * @return Representação da lista em formato JSON.
-	 */
-	private String toJson(List<? extends ObjetoJSON> lista) {
-		StringBuilder json = new StringBuilder();
-		int tamanho = lista.size();
-		for (int i = 0; i < tamanho; i++) {
-			json.append(lista.get(i).toJSON());
-			if (i < tamanho - 1) {
-				json.append(",");
-			}
-			json.append("\n");
-		}
-		return json.toString();
 	}
 }

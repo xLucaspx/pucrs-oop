@@ -57,4 +57,14 @@ public class DroneCargaViva extends DroneCarga {
 			\t\t\t"climatizado": %b
 			\t\t}""".formatted(super.toJSON(), climatizado);
 	}
+
+	@Override
+	public String toXML() {
+		return """
+			\t\t<drone>
+			\t\t\t<tipo>3</tipo>
+			%s
+			\t\t\t<climatizado>%b</climatizado>
+			\t\t</drone>""".formatted(super.toXML(), climatizado);
+	}
 }
