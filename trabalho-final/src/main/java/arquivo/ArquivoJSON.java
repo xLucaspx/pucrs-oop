@@ -1,12 +1,10 @@
 package arquivo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dados.Drone;
-import dados.Transporte;
 import formatos.ObjetoJSON;
+import handlers.DroneHandler;
+import handlers.TransporteHandler;
 
-import java.io.IOException;
-import java.io.Reader;
 import java.util.List;
 
 /**
@@ -27,22 +25,21 @@ public class ArquivoJSON extends ArquivoEstruturado {
 	}
 
 	/**
-	 * Abre o arquivo de saída com o nome indicado e escreve, em
-	 * formato JSON, todas as instâncias de {@link Drone} e
-	 * {@link Transporte} salvas em memória durante a execução.
+	 * {@inheritDoc} Utiliza o formato JSON.
 	 *
 	 * @throws RuntimeException Se algo de errado ocorrer com o arquivo.
 	 */
+	@Override
 	public void realizaEscrita() {
-		abreArquivoSaida(nomeArquivo);
+		abreArquivoSaida(getNomeArquivo());
 
 		StringBuilder json = new StringBuilder("{\n");
 		json.append("\t\"drones\": [\n");
-		json.append(toJson(droneHandler.buscaTodos()));
+		json.append(toJson(DroneHandler.getHandler().buscaTodos()));
 		json.append("\t],\n");
 
 		json.append("\t\"transportes\": [\n");
-		json.append(toJson(transporteHandler.buscaTodos()));
+		json.append(toJson(TransporteHandler.getHandler().buscaTodos()));
 		json.append("\t]\n}");
 
 		escreve(json.toString());
@@ -50,32 +47,19 @@ public class ArquivoJSON extends ArquivoEstruturado {
 	}
 
 	/**
-	 * Lê o conteúdo do arquivo de entrada com o nome indicado e tenta criar
-	 * as instâncias de {@link Drone} e {@link Transporte} declaradas em formato
-	 * JSON no arquivo e salvá-las em memória. Se ocorrerem erros durante a
-	 * leitura, a mesma é interrompida. Se quaisquer dos objetos já foram
-	 * cadastrados previamente, após o fim da execução é lançada uma exceção
-	 * que detalha em quais objetos houve problemas.
+	 * {@inheritDoc} Utiliza o formato JSON.
+	 * <p>
+	 * Se ocorrerem erros durante a leitura, a mesma é interrompida.
+	 * Se quaisquer dos objetos já foram cadastrados previamente,
+	 * após o fim da execução é lançada uma exceção que detalha em quais
+	 * objetos houve problemas.
 	 *
 	 * @throws RuntimeException Se algo de errado ocorrer com os arquivos ou
 	 *                          durante a leitura.
 	 */
+	@Override
 	public void realizaLeitura() {
-		Reader leitorArquivo = getReader(nomeArquivo);
-		StringBuilder erros = new StringBuilder();
-		ObjectMapper mapeadorJson = new ObjectMapper();
-		realizaLeitura(mapeadorJson, leitorArquivo, erros);
-
-		try {
-			leitorArquivo.close();
-		} catch (IOException e) {
-			e.printStackTrace(System.err);
-			erros.append("Erro ao tentar fechar o arquivo \"%s\"!".formatted(nomeArquivo));
-		}
-
-		if (!erros.isEmpty()) {
-			throw new RuntimeException(erros.toString());
-		}
+		realizaLeitura(new ObjectMapper());
 	}
 
 	/**

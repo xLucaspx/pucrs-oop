@@ -1,5 +1,8 @@
 package arquivo;
 
+import dados.Drone;
+import dados.Transporte;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -19,9 +22,24 @@ import java.util.Scanner;
  *
  * @author Lucas da Paz
  */
-abstract class ArquivoIO {
+public abstract class ArquivoIO {
 	private PrintStream out;
 	private Scanner in;
+
+	/**
+	 * Abre o arquivo de saída com o nome indicado e escreve todas
+	 * as instâncias de {@link Drone} e {@link Transporte} salvas em
+	 * memória durante a execução.
+	 */
+	public abstract void realizaEscrita();
+
+
+	/**
+	 * Lê o conteúdo do arquivo de entrada com o nome indicado; tenta criar
+	 * as instâncias de {@link Drone} e {@link Transporte} declaradas e
+	 * salvá-las em memória.
+	 */
+	public abstract void realizaLeitura();
 
 	/**
 	 * Se o arquivo de entrada estiver aberto e houver

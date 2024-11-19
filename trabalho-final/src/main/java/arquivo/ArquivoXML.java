@@ -1,12 +1,8 @@
 package arquivo;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import dados.Drone;
-import dados.Transporte;
-
-import java.io.IOException;
-import java.io.Reader;
+import handlers.DroneHandler;
+import handlers.TransporteHandler;
 
 /**
  * Classe de utilidades que permite a leitura e
@@ -26,20 +22,19 @@ public class ArquivoXML extends ArquivoEstruturado {
 	}
 
 	/**
-	 * Abre o arquivo de saída com o nome indicado e escreve, em
-	 * formato XML, todas as instâncias de {@link Drone} e
-	 * {@link Transporte} salvas em memória durante a execução.
+	 * {@inheritDoc} Utiliza o formato XML.
 	 *
 	 * @throws RuntimeException Se algo de errado ocorrer com o arquivo.
 	 */
+	@Override
 	public void realizaEscrita() {
-		abreArquivoSaida(nomeArquivo);
+		abreArquivoSaida(getNomeArquivo());
 
 		StringBuilder xml = new StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
 		xml.append("<dados>\n\t<drones>\n");
-		droneHandler.buscaTodos().forEach(d -> xml.append(d.toXML()).append('\n'));
+		DroneHandler.getHandler().buscaTodos().forEach(d -> xml.append(d.toXML()).append('\n'));
 		xml.append("\t</drones>\n\t<transportes>\n");
-		transporteHandler.buscaTodos().forEach(t -> xml.append(t.toXML()).append('\n'));
+		TransporteHandler.getHandler().buscaTodos().forEach(t -> xml.append(t.toXML()).append('\n'));
 		xml.append("\t</transportes>\n</dados>");
 
 		escreve(xml.toString());
@@ -47,31 +42,18 @@ public class ArquivoXML extends ArquivoEstruturado {
 	}
 
 	/**
-	 * Lê o conteúdo do arquivo de entrada com o nome indicado e tenta criar
-	 * as instâncias de {@link Drone} e {@link Transporte} declaradas em formato
-	 * XML no arquivo e salvá-las em memória. Se ocorrerem erros durante a
-	 * leitura, a mesma é interrompida. Se quaisquer dos objetos já foram
-	 * cadastrados previamente, após o fim da execução é lançada uma exceção
-	 * que detalha em quais objetos houve problemas.
+	 * {@inheritDoc} Utiliza o formato XML.
+	 * <p>
+	 * Se ocorrerem erros durante a leitura, a mesma é interrompida.
+	 * Se quaisquer dos objetos já foram cadastrados previamente,
+	 * após o fim da execução é lançada uma exceção que detalha em quais
+	 * objetos houve problemas.
 	 *
 	 * @throws RuntimeException Se algo de errado ocorrer com os arquivos ou
 	 *                          durante a leitura.
 	 */
+	@Override
 	public void realizaLeitura() {
-		Reader leitorArquivo = getReader(nomeArquivo);
-		StringBuilder erros = new StringBuilder();
-		ObjectMapper mapeadorXml = new XmlMapper();
-		realizaLeitura(mapeadorXml, leitorArquivo, erros);
-
-		try {
-			leitorArquivo.close();
-		} catch (IOException e) {
-			e.printStackTrace(System.err);
-			erros.append("Erro ao tentar fechar o arquivo \"%s\"!".formatted(nomeArquivo));
-		}
-
-		if (!erros.isEmpty()) {
-			throw new RuntimeException(erros.toString());
-		}
+		realizaLeitura(new XmlMapper());
 	}
 }

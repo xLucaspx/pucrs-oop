@@ -26,10 +26,10 @@ import java.io.Reader;
  *
  * @author Lucas da Paz
  */
-abstract class ArquivoEstruturado extends ArquivoIO {
-	protected final DroneHandler droneHandler;
-	protected final TransporteHandler transporteHandler;
-	protected final String nomeArquivo;
+public abstract class ArquivoEstruturado extends ArquivoIO {
+	private final DroneHandler droneHandler;
+	private final TransporteHandler transporteHandler;
+	private final String nomeArquivo;
 
 	/**
 	 * Inicializa um objeto {@link ArquivoEstruturado}.
@@ -44,11 +44,11 @@ abstract class ArquivoEstruturado extends ArquivoIO {
 	}
 
 	/**
-	 * Abre o arquivo de saída com o nome indicado e escreve, no
-	 * formato indicadp, todas as instâncias de {@link Drone} e
-	 * {@link Transporte} salvas em memória durante a execução.
+	 * @return O nome do arquivo utilizado por este objeto.
 	 */
-	public abstract void realizaEscrita();
+	protected String getNomeArquivo() {
+		return nomeArquivo;
+	}
 
 	/**
 	 * Lê o conteúdo do arquivo de entrada com o nome indicado e tenta criar
@@ -57,15 +57,14 @@ abstract class ArquivoEstruturado extends ArquivoIO {
 	 * interrompida. Se quaisquer dos objetos já foram cadastrados previamente,
 	 * a string de erros é atualizada.
 	 *
-	 * @param mapeador      O mapeador de arquivo estruturado.
-	 * @param leitorArquivo {@link Reader} associado ao arquivo; deve ser gerenciado
-	 *                      por quem chamou este método.
-	 * @param erros         String de erros; é atualizada para cada objeto instânciado que
-	 *                      não for adicionado ao sistema.
+	 * @param mapeador O mapeador de arquivo estruturado.
 	 * @throws RuntimeException Se algo de errado ocorrer com o arquivo ou
 	 *                          durante a leitura.
 	 */
-	protected void realizaLeitura(ObjectMapper mapeador, Reader leitorArquivo, StringBuilder erros) {
+	protected void realizaLeitura(ObjectMapper mapeador) {
+		Reader leitorArquivo = getReader(nomeArquivo);
+		StringBuilder erros = new StringBuilder();
+
 		try {
 			JsonNode raiz = mapeador.readTree(leitorArquivo);
 			JsonNode drones = raiz.get("drones");
@@ -85,6 +84,7 @@ abstract class ArquivoEstruturado extends ArquivoIO {
 			e.printStackTrace(System.err);
 			throw new RuntimeException("Erro inesperado ao tentar realizar a importação dos dados!");
 		}
+
 		if (!erros.isEmpty()) {
 			throw new RuntimeException(erros.toString());
 		}
