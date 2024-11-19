@@ -50,23 +50,23 @@ public class App extends JFrame {
   private void initComponents() {
 
     desktopPane = new javax.swing.JDesktopPane();
-    menuBar = new javax.swing.JMenuBar();
-    menuGeral = new javax.swing.JMenu();
-    novoDroneMenuItem = new javax.swing.JMenuItem();
-    novoTransporteMenuItem = new javax.swing.JMenuItem();
-    separadorMenuGeral1 = new javax.swing.JPopupMenu.Separator();
-    processarTransporteMenuItem = new javax.swing.JMenuItem();
-    situacaoTransporteMenuItem = new javax.swing.JMenuItem();
-    separadorMenuGeral2 = new javax.swing.JPopupMenu.Separator();
-    sairMenuItem = new javax.swing.JMenuItem();
-    menuRelatorio = new javax.swing.JMenu();
-    relatorioGeralMenuItem = new javax.swing.JMenuItem();
-    relatorioTransportesMenuItem = new javax.swing.JMenuItem();
-    menuArquivo = new javax.swing.JMenu();
-    salvarDadosMenuItem = new javax.swing.JMenuItem();
-    carregarDadosMenuItem = new javax.swing.JMenuItem();
-    separatorMenuArquivo1 = new javax.swing.JPopupMenu.Separator();
-    simulacaoMenuItem = new javax.swing.JMenuItem();
+    javax.swing.JMenuBar menuBar = new javax.swing.JMenuBar();
+    javax.swing.JMenu menuGeral = new javax.swing.JMenu();
+    javax.swing.JMenuItem novoDroneMenuItem = new javax.swing.JMenuItem();
+    javax.swing.JMenuItem novoTransporteMenuItem = new javax.swing.JMenuItem();
+    javax.swing.JPopupMenu.Separator separadorMenuGeral1 = new javax.swing.JPopupMenu.Separator();
+    javax.swing.JMenuItem processarTransporteMenuItem = new javax.swing.JMenuItem();
+    javax.swing.JMenuItem situacaoTransporteMenuItem = new javax.swing.JMenuItem();
+    javax.swing.JPopupMenu.Separator separadorMenuGeral2 = new javax.swing.JPopupMenu.Separator();
+    javax.swing.JMenuItem sairMenuItem = new javax.swing.JMenuItem();
+    javax.swing.JMenu menuRelatorio = new javax.swing.JMenu();
+    javax.swing.JMenuItem relatorioGeralMenuItem = new javax.swing.JMenuItem();
+    javax.swing.JMenuItem relatorioTransportesMenuItem = new javax.swing.JMenuItem();
+    javax.swing.JMenu menuArquivo = new javax.swing.JMenu();
+    javax.swing.JMenuItem salvarDadosMenuItem = new javax.swing.JMenuItem();
+    javax.swing.JMenuItem carregarDadosMenuItem = new javax.swing.JMenuItem();
+    javax.swing.JPopupMenu.Separator separatorMenuArquivo1 = new javax.swing.JPopupMenu.Separator();
+    javax.swing.JMenuItem simulacaoMenuItem = new javax.swing.JMenuItem();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     setTitle("ACME Air Drones");
@@ -252,23 +252,6 @@ public class App extends JFrame {
   }//GEN-LAST:event_abreLeituraDados
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JMenuItem carregarDadosMenuItem;
   private javax.swing.JDesktopPane desktopPane;
-  private javax.swing.JMenu menuArquivo;
-  private javax.swing.JMenuBar menuBar;
-  private javax.swing.JMenu menuGeral;
-  private javax.swing.JMenu menuRelatorio;
-  private javax.swing.JMenuItem novoDroneMenuItem;
-  private javax.swing.JMenuItem novoTransporteMenuItem;
-  private javax.swing.JMenuItem processarTransporteMenuItem;
-  private javax.swing.JMenuItem relatorioGeralMenuItem;
-  private javax.swing.JMenuItem relatorioTransportesMenuItem;
-  private javax.swing.JMenuItem sairMenuItem;
-  private javax.swing.JMenuItem salvarDadosMenuItem;
-  private javax.swing.JPopupMenu.Separator separadorMenuGeral1;
-  private javax.swing.JPopupMenu.Separator separadorMenuGeral2;
-  private javax.swing.JPopupMenu.Separator separatorMenuArquivo1;
-  private javax.swing.JMenuItem simulacaoMenuItem;
-  private javax.swing.JMenuItem situacaoTransporteMenuItem;
   // End of variables declaration//GEN-END:variables
 }

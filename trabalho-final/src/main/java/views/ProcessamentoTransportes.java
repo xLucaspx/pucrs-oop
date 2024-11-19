@@ -49,14 +49,14 @@ public class ProcessamentoTransportes extends javax.swing.JInternalFrame {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
-    painelHeader = new javax.swing.JPanel();
-    title = new javax.swing.JLabel();
-    painelRegistro = new javax.swing.JPanel();
-    scrollPaneRegistro = new javax.swing.JScrollPane();
+    javax.swing.JPanel painelHeader = new javax.swing.JPanel();
+    javax.swing.JLabel title = new javax.swing.JLabel();
+    javax.swing.JPanel painelRegistro = new javax.swing.JPanel();
+    javax.swing.JScrollPane scrollPaneRegistro = new javax.swing.JScrollPane();
     textAreaRegistro = new javax.swing.JTextArea();
-    painelBotoes = new javax.swing.JPanel();
-    btnProcessar = new javax.swing.JButton();
-    btnLimpar = new javax.swing.JButton();
+    javax.swing.JPanel painelBotoes = new javax.swing.JPanel();
+    javax.swing.JButton btnProcessar = new javax.swing.JButton();
+    javax.swing.JButton btnLimpar = new javax.swing.JButton();
 
     setClosable(true);
     setIconifiable(true);
@@ -212,13 +212,6 @@ public class ProcessamentoTransportes extends javax.swing.JInternalFrame {
 
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JButton btnLimpar;
-  private javax.swing.JButton btnProcessar;
-  private javax.swing.JPanel painelBotoes;
-  private javax.swing.JPanel painelHeader;
-  private javax.swing.JPanel painelRegistro;
-  private javax.swing.JScrollPane scrollPaneRegistro;
   private javax.swing.JTextArea textAreaRegistro;
-  private javax.swing.JLabel title;
   // End of variables declaration//GEN-END:variables
 }

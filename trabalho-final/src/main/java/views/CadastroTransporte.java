@@ -55,40 +55,40 @@ public class CadastroTransporte extends javax.swing.JInternalFrame {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
-    painelHeader = new javax.swing.JPanel();
-    title = new javax.swing.JLabel();
-    painelGeral = new javax.swing.JPanel();
-    labelNumero = new javax.swing.JLabel();
+    javax.swing.JPanel painelHeader = new javax.swing.JPanel();
+    javax.swing.JLabel title = new javax.swing.JLabel();
+    javax.swing.JPanel painelGeral = new javax.swing.JPanel();
+    javax.swing.JLabel labelNumero = new javax.swing.JLabel();
     inputNumero = new javax.swing.JFormattedTextField(Constantes.FORMATO_INTEIRO);
-    labelPeso = new javax.swing.JLabel();
+    javax.swing.JLabel labelPeso = new javax.swing.JLabel();
     inputPeso = new javax.swing.JFormattedTextField(Constantes.FORMATO_PONTO_FLUTUANTE);
-    labelCliente = new javax.swing.JLabel();
+    javax.swing.JLabel labelCliente = new javax.swing.JLabel();
     inputCliente = new javax.swing.JTextField();
-    labelDescricao = new javax.swing.JLabel();
+    javax.swing.JLabel labelDescricao = new javax.swing.JLabel();
     inputDescricao = new javax.swing.JTextField();
-    PainelCoordenadas = new javax.swing.JPanel();
-    labelLatOrigem = new javax.swing.JLabel();
+    javax.swing.JPanel PainelCoordenadas = new javax.swing.JPanel();
+    javax.swing.JLabel labelLatOrigem = new javax.swing.JLabel();
     inputLatOrigem = new javax.swing.JFormattedTextField(Constantes.FORMATO_PONTO_FLUTUANTE);
-    labelLongOrigem = new javax.swing.JLabel();
+    javax.swing.JLabel labelLongOrigem = new javax.swing.JLabel();
     inputLongOrigem = new javax.swing.JFormattedTextField(Constantes.FORMATO_PONTO_FLUTUANTE);
-    labelLatDestino = new javax.swing.JLabel();
+    javax.swing.JLabel labelLatDestino = new javax.swing.JLabel();
     inputLatDestino = new javax.swing.JFormattedTextField(Constantes.FORMATO_PONTO_FLUTUANTE);
-    labelLongDestino = new javax.swing.JLabel();
+    javax.swing.JLabel labelLongDestino = new javax.swing.JLabel();
     inputLongDestino = new javax.swing.JFormattedTextField(Constantes.FORMATO_PONTO_FLUTUANTE);
     painelAbas = new javax.swing.JTabbedPane();
-    tabTransportePessoal = new javax.swing.JPanel();
-    labelQtdPessoasPessoal = new javax.swing.JLabel();
+    javax.swing.JPanel tabTransportePessoal = new javax.swing.JPanel();
+    javax.swing.JLabel labelQtdPessoasPessoal = new javax.swing.JLabel();
     inputQtdPessoasPessoal = new javax.swing.JFormattedTextField(Constantes.FORMATO_INTEIRO);
-    tabCargaInanimada = new javax.swing.JPanel();
+    javax.swing.JPanel tabCargaInanimada = new javax.swing.JPanel();
     checkPerigosaCargaInanimada = new javax.swing.JCheckBox();
-    tabCargaViva = new javax.swing.JPanel();
-    labelTemperaturaMinimaCargaViva = new javax.swing.JLabel();
+    javax.swing.JPanel tabCargaViva = new javax.swing.JPanel();
+    javax.swing.JLabel labelTemperaturaMinimaCargaViva = new javax.swing.JLabel();
     inputTemperaturaMinimaCargaViva = new javax.swing.JFormattedTextField(Constantes.FORMATO_PONTO_FLUTUANTE);
-    labelTemperaturaMaximaCargaViva = new javax.swing.JLabel();
+    javax.swing.JLabel labelTemperaturaMaximaCargaViva = new javax.swing.JLabel();
     inputTemperaturaMaximaCargaViva = new javax.swing.JFormattedTextField(Constantes.FORMATO_PONTO_FLUTUANTE);
-    painelBotoes = new javax.swing.JPanel();
-    btnCadastrar = new javax.swing.JButton();
-    btnLimpar = new javax.swing.JButton();
+    javax.swing.JPanel painelBotoes = new javax.swing.JPanel();
+    javax.swing.JButton btnCadastrar = new javax.swing.JButton();
+    javax.swing.JButton btnLimpar = new javax.swing.JButton();
 
     setClosable(true);
     setIconifiable(true);
@@ -626,9 +626,6 @@ public class CadastroTransporte extends javax.swing.JInternalFrame {
   }//GEN-LAST:event_chamaLimpaCampos
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JPanel PainelCoordenadas;
-  private javax.swing.JButton btnCadastrar;
-  private javax.swing.JButton btnLimpar;
   private javax.swing.JCheckBox checkPerigosaCargaInanimada;
   private javax.swing.JTextField inputCliente;
   private javax.swing.JTextField inputDescricao;
@@ -641,24 +638,6 @@ public class CadastroTransporte extends javax.swing.JInternalFrame {
   private javax.swing.JFormattedTextField inputQtdPessoasPessoal;
   private javax.swing.JFormattedTextField inputTemperaturaMaximaCargaViva;
   private javax.swing.JFormattedTextField inputTemperaturaMinimaCargaViva;
-  private javax.swing.JLabel labelCliente;
-  private javax.swing.JLabel labelDescricao;
-  private javax.swing.JLabel labelLatDestino;
-  private javax.swing.JLabel labelLatOrigem;
-  private javax.swing.JLabel labelLongDestino;
-  private javax.swing.JLabel labelLongOrigem;
-  private javax.swing.JLabel labelNumero;
-  private javax.swing.JLabel labelPeso;
-  private javax.swing.JLabel labelQtdPessoasPessoal;
-  private javax.swing.JLabel labelTemperaturaMaximaCargaViva;
-  private javax.swing.JLabel labelTemperaturaMinimaCargaViva;
   private javax.swing.JTabbedPane painelAbas;
-  private javax.swing.JPanel painelBotoes;
-  private javax.swing.JPanel painelGeral;
-  private javax.swing.JPanel painelHeader;
-  private javax.swing.JPanel tabCargaInanimada;
-  private javax.swing.JPanel tabCargaViva;
-  private javax.swing.JPanel tabTransportePessoal;
-  private javax.swing.JLabel title;
   // End of variables declaration//GEN-END:variables
 }

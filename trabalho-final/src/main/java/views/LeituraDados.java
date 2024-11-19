@@ -33,18 +33,18 @@ public class LeituraDados extends javax.swing.JInternalFrame {
   private void initComponents() {
 
     tipoArquivoButtonGroup = new javax.swing.ButtonGroup();
-    painelHeader = new javax.swing.JPanel();
-    title = new javax.swing.JLabel();
-    painelArquivo = new javax.swing.JPanel();
-    labelArquivo = new javax.swing.JLabel();
+    javax.swing.JPanel painelHeader = new javax.swing.JPanel();
+    javax.swing.JLabel title = new javax.swing.JLabel();
+    javax.swing.JPanel painelArquivo = new javax.swing.JPanel();
+    javax.swing.JLabel labelArquivo = new javax.swing.JLabel();
     inputArquivo = new javax.swing.JTextField();
-    btnCarregar = new javax.swing.JButton();
-    painelTipoArquivo = new javax.swing.JPanel();
-    radioTipoCsv = new javax.swing.JRadioButton();
-    radioTipoJson = new javax.swing.JRadioButton();
-    radioTipoXml = new javax.swing.JRadioButton();
-    paineAjuda = new javax.swing.JPanel();
-    btnAjuda = new javax.swing.JButton();
+    javax.swing.JButton btnCarregar = new javax.swing.JButton();
+    javax.swing.JPanel painelTipoArquivo = new javax.swing.JPanel();
+    javax.swing.JRadioButton radioTipoCsv = new javax.swing.JRadioButton();
+    javax.swing.JRadioButton radioTipoJson = new javax.swing.JRadioButton();
+    javax.swing.JRadioButton radioTipoXml = new javax.swing.JRadioButton();
+    javax.swing.JPanel paineAjuda = new javax.swing.JPanel();
+    javax.swing.JButton btnAjuda = new javax.swing.JButton();
 
     setClosable(true);
     setIconifiable(true);
@@ -239,18 +239,7 @@ public class LeituraDados extends javax.swing.JInternalFrame {
   }//GEN-LAST:event_carregaDados
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JButton btnAjuda;
-  private javax.swing.JButton btnCarregar;
   private javax.swing.JTextField inputArquivo;
-  private javax.swing.JLabel labelArquivo;
-  private javax.swing.JPanel paineAjuda;
-  private javax.swing.JPanel painelArquivo;
-  private javax.swing.JPanel painelHeader;
-  private javax.swing.JPanel painelTipoArquivo;
-  private javax.swing.JRadioButton radioTipoCsv;
-  private javax.swing.JRadioButton radioTipoJson;
-  private javax.swing.JRadioButton radioTipoXml;
   private javax.swing.ButtonGroup tipoArquivoButtonGroup;
-  private javax.swing.JLabel title;
   // End of variables declaration//GEN-END:variables
 }

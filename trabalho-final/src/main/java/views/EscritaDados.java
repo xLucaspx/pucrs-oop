@@ -33,18 +33,18 @@ public class EscritaDados extends javax.swing.JInternalFrame {
   private void initComponents() {
 
     tipoArquivoButtonGroup = new javax.swing.ButtonGroup();
-    painelHeader = new javax.swing.JPanel();
-    title = new javax.swing.JLabel();
-    painelArquivo = new javax.swing.JPanel();
-    labelArquivo = new javax.swing.JLabel();
+    javax.swing.JPanel painelHeader = new javax.swing.JPanel();
+    javax.swing.JLabel title = new javax.swing.JLabel();
+    javax.swing.JPanel painelArquivo = new javax.swing.JPanel();
+    javax.swing.JLabel labelArquivo = new javax.swing.JLabel();
     inputArquivo = new javax.swing.JTextField();
-    btnSalvar = new javax.swing.JButton();
-    painelTipoArquivo = new javax.swing.JPanel();
-    radioTipoCsv = new javax.swing.JRadioButton();
-    radioTipoJson = new javax.swing.JRadioButton();
-    radioTipoXml = new javax.swing.JRadioButton();
-    paineAjuda = new javax.swing.JPanel();
-    btnAjuda = new javax.swing.JButton();
+    javax.swing.JButton btnSalvar = new javax.swing.JButton();
+    javax.swing.JPanel painelTipoArquivo = new javax.swing.JPanel();
+    javax.swing.JRadioButton radioTipoCsv = new javax.swing.JRadioButton();
+    javax.swing.JRadioButton radioTipoJson = new javax.swing.JRadioButton();
+    javax.swing.JRadioButton radioTipoXml = new javax.swing.JRadioButton();
+    javax.swing.JPanel paineAjuda = new javax.swing.JPanel();
+    javax.swing.JButton btnAjuda = new javax.swing.JButton();
 
     setClosable(true);
     setIconifiable(true);
@@ -112,11 +112,6 @@ public class EscritaDados extends javax.swing.JInternalFrame {
     radioTipoJson.setToolTipText("Salvar dados em formato JSON");
     radioTipoJson.setActionCommand(FormatoArquivo.JSON.name());
     radioTipoJson.setPreferredSize(new java.awt.Dimension(100, 15));
-    radioTipoJson.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        radioTipoJsonActionPerformed(evt);
-      }
-    });
     painelTipoArquivo.add(radioTipoJson);
 
     tipoArquivoButtonGroup.add(radioTipoXml);
@@ -249,23 +244,8 @@ public class EscritaDados extends javax.swing.JInternalFrame {
 		}
   }//GEN-LAST:event_salvaDados
 
-  private void radioTipoJsonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioTipoJsonActionPerformed
-    // TODO add your handling code here:
-  }//GEN-LAST:event_radioTipoJsonActionPerformed
-
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JButton btnAjuda;
-  private javax.swing.JButton btnSalvar;
   private javax.swing.JTextField inputArquivo;
-  private javax.swing.JLabel labelArquivo;
-  private javax.swing.JPanel paineAjuda;
-  private javax.swing.JPanel painelArquivo;
-  private javax.swing.JPanel painelHeader;
-  private javax.swing.JPanel painelTipoArquivo;
-  private javax.swing.JRadioButton radioTipoCsv;
-  private javax.swing.JRadioButton radioTipoJson;
-  private javax.swing.JRadioButton radioTipoXml;
   private javax.swing.ButtonGroup tipoArquivoButtonGroup;
-  private javax.swing.JLabel title;
   // End of variables declaration//GEN-END:variables
 }

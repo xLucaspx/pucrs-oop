@@ -78,17 +78,17 @@ public class SituacaoTransporte extends javax.swing.JInternalFrame {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
-    painelHeader = new javax.swing.JPanel();
-    title = new javax.swing.JLabel();
-    painelLocalizar = new javax.swing.JPanel();
-    labelNumero = new javax.swing.JLabel();
+    javax.swing.JPanel painelHeader = new javax.swing.JPanel();
+    javax.swing.JLabel title = new javax.swing.JLabel();
+    javax.swing.JPanel painelLocalizar = new javax.swing.JPanel();
+    javax.swing.JLabel labelNumero = new javax.swing.JLabel();
     inputNumero = new javax.swing.JFormattedTextField(Constantes.FORMATO_INTEIRO);
-    btnBuscar = new javax.swing.JButton();
-    labelTransporte = new javax.swing.JLabel();
-    scrollPaneTransporte = new javax.swing.JScrollPane();
+    javax.swing.JButton btnBuscar = new javax.swing.JButton();
+    javax.swing.JLabel labelTransporte = new javax.swing.JLabel();
+    javax.swing.JScrollPane scrollPaneTransporte = new javax.swing.JScrollPane();
     textAreaTransporte = new javax.swing.JTextArea();
-    painelSituacao = new javax.swing.JPanel();
-    labelSituacao = new javax.swing.JLabel();
+    javax.swing.JPanel painelSituacao = new javax.swing.JPanel();
+    javax.swing.JLabel labelSituacao = new javax.swing.JLabel();
     comboSituacao = new javax.swing.JComboBox<>();
     btnDefinir = new javax.swing.JButton();
 
@@ -308,18 +308,9 @@ public class SituacaoTransporte extends javax.swing.JInternalFrame {
   }//GEN-LAST:event_defineNovaSituacao
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JButton btnBuscar;
   private javax.swing.JButton btnDefinir;
   private javax.swing.JComboBox<Estado> comboSituacao;
   private javax.swing.JFormattedTextField inputNumero;
-  private javax.swing.JLabel labelNumero;
-  private javax.swing.JLabel labelSituacao;
-  private javax.swing.JLabel labelTransporte;
-  private javax.swing.JPanel painelHeader;
-  private javax.swing.JPanel painelLocalizar;
-  private javax.swing.JPanel painelSituacao;
-  private javax.swing.JScrollPane scrollPaneTransporte;
   private javax.swing.JTextArea textAreaTransporte;
-  private javax.swing.JLabel title;
   // End of variables declaration//GEN-END:variables
 }

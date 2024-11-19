@@ -30,14 +30,14 @@ public class LeituraSimulacao extends javax.swing.JInternalFrame {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
-    painelHeader = new javax.swing.JPanel();
-    title = new javax.swing.JLabel();
-    painelArquivo = new javax.swing.JPanel();
-    labelArquivo = new javax.swing.JLabel();
+    javax.swing.JPanel painelHeader = new javax.swing.JPanel();
+    javax.swing.JLabel title = new javax.swing.JLabel();
+    javax.swing.JPanel painelArquivo = new javax.swing.JPanel();
+    javax.swing.JLabel labelArquivo = new javax.swing.JLabel();
     inputArquivo = new javax.swing.JTextField();
-    btnRealizarSimulacao = new javax.swing.JButton();
-    paineAjuda = new javax.swing.JPanel();
-    btnAjuda = new javax.swing.JButton();
+    javax.swing.JButton btnRealizarSimulacao = new javax.swing.JButton();
+    javax.swing.JPanel paineAjuda = new javax.swing.JPanel();
+    javax.swing.JButton btnAjuda = new javax.swing.JButton();
 
     setClosable(true);
     setIconifiable(true);
@@ -189,13 +189,6 @@ public class LeituraSimulacao extends javax.swing.JInternalFrame {
   }//GEN-LAST:event_realizaSimulacao
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JButton btnAjuda;
-  private javax.swing.JButton btnRealizarSimulacao;
   private javax.swing.JTextField inputArquivo;
-  private javax.swing.JLabel labelArquivo;
-  private javax.swing.JPanel paineAjuda;
-  private javax.swing.JPanel painelArquivo;
-  private javax.swing.JPanel painelHeader;
-  private javax.swing.JLabel title;
   // End of variables declaration//GEN-END:variables
 }

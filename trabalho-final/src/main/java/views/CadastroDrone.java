@@ -51,30 +51,30 @@ public class CadastroDrone extends javax.swing.JInternalFrame {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
-    painelHeader = new javax.swing.JPanel();
-    title = new javax.swing.JLabel();
-    painelDrone = new javax.swing.JPanel();
-    labelCodigo = new javax.swing.JLabel();
+    javax.swing.JPanel painelHeader = new javax.swing.JPanel();
+    javax.swing.JLabel title = new javax.swing.JLabel();
+    javax.swing.JPanel painelDrone = new javax.swing.JPanel();
+    javax.swing.JLabel labelCodigo = new javax.swing.JLabel();
     inputCodigo = new javax.swing.JFormattedTextField(Constantes.FORMATO_INTEIRO);
-    labelCustoFixo = new javax.swing.JLabel();
+    javax.swing.JLabel labelCustoFixo = new javax.swing.JLabel();
     inputCustoFixo = new javax.swing.JFormattedTextField(Constantes.FORMATO_PONTO_FLUTUANTE);
-    labelAutonomia = new javax.swing.JLabel();
+    javax.swing.JLabel labelAutonomia = new javax.swing.JLabel();
     inputAutonomia = new javax.swing.JFormattedTextField(Constantes.FORMATO_PONTO_FLUTUANTE);
     painelAbas = new javax.swing.JTabbedPane();
-    tabDronePessoal = new javax.swing.JPanel();
-    labelMaxPessoasPessoal = new javax.swing.JLabel();
+    javax.swing.JPanel tabDronePessoal = new javax.swing.JPanel();
+    javax.swing.JLabel labelMaxPessoasPessoal = new javax.swing.JLabel();
     inputMaxPessoasPessoal = new javax.swing.JFormattedTextField(Constantes.FORMATO_INTEIRO);
-    tabDroneCargaInanimada = new javax.swing.JPanel();
-    labelPesoMaximoCargaInanimada = new javax.swing.JLabel();
+    javax.swing.JPanel tabDroneCargaInanimada = new javax.swing.JPanel();
+    javax.swing.JLabel labelPesoMaximoCargaInanimada = new javax.swing.JLabel();
     inputPesoMaximoCargaInanimada = new javax.swing.JFormattedTextField(Constantes.FORMATO_PONTO_FLUTUANTE);
     checkProtecaoCargaInanimada = new javax.swing.JCheckBox();
-    tabDroneCargaViva = new javax.swing.JPanel();
-    labelPesoMaximoCargaViva = new javax.swing.JLabel();
+    javax.swing.JPanel tabDroneCargaViva = new javax.swing.JPanel();
+    javax.swing.JLabel labelPesoMaximoCargaViva = new javax.swing.JLabel();
     inputPesoMaximoCargaViva = new javax.swing.JFormattedTextField(Constantes.FORMATO_PONTO_FLUTUANTE);
     checkClimatizacaoCargaViva = new javax.swing.JCheckBox();
-    painelBotoes = new javax.swing.JPanel();
-    btnCadastrar = new javax.swing.JButton();
-    btnLimpar = new javax.swing.JButton();
+    javax.swing.JPanel painelBotoes = new javax.swing.JPanel();
+    javax.swing.JButton btnCadastrar = new javax.swing.JButton();
+    javax.swing.JButton btnLimpar = new javax.swing.JButton();
 
     setClosable(true);
     setIconifiable(true);
@@ -477,8 +477,6 @@ public class CadastroDrone extends javax.swing.JInternalFrame {
   }//GEN-LAST:event_chamaLimpaCampos
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JButton btnCadastrar;
-  private javax.swing.JButton btnLimpar;
   private javax.swing.JCheckBox checkClimatizacaoCargaViva;
   private javax.swing.JCheckBox checkProtecaoCargaInanimada;
   private javax.swing.JFormattedTextField inputAutonomia;
@@ -487,19 +485,6 @@ public class CadastroDrone extends javax.swing.JInternalFrame {
   private javax.swing.JFormattedTextField inputMaxPessoasPessoal;
   private javax.swing.JFormattedTextField inputPesoMaximoCargaInanimada;
   private javax.swing.JFormattedTextField inputPesoMaximoCargaViva;
-  private javax.swing.JLabel labelAutonomia;
-  private javax.swing.JLabel labelCodigo;
-  private javax.swing.JLabel labelCustoFixo;
-  private javax.swing.JLabel labelMaxPessoasPessoal;
-  private javax.swing.JLabel labelPesoMaximoCargaInanimada;
-  private javax.swing.JLabel labelPesoMaximoCargaViva;
   private javax.swing.JTabbedPane painelAbas;
-  private javax.swing.JPanel painelBotoes;
-  private javax.swing.JPanel painelDrone;
-  private javax.swing.JPanel painelHeader;
-  private javax.swing.JPanel tabDroneCargaInanimada;
-  private javax.swing.JPanel tabDroneCargaViva;
-  private javax.swing.JPanel tabDronePessoal;
-  private javax.swing.JLabel title;
   // End of variables declaration//GEN-END:variables
 }

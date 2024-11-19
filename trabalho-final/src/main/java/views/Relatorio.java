@@ -36,14 +36,14 @@ public abstract class Relatorio extends javax.swing.JInternalFrame {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
-    painelHeader = new javax.swing.JPanel();
-    title = new javax.swing.JLabel();
-    painelRelatorio = new javax.swing.JPanel();
-    scrollPaneRelatorio = new javax.swing.JScrollPane();
+    javax.swing.JPanel painelHeader = new javax.swing.JPanel();
+    javax.swing.JLabel title = new javax.swing.JLabel();
+    javax.swing.JPanel painelRelatorio = new javax.swing.JPanel();
+    javax.swing.JScrollPane scrollPaneRelatorio = new javax.swing.JScrollPane();
     textAreaRelatorio = new javax.swing.JTextArea();
-    painelBotoes = new javax.swing.JPanel();
-    btnGerar = new javax.swing.JButton();
-    btnCopiar = new javax.swing.JButton();
+    javax.swing.JPanel painelBotoes = new javax.swing.JPanel();
+    javax.swing.JButton btnGerar = new javax.swing.JButton();
+    javax.swing.JButton btnCopiar = new javax.swing.JButton();
 
     setClosable(true);
     setIconifiable(true);
@@ -181,13 +181,6 @@ public abstract class Relatorio extends javax.swing.JInternalFrame {
   }//GEN-LAST:event_mostraRelatorio
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JButton btnCopiar;
-  private javax.swing.JButton btnGerar;
-  private javax.swing.JPanel painelBotoes;
-  private javax.swing.JPanel painelHeader;
-  private javax.swing.JPanel painelRelatorio;
-  private javax.swing.JScrollPane scrollPaneRelatorio;
   private javax.swing.JTextArea textAreaRelatorio;
-  private javax.swing.JLabel title;
   // End of variables declaration//GEN-END:variables
 }
