@@ -14,7 +14,6 @@ import java.util.Locale;
  * @author Lucas da Paz
  */
 public class ACMEAirDrones {
-
 	/**
 	 * Realiza as configurações necessárias e inicia
 	 * a aplicação.

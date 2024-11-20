@@ -23,8 +23,8 @@ import java.util.Scanner;
  * @author Lucas da Paz
  */
 public abstract class ArquivoIO {
-	private PrintStream out;
 	private Scanner in;
+	private PrintStream out;
 
 	/**
 	 * Abre o arquivo de saída com o nome indicado e escreve todas
@@ -32,7 +32,6 @@ public abstract class ArquivoIO {
 	 * memória durante a execução.
 	 */
 	public abstract void realizaEscrita();
-
 
 	/**
 	 * Lê o conteúdo do arquivo de entrada com o nome indicado; tenta criar
@@ -96,41 +95,6 @@ public abstract class ArquivoIO {
 			e.printStackTrace(System.err);
 			throw new RuntimeException("Erro ao tentar abrir arquivo \"%s\"!".formatted(caminhoArquivo));
 		}
-	}
-
-	/**
-	 * Tenta resolver o caminho real do arquivo com a string de caminho passada
-	 * como argumento. É case insensitive, i.e., não diferencia letras maiúsculas
-	 * de minúsculas. Se não encontrar um arquivo existente correspondente, retorna
-	 * o caminho representando a string passada como argumento.
-	 *
-	 * @param caminhoArquivo String representando o arquivo buscado.
-	 * @return O caminho do arquivo correspondente.
-	 * @throws IOException Se ocorrer algum erro ao buscar pelo arquivo.
-	 */
-	private Path encontraArquivo(String caminhoArquivo) throws IOException {
-		caminhoArquivo = caminhoArquivo.toLowerCase();
-		File arquivo = new File(caminhoArquivo).getCanonicalFile();
-
-		// se o arquivo não existe, tenta resolver o caminho:
-		if (!arquivo.exists()) {
-			File diretorioPai = arquivo.getParentFile();
-			if (diretorioPai == null) {
-				return arquivo.toPath(); // se não tem diretório pai retorna o caminho como está
-			}
-
-			File[] arquivos = diretorioPai.listFiles();
-			if (arquivos == null) {
-				return arquivo.toPath(); // se não é um diretório
-			}
-
-			for (File f : arquivos) {
-				if (f.isFile() && f.getName().toLowerCase().equals(caminhoArquivo)) {
-					return f.toPath();
-				}
-			}
-		}
-		return arquivo.toPath();
 	}
 
 	/**
@@ -207,5 +171,40 @@ public abstract class ArquivoIO {
 		}
 		out.close();
 		out = null;
+	}
+
+	/**
+	 * Tenta resolver o caminho real do arquivo com a string de caminho passada
+	 * como argumento. É case insensitive, i.e., não diferencia letras maiúsculas
+	 * de minúsculas. Se não encontrar um arquivo existente correspondente, retorna
+	 * o caminho representando a string passada como argumento.
+	 *
+	 * @param caminhoArquivo String representando o arquivo buscado.
+	 * @return O caminho do arquivo correspondente.
+	 * @throws IOException Se ocorrer algum erro ao buscar pelo arquivo.
+	 */
+	private Path encontraArquivo(String caminhoArquivo) throws IOException {
+		caminhoArquivo = caminhoArquivo.toLowerCase();
+		File arquivo = new File(caminhoArquivo).getCanonicalFile();
+
+		// se o arquivo não existe, tenta resolver o caminho:
+		if (!arquivo.exists()) {
+			File diretorioPai = arquivo.getParentFile();
+			if (diretorioPai == null) {
+				return arquivo.toPath(); // se não tem diretório pai retorna o caminho como está
+			}
+
+			File[] arquivos = diretorioPai.listFiles();
+			if (arquivos == null) {
+				return arquivo.toPath(); // se não é um diretório
+			}
+
+			for (File f : arquivos) {
+				if (f.isFile() && f.getName().toLowerCase().equals(caminhoArquivo)) {
+					return f.toPath();
+				}
+			}
+		}
+		return arquivo.toPath();
 	}
 }
