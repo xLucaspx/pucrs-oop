@@ -73,10 +73,10 @@ public class LeituraSimulacao extends javax.swing.JInternalFrame {
 
     labelArquivo.setLabelFor(inputArquivo);
     labelArquivo.setText("Nome do arquivo:");
-    labelArquivo.setPreferredSize(new java.awt.Dimension(105, 30));
+    labelArquivo.setPreferredSize(new java.awt.Dimension(120, 30));
 
     inputArquivo.setToolTipText("Informe o nome do cliente");
-    inputArquivo.setPreferredSize(new java.awt.Dimension(125, 30));
+    inputArquivo.setPreferredSize(new java.awt.Dimension(185, 30));
 
     btnRealizarSimulacao.setText("Simular");
     btnRealizarSimulacao.setToolTipText("Buscar arquivos e realizar simulação");
@@ -95,9 +95,9 @@ public class LeituraSimulacao extends javax.swing.JInternalFrame {
       painelArquivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(painelArquivoLayout.createSequentialGroup()
         .addContainerGap()
-        .addComponent(labelArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addComponent(labelArquivo, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(inputArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addComponent(inputArquivo, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addComponent(btnRealizarSimulacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addContainerGap())

@@ -335,17 +335,17 @@ public class CadastroTransporte extends javax.swing.JInternalFrame {
 
     labelTemperaturaMinimaCargaViva.setLabelFor(inputTemperaturaMinimaCargaViva);
     labelTemperaturaMinimaCargaViva.setText("Temperatura mínima:");
-    labelTemperaturaMinimaCargaViva.setPreferredSize(new java.awt.Dimension(125, 15));
+    labelTemperaturaMinimaCargaViva.setPreferredSize(new java.awt.Dimension(140, 15));
 
     inputTemperaturaMinimaCargaViva.setToolTipText("Informe a temperatura mínima do transporte em graus Celsius");
-    inputTemperaturaMinimaCargaViva.setPreferredSize(new java.awt.Dimension(125, 30));
+    inputTemperaturaMinimaCargaViva.setPreferredSize(new java.awt.Dimension(140, 30));
 
     labelTemperaturaMaximaCargaViva.setLabelFor(inputTemperaturaMaximaCargaViva);
     labelTemperaturaMaximaCargaViva.setText("Temperatura máxima:");
-    labelTemperaturaMaximaCargaViva.setPreferredSize(new java.awt.Dimension(125, 15));
+    labelTemperaturaMaximaCargaViva.setPreferredSize(new java.awt.Dimension(140, 15));
 
     inputTemperaturaMaximaCargaViva.setToolTipText("Informe a temperatura máxima do transporte em graus Celsius");
-    inputTemperaturaMaximaCargaViva.setPreferredSize(new java.awt.Dimension(125, 30));
+    inputTemperaturaMaximaCargaViva.setPreferredSize(new java.awt.Dimension(140, 30));
 
     javax.swing.GroupLayout tabCargaVivaLayout = new javax.swing.GroupLayout(tabCargaViva);
     tabCargaViva.setLayout(tabCargaVivaLayout);
@@ -355,12 +355,12 @@ public class CadastroTransporte extends javax.swing.JInternalFrame {
         .addContainerGap()
         .addGroup(tabCargaVivaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
           .addComponent(inputTemperaturaMinimaCargaViva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(labelTemperaturaMinimaCargaViva, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(labelTemperaturaMinimaCargaViva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addGroup(tabCargaVivaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-          .addComponent(inputTemperaturaMaximaCargaViva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(labelTemperaturaMaximaCargaViva, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addContainerGap(247, Short.MAX_VALUE))
+          .addComponent(labelTemperaturaMaximaCargaViva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(inputTemperaturaMaximaCargaViva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addContainerGap(228, Short.MAX_VALUE))
     );
     tabCargaVivaLayout.setVerticalGroup(
       tabCargaVivaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

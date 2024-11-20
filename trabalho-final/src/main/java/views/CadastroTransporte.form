@@ -606,14 +606,14 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="inputTemperaturaMinimaCargaViva" alignment="0" max="32767" attributes="0"/>
-                          <Component id="labelTemperaturaMinimaCargaViva" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                          <Component id="labelTemperaturaMinimaCargaViva" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="inputTemperaturaMaximaCargaViva" alignment="0" max="32767" attributes="0"/>
-                          <Component id="labelTemperaturaMaximaCargaViva" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                          <Component id="labelTemperaturaMaximaCargaViva" max="32767" attributes="0"/>
+                          <Component id="inputTemperaturaMaximaCargaViva" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="247" max="32767" attributes="0"/>
+                      <EmptySpace pref="228" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -646,7 +646,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Temperatura m&#xed;nima:"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[125, 15]"/>
+                  <Dimension value="[140, 15]"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -658,7 +658,7 @@
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value="Informe a temperatura m&#xed;nima do transporte em graus Celsius"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[125, 30]"/>
+                  <Dimension value="[140, 30]"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -672,7 +672,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Temperatura m&#xe1;xima:"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[125, 15]"/>
+                  <Dimension value="[140, 15]"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -684,7 +684,7 @@
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value="Informe a temperatura m&#xe1;xima do transporte em graus Celsius"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[125, 30]"/>
+                  <Dimension value="[140, 30]"/>
                 </Property>
               </Properties>
               <AuxValues>

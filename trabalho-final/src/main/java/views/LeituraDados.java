@@ -63,9 +63,9 @@ public class LeituraDados extends javax.swing.JInternalFrame {
     painelHeaderLayout.setHorizontalGroup(
       painelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(painelHeaderLayout.createSequentialGroup()
-        .addContainerGap(31, Short.MAX_VALUE)
-        .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
-        .addContainerGap(31, Short.MAX_VALUE))
+        .addContainerGap(32, Short.MAX_VALUE)
+        .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+        .addContainerGap(34, Short.MAX_VALUE))
     );
     painelHeaderLayout.setVerticalGroup(
       painelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,10 +80,10 @@ public class LeituraDados extends javax.swing.JInternalFrame {
 
     labelArquivo.setLabelFor(inputArquivo);
     labelArquivo.setText("Nome do arquivo:");
-    labelArquivo.setPreferredSize(new java.awt.Dimension(105, 30));
+    labelArquivo.setPreferredSize(new java.awt.Dimension(120, 30));
 
     inputArquivo.setToolTipText("Informe o nome do cliente");
-    inputArquivo.setPreferredSize(new java.awt.Dimension(125, 30));
+    inputArquivo.setPreferredSize(new java.awt.Dimension(185, 30));
 
     btnCarregar.setText("Carregar");
     btnCarregar.setToolTipText("Carregar para o sistema os dados do arquivo informado");
@@ -130,10 +130,10 @@ public class LeituraDados extends javax.swing.JInternalFrame {
         .addGroup(painelArquivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
           .addComponent(painelTipoArquivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addGroup(painelArquivoLayout.createSequentialGroup()
-            .addComponent(labelArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(labelArquivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(inputArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 22, Short.MAX_VALUE)
+            .addComponent(inputArquivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnCarregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         .addContainerGap())
     );
@@ -170,7 +170,7 @@ public class LeituraDados extends javax.swing.JInternalFrame {
       .addGroup(layout.createSequentialGroup()
         .addContainerGap(19, Short.MAX_VALUE)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-          .addComponent(painelArquivo, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+          .addComponent(painelArquivo, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
           .addComponent(painelHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(paineAjuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addContainerGap(19, Short.MAX_VALUE))
