@@ -158,8 +158,11 @@ public class LeituraSimulacao extends javax.swing.JInternalFrame {
 			Digite o nome do arquivo de simulação, sem extensão.
 			O sistema buscará, na pasta raíz, pelos arquivos com o
 			nome digitado e com seguintes sufixos:
-			- "-DRONES.csv";
-			- "-TRANSPORTES.csv".
+			- "-drones.csv";
+			- "-transportes.csv".
+			
+			A busca de arquivos é case-insensitive, i.e., não diferencia
+			letras maiúsculas de minúsculas.
 
 			E.g.: Ao digitar "simula", o sistema buscará pelos arquivos
 			"simula-drones.csv" e "simula-transportes.csv".

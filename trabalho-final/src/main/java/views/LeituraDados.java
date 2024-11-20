@@ -193,12 +193,15 @@ public class LeituraDados extends javax.swing.JInternalFrame {
   private void mostraAjuda(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostraAjuda
 		String ajuda = """
 			Digite o nome do arquivo do qual deseja carregar os dados,
-			sem extensão; os dados serão salvos conforme o formato escolhido.
+			sem extensão; os dados serão buscados conforme o formato escolhido.
+			A busca de arquivos é case-insensitive, i.e., não diferencia letras
+			maiúsculas de minúsculas.
 			
 			E.g.: Considerando "dados" como o nome do arquivo inserido, se o
-			formato selecionado for CSV, os dados serão lidos de dois arquivos
-			distintos, "dados-drones.csv" e "dados-transportes.csv", buscados na
-			pasta raíz.
+			formato selecionado for JSON, o sistema tentará ler do arquivo
+			"dados.json"; se o formato selecionado for  CSV, os dados serão lidos
+			de dois arquivos distintos, "dados-drones.csv" e "dados-transportes.csv",
+			buscados na pasta raíz.
 
 			Se algum erro ocorrer durante a operação, uma mensagem será exibida.
 			""";

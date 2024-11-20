@@ -4,14 +4,15 @@ import dados.Drone;
 import dados.Transporte;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.Reader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -86,14 +87,35 @@ public abstract class ArquivoIO {
 	 * @return Interface {@code Reader} para o arquivo especificado.
 	 * @throws RuntimeException Se ocorrer algo de errado ao tentar abrir
 	 *                          o arquivo.
+	 * @see #encontraArquivo(String)
 	 * @see Files#newBufferedReader(Path, Charset)
 	 */
 	protected Reader getReader(String caminhoArquivo) {
 		try {
-			return Files.newBufferedReader(Paths.get(caminhoArquivo), StandardCharsets.UTF_8);
+			return Files.newBufferedReader(encontraArquivo(caminhoArquivo), StandardCharsets.UTF_8);
 		} catch (IOException e) {
 			e.printStackTrace(System.err);
 			throw new RuntimeException("Erro ao tentar abrir arquivo \"%s\"!".formatted(caminhoArquivo));
+		}
+	}
+
+	/**
+	 * Resolve o caminho do arquivo com o nome passado como argumento.
+	 * É case insensitive, i.e., não diferencia letras maiúsculas de minúsculas.
+	 *
+	 * @param caminhoArquivo String representando o arquivo buscado.
+	 * @return O caminho do arquivo com o nome correspondente.
+	 */
+	private Path encontraArquivo(String caminhoArquivo) {
+		try {
+			File f = new File(caminhoArquivo);
+			return f.getCanonicalFile().toPath();
+		} catch (IOException e) {
+			e.printStackTrace(System.err);
+			throw new RuntimeException("Erro de I/O ao tentar buscar o arquivo \"%s\"!".formatted(caminhoArquivo));
+		} catch (InvalidPathException e) {
+			e.printStackTrace(System.err);
+			throw new RuntimeException("Arquivo não encontrado (%s)!".formatted(caminhoArquivo));
 		}
 	}
 
@@ -107,13 +129,14 @@ public abstract class ArquivoIO {
 	 * @throws RuntimeException Se ocorrer algo de errado ao tentar abrir
 	 *                          o arquivo.
 	 * @see #fechaArquivoEntrada()
+	 * @see #encontraArquivo(String)
 	 * @see Files#newBufferedReader(Path, Charset)
 	 * @see Scanner#Scanner(Readable)
 	 */
 	protected void abreArquivoEntrada(String caminhoArquivo) {
 		try {
 			fechaArquivoEntrada();
-			BufferedReader br = Files.newBufferedReader(Paths.get(caminhoArquivo), StandardCharsets.UTF_8);
+			BufferedReader br = Files.newBufferedReader(encontraArquivo(caminhoArquivo), StandardCharsets.UTF_8);
 			in = new Scanner(br);
 			in.useLocale(Locale.ENGLISH);
 		} catch (IOException e) {
@@ -132,12 +155,13 @@ public abstract class ArquivoIO {
 	 * @throws RuntimeException Se ocorrer algo de errado ao tentar abrir
 	 *                          o arquivo.
 	 * @see #fechaArquivoSaida()
+	 * @see #encontraArquivo(String)
 	 * @see PrintStream#PrintStream(String, Charset)
 	 */
 	protected void abreArquivoSaida(String caminhoArquivo) {
 		try {
 			fechaArquivoSaida();
-			out = new PrintStream(Paths.get(caminhoArquivo).toString(), StandardCharsets.UTF_8);
+			out = new PrintStream(encontraArquivo(caminhoArquivo).toString(), StandardCharsets.UTF_8);
 		} catch (IOException e) {
 			e.printStackTrace(System.err);
 			throw new RuntimeException("Erro ao tentar abrir arquivo \"%s\"!".formatted(caminhoArquivo));
