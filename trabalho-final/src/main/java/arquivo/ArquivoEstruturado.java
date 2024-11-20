@@ -168,7 +168,7 @@ public abstract class ArquivoEstruturado extends ArquivoIO {
 			int tipo = campos.get("tipo").asInt();
 			int numero = campos.get("numero").asInt();
 			String nomeCliente = campos.get("nomeCliente").asText();
-			String descricao = campos.get("peso").asText();
+			String descricao = campos.get("descricao").asText();
 			double peso = campos.get("peso").asDouble();
 			double latitudeOrigem = campos.get("latitudeOrigem").asDouble();
 			double longitudeOrigem = campos.get("longitudeOrigem").asDouble();

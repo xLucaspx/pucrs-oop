@@ -1,0 +1,298 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dados>
+	<drones>
+		<drone>
+			<tipo>1</tipo>
+			<codigo>1</codigo>
+			<custoFixo>10000</custoFixo>
+			<autonomia>100</autonomia>
+			<qtdMaxPessoas>5</qtdMaxPessoas>
+		</drone>
+		<drone>
+			<tipo>2</tipo>
+			<codigo>2</codigo>
+			<custoFixo>22000</custoFixo>
+			<autonomia>220</autonomia>
+			<pesoMaximo>210</pesoMaximo>
+			<protecao>true</protecao>
+		</drone>
+		<drone>
+			<tipo>3</tipo>
+			<codigo>3</codigo>
+			<custoFixo>36000</custoFixo>
+			<autonomia>460</autonomia>
+			<pesoMaximo>340</pesoMaximo>
+			<climatizado>true</climatizado>
+		</drone>
+		<drone>
+			<tipo>1</tipo>
+			<codigo>4</codigo>
+			<custoFixo>13000</custoFixo>
+			<autonomia>130</autonomia>
+			<qtdMaxPessoas>5</qtdMaxPessoas>
+		</drone>
+		<drone>
+			<tipo>2</tipo>
+			<codigo>5</codigo>
+			<custoFixo>28000</custoFixo>
+			<autonomia>280</autonomia>
+			<pesoMaximo>240</pesoMaximo>
+			<protecao>true</protecao>
+		</drone>
+		<drone>
+			<tipo>3</tipo>
+			<codigo>6</codigo>
+			<custoFixo>45000</custoFixo>
+			<autonomia>550</autonomia>
+			<pesoMaximo>400</pesoMaximo>
+			<climatizado>true</climatizado>
+		</drone>
+		<drone>
+			<tipo>1</tipo>
+			<codigo>7</codigo>
+			<custoFixo>16000</custoFixo>
+			<autonomia>160</autonomia>
+			<qtdMaxPessoas>5</qtdMaxPessoas>
+		</drone>
+		<drone>
+			<tipo>2</tipo>
+			<codigo>8</codigo>
+			<custoFixo>34000</custoFixo>
+			<autonomia>340</autonomia>
+			<pesoMaximo>270</pesoMaximo>
+			<protecao>true</protecao>
+		</drone>
+		<drone>
+			<tipo>3</tipo>
+			<codigo>9</codigo>
+			<custoFixo>54000</custoFixo>
+			<autonomia>640</autonomia>
+			<pesoMaximo>460</pesoMaximo>
+			<climatizado>true</climatizado>
+		</drone>
+		<drone>
+			<tipo>1</tipo>
+			<codigo>10</codigo>
+			<custoFixo>19000</custoFixo>
+			<autonomia>190</autonomia>
+			<qtdMaxPessoas>5</qtdMaxPessoas>
+		</drone>
+	</drones>
+	<transportes>
+		<transporte>
+			<tipo>1</tipo>
+			<numero>1</numero>
+			<nomeCliente>Cliente 1</nomeCliente>
+			<descricao>Descrição 1</descricao>
+			<peso>100</peso>
+			<latitudeOrigem>-30.02719</latitudeOrigem>
+			<longitudeOrigem>-51.161572</longitudeOrigem>
+			<latitudeDestino>-30.061458</latitudeDestino>
+			<longitudeDestino>-51.173695</longitudeDestino>
+			<situacao>ALOCADO</situacao>
+			<codigoDrone>1</codigoDrone>
+			<qtdPessoas>2</qtdPessoas>
+		</transporte>
+		<transporte>
+			<tipo>2</tipo>
+			<numero>2</numero>
+			<nomeCliente>Cliente 2</nomeCliente>
+			<descricao>Descrição 2</descricao>
+			<peso>105</peso>
+			<latitudeOrigem>48.853078</latitudeOrigem>
+			<longitudeOrigem>2.346121</longitudeOrigem>
+			<latitudeDestino>49.44334</latitudeDestino>
+			<longitudeDestino>1.097417</longitudeDestino>
+			<situacao>ALOCADO</situacao>
+			<codigoDrone>2</codigoDrone>
+			<cargaPerigosa>false</cargaPerigosa>
+		</transporte>
+		<transporte>
+			<tipo>3</tipo>
+			<numero>3</numero>
+			<nomeCliente>Cliente 3</nomeCliente>
+			<descricao>Descrição 3</descricao>
+			<peso>110</peso>
+			<latitudeOrigem>-30.027593</latitudeOrigem>
+			<longitudeOrigem>-51.227884</longitudeOrigem>
+			<latitudeDestino>-27.597393</latitudeDestino>
+			<longitudeDestino>-48.55289</longitudeDestino>
+			<situacao>ALOCADO</situacao>
+			<codigoDrone>3</codigoDrone>
+			<temperaturaMinima>20.1</temperaturaMinima>
+			<temperaturaMaxima>30.9</temperaturaMaxima>
+		</transporte>
+		<transporte>
+			<tipo>1</tipo>
+			<numero>4</numero>
+			<nomeCliente>Cliente 4</nomeCliente>
+			<descricao>Descrição 4</descricao>
+			<peso>115</peso>
+			<latitudeOrigem>-30.02719</latitudeOrigem>
+			<longitudeOrigem>-51.161572</longitudeOrigem>
+			<latitudeDestino>-30.061458</latitudeDestino>
+			<longitudeDestino>-51.173695</longitudeDestino>
+			<situacao>ALOCADO</situacao>
+			<codigoDrone>4</codigoDrone>
+			<qtdPessoas>2</qtdPessoas>
+		</transporte>
+		<transporte>
+			<tipo>2</tipo>
+			<numero>5</numero>
+			<nomeCliente>Cliente 5</nomeCliente>
+			<descricao>Descrição 5</descricao>
+			<peso>120</peso>
+			<latitudeOrigem>48.853078</latitudeOrigem>
+			<longitudeOrigem>2.346121</longitudeOrigem>
+			<latitudeDestino>49.44334</latitudeDestino>
+			<longitudeDestino>1.097417</longitudeDestino>
+			<situacao>ALOCADO</situacao>
+			<codigoDrone>5</codigoDrone>
+			<cargaPerigosa>false</cargaPerigosa>
+		</transporte>
+		<transporte>
+			<tipo>3</tipo>
+			<numero>6</numero>
+			<nomeCliente>Cliente 6</nomeCliente>
+			<descricao>Descrição 6</descricao>
+			<peso>125</peso>
+			<latitudeOrigem>-30.027593</latitudeOrigem>
+			<longitudeOrigem>-51.227884</longitudeOrigem>
+			<latitudeDestino>-27.597393</latitudeDestino>
+			<longitudeDestino>-48.55289</longitudeDestino>
+			<situacao>ALOCADO</situacao>
+			<codigoDrone>6</codigoDrone>
+			<temperaturaMinima>20.1</temperaturaMinima>
+			<temperaturaMaxima>30.9</temperaturaMaxima>
+		</transporte>
+		<transporte>
+			<tipo>1</tipo>
+			<numero>7</numero>
+			<nomeCliente>Cliente 7</nomeCliente>
+			<descricao>Descrição 7</descricao>
+			<peso>130</peso>
+			<latitudeOrigem>-30.02719</latitudeOrigem>
+			<longitudeOrigem>-51.161572</longitudeOrigem>
+			<latitudeDestino>-30.061458</latitudeDestino>
+			<longitudeDestino>-51.173695</longitudeDestino>
+			<situacao>ALOCADO</situacao>
+			<codigoDrone>7</codigoDrone>
+			<qtdPessoas>2</qtdPessoas>
+		</transporte>
+		<transporte>
+			<tipo>2</tipo>
+			<numero>8</numero>
+			<nomeCliente>Cliente 8</nomeCliente>
+			<descricao>Descrição 8</descricao>
+			<peso>135</peso>
+			<latitudeOrigem>48.853078</latitudeOrigem>
+			<longitudeOrigem>2.346121</longitudeOrigem>
+			<latitudeDestino>49.44334</latitudeDestino>
+			<longitudeDestino>1.097417</longitudeDestino>
+			<situacao>ALOCADO</situacao>
+			<codigoDrone>8</codigoDrone>
+			<cargaPerigosa>false</cargaPerigosa>
+		</transporte>
+		<transporte>
+			<tipo>3</tipo>
+			<numero>9</numero>
+			<nomeCliente>Cliente 9</nomeCliente>
+			<descricao>Descrição 9</descricao>
+			<peso>140</peso>
+			<latitudeOrigem>-30.027593</latitudeOrigem>
+			<longitudeOrigem>-51.227884</longitudeOrigem>
+			<latitudeDestino>-27.597393</latitudeDestino>
+			<longitudeDestino>-48.55289</longitudeDestino>
+			<situacao>ALOCADO</situacao>
+			<codigoDrone>9</codigoDrone>
+			<temperaturaMinima>20.1</temperaturaMinima>
+			<temperaturaMaxima>30.9</temperaturaMaxima>
+		</transporte>
+		<transporte>
+			<tipo>1</tipo>
+			<numero>10</numero>
+			<nomeCliente>Cliente 10</nomeCliente>
+			<descricao>Descrição 10</descricao>
+			<peso>145</peso>
+			<latitudeOrigem>-30.02719</latitudeOrigem>
+			<longitudeOrigem>-51.161572</longitudeOrigem>
+			<latitudeDestino>-30.061458</latitudeDestino>
+			<longitudeDestino>-51.173695</longitudeDestino>
+			<situacao>ALOCADO</situacao>
+			<codigoDrone>10</codigoDrone>
+			<qtdPessoas>2</qtdPessoas>
+		</transporte>
+		<transporte>
+			<tipo>2</tipo>
+			<numero>11</numero>
+			<nomeCliente>Cliente 11</nomeCliente>
+			<descricao>Descrição 11</descricao>
+			<peso>150</peso>
+			<latitudeOrigem>48.853078</latitudeOrigem>
+			<longitudeOrigem>2.346121</longitudeOrigem>
+			<latitudeDestino>49.44334</latitudeDestino>
+			<longitudeDestino>1.097417</longitudeDestino>
+			<situacao>PENDENTE</situacao>
+			<codigoDrone>0</codigoDrone>
+			<cargaPerigosa>false</cargaPerigosa>
+		</transporte>
+		<transporte>
+			<tipo>3</tipo>
+			<numero>12</numero>
+			<nomeCliente>Cliente 12</nomeCliente>
+			<descricao>Descrição 12</descricao>
+			<peso>155</peso>
+			<latitudeOrigem>-30.027593</latitudeOrigem>
+			<longitudeOrigem>-51.227884</longitudeOrigem>
+			<latitudeDestino>-27.597393</latitudeDestino>
+			<longitudeDestino>-48.55289</longitudeDestino>
+			<situacao>PENDENTE</situacao>
+			<codigoDrone>0</codigoDrone>
+			<temperaturaMinima>20.1</temperaturaMinima>
+			<temperaturaMaxima>30.9</temperaturaMaxima>
+		</transporte>
+		<transporte>
+			<tipo>1</tipo>
+			<numero>13</numero>
+			<nomeCliente>Cliente 13</nomeCliente>
+			<descricao>Descrição 13</descricao>
+			<peso>160</peso>
+			<latitudeOrigem>-30.02719</latitudeOrigem>
+			<longitudeOrigem>-51.161572</longitudeOrigem>
+			<latitudeDestino>-30.061458</latitudeDestino>
+			<longitudeDestino>-51.173695</longitudeDestino>
+			<situacao>PENDENTE</situacao>
+			<codigoDrone>0</codigoDrone>
+			<qtdPessoas>2</qtdPessoas>
+		</transporte>
+		<transporte>
+			<tipo>2</tipo>
+			<numero>14</numero>
+			<nomeCliente>Cliente 14</nomeCliente>
+			<descricao>Descrição 14</descricao>
+			<peso>165</peso>
+			<latitudeOrigem>48.853078</latitudeOrigem>
+			<longitudeOrigem>2.346121</longitudeOrigem>
+			<latitudeDestino>49.44334</latitudeDestino>
+			<longitudeDestino>1.097417</longitudeDestino>
+			<situacao>PENDENTE</situacao>
+			<codigoDrone>0</codigoDrone>
+			<cargaPerigosa>false</cargaPerigosa>
+		</transporte>
+		<transporte>
+			<tipo>3</tipo>
+			<numero>15</numero>
+			<nomeCliente>Cliente 15</nomeCliente>
+			<descricao>Descrição 15</descricao>
+			<peso>170</peso>
+			<latitudeOrigem>-30.027593</latitudeOrigem>
+			<longitudeOrigem>-51.227884</longitudeOrigem>
+			<latitudeDestino>-27.597393</latitudeDestino>
+			<longitudeDestino>-48.55289</longitudeDestino>
+			<situacao>PENDENTE</situacao>
+			<codigoDrone>0</codigoDrone>
+			<temperaturaMinima>20.1</temperaturaMinima>
+			<temperaturaMaxima>30.9</temperaturaMaxima>
+		</transporte>
+	</transportes>
+</dados>
