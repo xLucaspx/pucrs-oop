@@ -11,7 +11,6 @@ import java.io.Reader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.util.Locale;
 import java.util.Scanner;
@@ -100,23 +99,38 @@ public abstract class ArquivoIO {
 	}
 
 	/**
-	 * Resolve o caminho do arquivo com o nome passado como argumento.
-	 * É case insensitive, i.e., não diferencia letras maiúsculas de minúsculas.
+	 * Tenta resolver o caminho real do arquivo com a string de caminho passada
+	 * como argumento. É case insensitive, i.e., não diferencia letras maiúsculas
+	 * de minúsculas. Se não encontrar um arquivo existente correspondente, retorna
+	 * o caminho representando a string passada como argumento.
 	 *
 	 * @param caminhoArquivo String representando o arquivo buscado.
-	 * @return O caminho do arquivo com o nome correspondente.
+	 * @return O caminho do arquivo correspondente.
+	 * @throws IOException Se ocorrer algum erro ao buscar pelo arquivo.
 	 */
-	private Path encontraArquivo(String caminhoArquivo) {
-		try {
-			File f = new File(caminhoArquivo);
-			return f.getCanonicalFile().toPath();
-		} catch (IOException e) {
-			e.printStackTrace(System.err);
-			throw new RuntimeException("Erro de I/O ao tentar buscar o arquivo \"%s\"!".formatted(caminhoArquivo));
-		} catch (InvalidPathException e) {
-			e.printStackTrace(System.err);
-			throw new RuntimeException("Arquivo não encontrado (%s)!".formatted(caminhoArquivo));
+	private Path encontraArquivo(String caminhoArquivo) throws IOException {
+		caminhoArquivo = caminhoArquivo.toLowerCase();
+		File arquivo = new File(caminhoArquivo).getCanonicalFile();
+
+		// se o arquivo não existe, tenta resolver o caminho:
+		if (!arquivo.exists()) {
+			File diretorioPai = arquivo.getParentFile();
+			if (diretorioPai == null) {
+				return arquivo.toPath(); // se não tem diretório pai retorna o caminho como está
+			}
+
+			File[] arquivos = diretorioPai.listFiles();
+			if (arquivos == null) {
+				return arquivo.toPath(); // se não é um diretório
+			}
+
+			for (File f : arquivos) {
+				if (f.isFile() && f.getName().toLowerCase().equals(caminhoArquivo)) {
+					return f.toPath();
+				}
+			}
 		}
+		return arquivo.toPath();
 	}
 
 	/**
