@@ -51,7 +51,7 @@ public class DroneCargaInanimada extends DroneCarga {
 
 	@Override
 	public boolean adicionaTransporte(Transporte t) {
-		List<ValidadorDroneTransporte> validacoes = new ArrayList<>(List.of(new ValidadorCargaPerigosa()));
+		List<ValidadorDroneTransporte> validacoes = List.of(new ValidadorCargaPerigosa());
 		for (var v : validacoes) {
 			if (!v.valida(this, t)) {
 				return false;

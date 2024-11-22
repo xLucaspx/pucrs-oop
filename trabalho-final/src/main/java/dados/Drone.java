@@ -77,7 +77,7 @@ public abstract class Drone implements Comparable<Drone>, ObjetoJSON, ObjetoCSV,
 	 * {@code false} caso contrário.
 	 */
 	public boolean adicionaTransporte(Transporte t) {
-		List<ValidadorDroneTransporte> validacoes = new ArrayList<>(List.of(new ValidadorAutonomia()));
+		List<ValidadorDroneTransporte> validacoes = List.of(new ValidadorAutonomia());
 		for (var v : validacoes) {
 			if (!v.valida(this, t)) {
 				return false;

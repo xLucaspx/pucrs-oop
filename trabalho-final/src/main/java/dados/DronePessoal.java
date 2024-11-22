@@ -50,7 +50,7 @@ public class DronePessoal extends Drone {
 
 	@Override
 	public boolean adicionaTransporte(Transporte t) {
-		List<ValidadorDroneTransporte> validacoes = new ArrayList<>(List.of(new ValidadorMaximoPessoas()));
+		List<ValidadorDroneTransporte> validacoes = List.of(new ValidadorMaximoPessoas());
 		for (var v : validacoes) {
 			if (!v.valida(this, t)) {
 				return false;

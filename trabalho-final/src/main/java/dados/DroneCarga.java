@@ -39,7 +39,7 @@ public abstract class DroneCarga extends Drone {
 
 	@Override
 	public boolean adicionaTransporte(Transporte t) {
-		List<ValidadorDroneTransporte> validacoes = new ArrayList<>(List.of(new ValidadorPesoMaximo()));
+		List<ValidadorDroneTransporte> validacoes = List.of(new ValidadorPesoMaximo());
 		for (var v : validacoes) {
 			if (!v.valida(this, t)) {
 				return false;
