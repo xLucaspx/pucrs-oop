@@ -65,6 +65,7 @@ public class ProcessamentoTransportes extends javax.swing.JInternalFrame {
     setTitle("Processamento de Transportes Pendentes");
     setVisible(true);
 
+    title.setFont(Constantes.FONTE_TITULO);
     title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     title.setLabelFor(this);
     title.setText(getTitle());
@@ -82,7 +83,7 @@ public class ProcessamentoTransportes extends javax.swing.JInternalFrame {
       painelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(painelHeaderLayout.createSequentialGroup()
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addComponent(title)
+        .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 

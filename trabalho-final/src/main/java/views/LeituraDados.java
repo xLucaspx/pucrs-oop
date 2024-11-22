@@ -54,6 +54,7 @@ public class LeituraDados extends javax.swing.JInternalFrame {
     setPreferredSize(new java.awt.Dimension(500, 320));
     setVisible(true);
 
+    title.setFont(Constantes.FONTE_TITULO);
     title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     title.setLabelFor(this);
     title.setText(getTitle());
@@ -179,7 +180,7 @@ public class LeituraDados extends javax.swing.JInternalFrame {
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
         .addContainerGap(20, Short.MAX_VALUE)
-        .addComponent(painelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addComponent(painelHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addGap(18, 18, 18)
         .addComponent(painelArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

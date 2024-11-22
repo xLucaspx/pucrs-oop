@@ -54,6 +54,7 @@ public class EscritaDados extends javax.swing.JInternalFrame {
     setPreferredSize(new java.awt.Dimension(500, 320));
     setVisible(true);
 
+    title.setFont(Constantes.FONTE_TITULO);
     title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     title.setLabelFor(this);
     title.setText(getTitle());
@@ -71,7 +72,7 @@ public class EscritaDados extends javax.swing.JInternalFrame {
       painelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(painelHeaderLayout.createSequentialGroup()
         .addContainerGap()
-        .addComponent(title)
+        .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 

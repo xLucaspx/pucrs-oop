@@ -97,12 +97,14 @@ public class SituacaoTransporte extends javax.swing.JInternalFrame {
     setMaximizable(true);
     setResizable(true);
     setTitle("Alterar Situação de Transporte");
-    setPreferredSize(new java.awt.Dimension(500, 550));
+    setPreferredSize(new java.awt.Dimension(500, 565));
     setVisible(true);
 
+    title.setFont(Constantes.FONTE_TITULO);
     title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     title.setLabelFor(this);
     title.setText(getTitle());
+    title.setPreferredSize(new java.awt.Dimension(70, 25));
 
     javax.swing.GroupLayout painelHeaderLayout = new javax.swing.GroupLayout(painelHeader);
     painelHeader.setLayout(painelHeaderLayout);
@@ -117,7 +119,7 @@ public class SituacaoTransporte extends javax.swing.JInternalFrame {
       painelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(painelHeaderLayout.createSequentialGroup()
         .addContainerGap()
-        .addComponent(title)
+        .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 

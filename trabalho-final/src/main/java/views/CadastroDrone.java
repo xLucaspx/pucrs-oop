@@ -81,12 +81,14 @@ public class CadastroDrone extends javax.swing.JInternalFrame {
     setMaximizable(true);
     setResizable(true);
     setTitle("Cadastro de Drone");
-    setPreferredSize(new java.awt.Dimension(550, 400));
+    setPreferredSize(new java.awt.Dimension(550, 415));
     setVisible(true);
 
+    title.setFont(Constantes.FONTE_TITULO);
     title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     title.setLabelFor(this);
     title.setText(getTitle());
+    title.setPreferredSize(new java.awt.Dimension(70, 25));
 
     javax.swing.GroupLayout painelHeaderLayout = new javax.swing.GroupLayout(painelHeader);
     painelHeader.setLayout(painelHeaderLayout);
@@ -101,7 +103,7 @@ public class CadastroDrone extends javax.swing.JInternalFrame {
       painelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(painelHeaderLayout.createSequentialGroup()
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addComponent(title)
+        .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
@@ -331,7 +333,7 @@ public class CadastroDrone extends javax.swing.JInternalFrame {
         .addComponent(painelAbas, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(18, 18, 18)
         .addComponent(painelBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addContainerGap(34, Short.MAX_VALUE))
+        .addContainerGap(35, Short.MAX_VALUE))
     );
 
     pack();
